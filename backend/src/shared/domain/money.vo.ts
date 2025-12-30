@@ -27,7 +27,11 @@ export class Money {
     if (this._currency !== other._currency) {
       throw new Error('Currencies do not match');
     }
-    return new Money(this._amount - other._amount, this._currency);
+    const result = this._amount - other._amount;
+    if (result < 0) {
+      throw new Error('Cannot subtract: result would be negative');
+    }
+    return new Money(result, this._currency);
   }
 
   toString(): string {

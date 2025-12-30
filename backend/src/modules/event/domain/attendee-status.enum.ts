@@ -4,4 +4,5 @@ export enum AttendeeStatus {
   ATTENDED = 'ATTENDED', // Actually showed up (check-in)
   NO_SHOW = 'NO_SHOW', // RSVP'd but didn't attend
   CANCELLED = 'CANCELLED', // User cancelled RSVP
+  EXCUSED = 'EXCUSED', // Manual override (illness, force majeure)
 }

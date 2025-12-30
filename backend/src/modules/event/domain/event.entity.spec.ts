@@ -1,5 +1,6 @@
 import { Event } from './event.entity';
 import { EventType } from './event-type.enum';
+import { EventGenre } from './event-genre.enum';
 import { EventStatus } from './event-status.enum';
 
 // Mock uuid to avoid Jest ESM issues with newer versions
@@ -13,6 +14,7 @@ describe('Event Entity', () => {
     title: 'Sunset Vibes',
     description: 'Best sunset in Valencia',
     type: EventType.HOUSE_DAY,
+    genre: EventGenre.HOUSE,
     startTime: new Date('2025-06-20T18:00:00Z'),
     endTime: new Date('2025-06-20T23:00:00Z'),
     location: 'Marina Beach Rooftop',

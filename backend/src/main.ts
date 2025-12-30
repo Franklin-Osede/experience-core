@@ -1,16 +1,27 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
+import { AllExceptionsFilter } from './shared/infrastructure/filters/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+  const logger = new Logger('Bootstrap');
 
-  // Enable CORS
-  app.enableCors();
+  // CORS Configuration
+  const corsOrigin = configService.get<string>('CORS_ORIGIN') || '*';
+  app.enableCors({
+    origin: corsOrigin === '*' ? true : corsOrigin.split(','),
+    credentials: true,
+  });
 
   // Versioning: /api/v1/...
   app.setGlobalPrefix('api/v1');
+
+  // Global Exception Filter
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   // Validation Pipe (Global)
   app.useGlobalPipes(
@@ -18,6 +29,9 @@ async function bootstrap() {
       whitelist: true,
       transform: true,
       forbidNonWhitelisted: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
 
@@ -34,9 +48,14 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  const port = process.env.PORT || 5555;
+  const port = configService.get<number>('PORT') || 5555;
+  const nodeEnv = configService.get<string>('NODE_ENV') || 'development';
+
   await app.listen(port);
-  console.log(`Application is running on: ${await app.getUrl()}`);
-  console.log(`Swagger Docs available at: ${await app.getUrl()}/api/docs`);
+
+  logger.log(`🚀 Application is running on: ${await app.getUrl()}`);
+  logger.log(`📚 Swagger Docs available at: ${await app.getUrl()}/api/docs`);
+  logger.log(`🌍 Environment: ${nodeEnv}`);
+  logger.log(`🔒 CORS Origin: ${corsOrigin}`);
 }
 void bootstrap();

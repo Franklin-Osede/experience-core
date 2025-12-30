@@ -23,6 +23,13 @@ export class Wallet extends Entity<WalletProps> {
     });
   }
 
+  /**
+   * Reconstructs a Wallet entity from persistence data
+   */
+  static fromPersistence(props: WalletProps & { id: string }): Wallet {
+    return new Wallet(props.id, props);
+  }
+
   public deposit(amount: Money): void {
     this.props.balance = this.props.balance.add(amount);
     this.props.updatedAt = new Date();

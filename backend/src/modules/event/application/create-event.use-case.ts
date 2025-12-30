@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { Event } from '../domain/event.entity';
 import { EventRepository } from '../domain/event.repository';
 import { CreateEventDto } from './create-event.dto';
+import { EventGenre } from '../domain/event-genre.enum';
 
 @Injectable()
 export class CreateEventUseCase {
@@ -16,6 +17,7 @@ export class CreateEventUseCase {
       title: dto.title,
       description: dto.description,
       type: dto.type,
+      genre: (dto.genre as EventGenre) || EventGenre.OPEN_FORMAT,
       startTime: new Date(dto.startTime),
       endTime: new Date(dto.endTime),
       location: dto.location,

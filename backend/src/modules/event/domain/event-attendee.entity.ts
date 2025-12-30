@@ -34,6 +34,15 @@ export class EventAttendee extends Entity<EventAttendeeProps> {
     });
   }
 
+  /**
+   * Reconstructs an EventAttendee entity from persistence data
+   */
+  static fromPersistence(
+    props: EventAttendeeProps & { id: string },
+  ): EventAttendee {
+    return new EventAttendee(props.id, props);
+  }
+
   public checkIn(): void {
     if (this.props.status === AttendeeStatus.CANCELLED) {
       throw new Error('Cannot check-in: RSVP was cancelled');
@@ -72,8 +81,20 @@ export class EventAttendee extends Entity<EventAttendeeProps> {
       return; // Was cancelled, not a no-show
     }
 
+    if (this.props.status === AttendeeStatus.EXCUSED) {
+      return; // Excused, do not penalize
+    }
+
     this.props.status = AttendeeStatus.NO_SHOW;
     this.props.updatedAt = new Date();
+  }
+
+  public excuse(reason: string): void {
+    // Admin/Support tool
+    this.props.status = AttendeeStatus.EXCUSED;
+    this.props.updatedAt = new Date();
+    // Logic to store reason log can be added here
+    console.log(`Attendee Excused: ${reason}`);
   }
 
   // Getters

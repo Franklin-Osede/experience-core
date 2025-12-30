@@ -1,5 +1,6 @@
 import { Entity } from '../../../shared/domain/entity.base';
 import { EventType } from './event-type.enum';
+import { EventGenre } from './event-genre.enum';
 import { EventStatus } from './event-status.enum';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -8,6 +9,7 @@ export interface EventProps {
   title: string;
   description: string;
   type: EventType;
+  genre: EventGenre; // New: Salsa, House, etc.
   status: EventStatus;
   startTime: Date;
   endTime: Date;
@@ -39,6 +41,13 @@ export class Event extends Entity<EventProps> {
       createdAt: now,
       updatedAt: now,
     });
+  }
+
+  /**
+   * Reconstructs an Event entity from persistence data
+   */
+  static fromPersistence(props: EventProps & { id: string }): Event {
+    return new Event(props.id, props);
   }
 
   public publish(): void {
@@ -96,5 +105,13 @@ export class Event extends Entity<EventProps> {
   }
   get maxCapacity(): number | undefined {
     return this.props.maxCapacity;
+  }
+
+  get organizerId(): string {
+    return this.props.organizerId;
+  }
+
+  get venueId(): string | undefined {
+    return this.props.venueId;
   }
 }

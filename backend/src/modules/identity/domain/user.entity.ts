@@ -1,5 +1,6 @@
 import { Entity } from '../../../shared/domain/entity.base';
 import { UserRole } from './user-role.enum';
+import { Money } from '../../../shared/domain/money.vo';
 import { v4 as uuidv4 } from 'uuid';
 import * as bcrypt from 'bcrypt';
 
@@ -12,6 +13,9 @@ export interface UserProps {
   inviteCredits: number;
   eventsAttended: number; // Track participation
   hasUnlockedInvites: boolean; // For launch phase users
+  outstandingDebt: Money;
+  profilePhotoUrl?: string; // New: Face check
+  isPhotoVerified: boolean; // New: Bouncer verified
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,6 +36,9 @@ export class User extends Entity<UserProps> {
       | 'inviteCredits'
       | 'eventsAttended'
       | 'hasUnlockedInvites'
+      | 'outstandingDebt'
+      | 'isPhotoVerified' // Auto-set to false
+      | 'profilePhotoUrl' // Optional initially
     >,
   ): User {
     const id = uuidv4();
@@ -63,13 +70,52 @@ export class User extends Entity<UserProps> {
       inviteCredits: initialInvites,
       eventsAttended: 0,
       hasUnlockedInvites,
+      outstandingDebt: new Money(0, 'EUR'),
+      isPhotoVerified: false,
       createdAt: now,
       updatedAt: now,
     });
   }
 
+  /**
+   * Reconstructs a User entity from persistence data
+   * Used by repositories to map from database entities
+   */
+  static fromPersistence(props: UserProps & { id: string }): User {
+    return new User(props.id, {
+      email: props.email,
+      password: props.password,
+      role: props.role,
+      isVerified: props.isVerified,
+      reputationScore: props.reputationScore,
+      inviteCredits: props.inviteCredits,
+      eventsAttended: props.eventsAttended,
+      hasUnlockedInvites: props.hasUnlockedInvites,
+      outstandingDebt: props.outstandingDebt,
+      profilePhotoUrl: props.profilePhotoUrl,
+      isPhotoVerified: props.isPhotoVerified,
+      createdAt: props.createdAt,
+      updatedAt: props.updatedAt,
+    });
+  }
+
   public verify(): void {
     this.props.isVerified = true;
+    this.props.updatedAt = new Date();
+  }
+
+  public updateProfilePhoto(url: string): void {
+    this.props.profilePhotoUrl = url;
+    // Reset verification if photo changes? Strict rule: Yes.
+    this.props.isPhotoVerified = false; 
+    this.props.updatedAt = new Date();
+  }
+
+  public verifyPhoto(): void {
+    if (!this.props.profilePhotoUrl) {
+      throw new Error('Cannot verify user without a profile photo');
+    }
+    this.props.isPhotoVerified = true;
     this.props.updatedAt = new Date();
   }
 
@@ -119,6 +165,16 @@ export class User extends Entity<UserProps> {
     this.props.updatedAt = new Date();
   }
 
+  public recordDebt(amount: Money): void {
+    this.props.outstandingDebt = this.props.outstandingDebt.add(amount);
+    this.props.updatedAt = new Date();
+  }
+
+  public clearDebt(): void {
+    this.props.outstandingDebt = new Money(0, this.props.outstandingDebt.currency);
+    this.props.updatedAt = new Date();
+  }
+
   public async validatePassword(plain: string): Promise<boolean> {
     return bcrypt.compare(plain, this.props.password);
   }
@@ -150,5 +206,17 @@ export class User extends Entity<UserProps> {
 
   get hasUnlockedInvites(): boolean {
     return this.props.hasUnlockedInvites;
+  }
+
+  get outstandingDebt(): Money {
+    return this.props.outstandingDebt;
+  }
+
+  get profilePhotoUrl(): string | undefined {
+    return this.props.profilePhotoUrl;
+  }
+
+  get isPhotoVerified(): boolean {
+    return this.props.isPhotoVerified;
   }
 }

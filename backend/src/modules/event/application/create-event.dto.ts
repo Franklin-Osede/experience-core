@@ -31,6 +31,16 @@ export class CreateEventDto {
   @IsEnum(EventType)
   type: EventType;
 
+  @ApiProperty({
+    enum: EventType, // Swagger might need update for EventGenre, but sharing same pattern
+    example: 'SALSA',
+    required: false,
+    description: 'Music genre for vertical expansion',
+  })
+  @IsOptional()
+  @IsString() // Or IsEnum if we export it to DTO level
+  genre?: string;
+
   @ApiProperty({ example: '2025-06-20T18:00:00Z' })
   @IsDateString()
   startTime: string;
