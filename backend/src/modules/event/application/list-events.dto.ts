@@ -43,12 +43,16 @@ export class ListEventsDto {
   @IsEnum(EventGenre)
   genre?: EventGenre;
 
-  @ApiPropertyOptional({ description: 'Filter events from this date (ISO string)' })
+  @ApiPropertyOptional({
+    description: 'Filter events from this date (ISO string)',
+  })
   @IsOptional()
   @IsDateString()
   fromDate?: string;
 
-  @ApiPropertyOptional({ description: 'Filter events until this date (ISO string)' })
+  @ApiPropertyOptional({
+    description: 'Filter events until this date (ISO string)',
+  })
   @IsOptional()
   @IsDateString()
   toDate?: string;

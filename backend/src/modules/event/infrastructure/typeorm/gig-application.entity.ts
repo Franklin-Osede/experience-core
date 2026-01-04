@@ -47,10 +47,9 @@ export class GigApplicationEntity {
   // Foreign key relationships (using strings to avoid circular imports)
   @ManyToOne('VenueAvailabilityEntity', { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'availabilityId' })
-  availability?: any;
+  availability?: unknown;
 
   @ManyToOne('UserEntity', { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'djId' })
-  dj?: any;
+  dj?: unknown;
 }
-

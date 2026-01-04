@@ -50,4 +50,3 @@ export class SplitPaymentEntity {
   })
   payers?: SplitPaymentPayerEntity[];
 }
-

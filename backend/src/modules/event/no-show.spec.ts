@@ -12,8 +12,8 @@ import { UserRepository } from '../identity/domain/user.repository';
 import { User } from '../identity/domain/user.entity';
 import { UserRole } from '../identity/domain/user-role.enum';
 import { EventType } from './domain/event-type.enum';
-import { AttendeeStatus } from './domain/attendee-status.enum';
 import { EventAttendee } from './domain/event-attendee.entity';
+import { EventAttendeeRepository } from './domain/event-attendee.repository';
 
 // Mock uuid
 jest.mock('uuid', () => ({
@@ -51,13 +51,25 @@ describe('No-Show Penalty Logic', () => {
 
   it('should penalize No-Shows and ignore Checked-In users', async () => {
     // 1. Setup Data
-    const organizer = User.create({ email: 'dj@test.com', password: 'pw', role: UserRole.DJ });
-    const goodUser = User.create({ email: 'good@test.com', password: 'pw', role: UserRole.FAN });
-    const flakeUser = User.create({ email: 'flake@test.com', password: 'pw', role: UserRole.FAN });
-    
+    const organizer = User.create({
+      email: 'dj@test.com',
+      password: 'pw',
+      role: UserRole.DJ,
+    });
+    const goodUser = User.create({
+      email: 'good@test.com',
+      password: 'pw',
+      role: UserRole.FAN,
+    });
+    const flakeUser = User.create({
+      email: 'flake@test.com',
+      password: 'pw',
+      role: UserRole.FAN,
+    });
+
     // Give flake some rep initially
     flakeUser.increaseReputation(50);
-    
+
     await userRepo.save(organizer);
     await userRepo.save(goodUser);
     await userRepo.save(flakeUser);
@@ -85,7 +97,7 @@ describe('No-Show Penalty Logic', () => {
     await processNoShow.execute(event.id);
 
     // 6. Verify Results
-    
+
     // Flake User: Should have Debt and status NO_SHOW
     const updatedFlake = await userRepo.findById(flakeUser.id);
     expect(updatedFlake!.outstandingDebt.amount).toBe(1000); // 10 EUR Penalty
@@ -98,8 +110,16 @@ describe('No-Show Penalty Logic', () => {
 
   it('should NOT penalize Excused users', async () => {
     // 1. Setup
-    const organizer = User.create({ email: 'dj2@test.com', password: 'pw', role: UserRole.DJ });
-    const sickUser = User.create({ email: 'sick@test.com', password: 'pw', role: UserRole.FAN });
+    const organizer = User.create({
+      email: 'dj2@test.com',
+      password: 'pw',
+      role: UserRole.DJ,
+    });
+    const sickUser = User.create({
+      email: 'sick@test.com',
+      password: 'pw',
+      role: UserRole.FAN,
+    });
     sickUser.increaseReputation(50); // Give them rep to verify it doesn't drop
     await userRepo.save(organizer);
     await userRepo.save(sickUser);
@@ -118,11 +138,16 @@ describe('No-Show Penalty Logic', () => {
 
     // 2. Mark as EXCUSED (Admin Action simulation)
     // We need to access the attendee directly for this test as we don't have a use case for it yet
-    const attendees: EventAttendee[] = await moduleRef.get('EventAttendeeRepository').findByEvent(event.id);
-    const sickAttendee = attendees.find((a: EventAttendee) => a.userId === sickUser.id);
+    const attendeeRepo = moduleRef.get<EventAttendeeRepository>(
+      'EventAttendeeRepository',
+    );
+    const attendees: EventAttendee[] = await attendeeRepo.findByEvent(event.id);
+    const sickAttendee = attendees.find(
+      (a: EventAttendee) => a.userId === sickUser.id,
+    );
     if (sickAttendee) {
-        sickAttendee.excuse('Flu');
-        await moduleRef.get('EventAttendeeRepository').save(sickAttendee);
+      sickAttendee.excuse('Flu');
+      await attendeeRepo.save(sickAttendee);
     }
 
     // 3. Process No-Show

@@ -20,11 +20,12 @@ export const createLoggerConfig = (
             winston.format.colorize(),
             winston.format.printf(
               ({ timestamp, level, message, context, ...meta }) => {
-                const contextStr = context ? `[${context}]` : '';
+                // eslint-disable-next-line @typescript-eslint/no-base-to-string
+                const contextStr = context ? `[${String(context)}]` : '';
                 const metaStr = Object.keys(meta).length
                   ? ` ${JSON.stringify(meta)}`
                   : '';
-                return `${timestamp} ${level} ${contextStr} ${message}${metaStr}`;
+                return `${String(timestamp)} ${String(level)} ${contextStr} ${String(message)}${metaStr}`;
               },
             ),
           ),
@@ -53,4 +54,3 @@ export const createLoggerConfig = (
     ],
   };
 };
-

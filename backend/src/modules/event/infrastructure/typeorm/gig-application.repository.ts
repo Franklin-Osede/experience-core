@@ -6,9 +6,7 @@ import { GigApplicationRepository } from '../../domain/gig-application.repositor
 import { GigApplicationEntity } from './gig-application.entity';
 
 @Injectable()
-export class TypeOrmGigApplicationRepository
-  implements GigApplicationRepository
-{
+export class TypeOrmGigApplicationRepository implements GigApplicationRepository {
   constructor(
     @InjectRepository(GigApplicationEntity)
     private readonly typeOrmRepository: Repository<GigApplicationEntity>,
@@ -42,7 +40,7 @@ export class TypeOrmGigApplicationRepository
   }
 
   private toEntity(application: GigApplication): GigApplicationEntity {
-    const props = (application as any).props;
+    const props = application.getProps();
     const entity = new GigApplicationEntity();
     entity.id = application.id;
     entity.availabilityId = props.availabilityId;

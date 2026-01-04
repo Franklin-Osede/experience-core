@@ -25,9 +25,8 @@ import { createLoggerConfig } from './config/logger.config';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
-        const config = configService.get<ReturnType<typeof databaseConfig>>(
-          'database',
-        );
+        const config =
+          configService.get<ReturnType<typeof databaseConfig>>('database');
         if (!config) {
           throw new Error('Database configuration not found');
         }

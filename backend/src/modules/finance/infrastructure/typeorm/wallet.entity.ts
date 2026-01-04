@@ -45,4 +45,3 @@ export class WalletEntity {
   @JoinColumn({ name: 'userId' })
   user?: any;
 }
-

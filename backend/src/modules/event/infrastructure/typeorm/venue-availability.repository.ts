@@ -8,9 +8,7 @@ import { Money } from '../../../../shared/domain/money.vo';
 import { AvailabilityStatus } from '../../domain/venue-availability.entity';
 
 @Injectable()
-export class TypeOrmVenueAvailabilityRepository
-  implements VenueAvailabilityRepository
-{
+export class TypeOrmVenueAvailabilityRepository implements VenueAvailabilityRepository {
   constructor(
     @InjectRepository(VenueAvailabilityEntity)
     private readonly typeOrmRepository: Repository<VenueAvailabilityEntity>,
@@ -37,7 +35,9 @@ export class TypeOrmVenueAvailabilityRepository
   async findAllOpen(date?: Date): Promise<VenueAvailability[]> {
     const queryBuilder = this.typeOrmRepository
       .createQueryBuilder('availability')
-      .where('availability.status = :status', { status: AvailabilityStatus.OPEN });
+      .where('availability.status = :status', {
+        status: AvailabilityStatus.OPEN,
+      });
 
     if (date) {
       queryBuilder.andWhere('availability.date >= :date', { date });
@@ -57,7 +57,7 @@ export class TypeOrmVenueAvailabilityRepository
   }
 
   private toEntity(availability: VenueAvailability): VenueAvailabilityEntity {
-    const props = (availability as any).props;
+    const props = availability.getProps();
     const entity = new VenueAvailabilityEntity();
     entity.id = availability.id;
     entity.venueId = props.venueId;

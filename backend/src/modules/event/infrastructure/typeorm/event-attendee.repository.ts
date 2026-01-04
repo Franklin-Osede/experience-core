@@ -9,9 +9,7 @@ import { EventAttendeeEntity } from './event-attendee.entity';
  * TypeORM implementation of EventAttendeeRepository
  */
 @Injectable()
-export class TypeOrmEventAttendeeRepository
-  implements EventAttendeeRepository
-{
+export class TypeOrmEventAttendeeRepository implements EventAttendeeRepository {
   constructor(
     @InjectRepository(EventAttendeeEntity)
     private readonly typeOrmRepository: Repository<EventAttendeeEntity>,
@@ -51,7 +49,7 @@ export class TypeOrmEventAttendeeRepository
   }
 
   private toEntity(attendee: EventAttendee): EventAttendeeEntity {
-    const props = (attendee as any).props;
+    const props = attendee.getProps();
     const entity = new EventAttendeeEntity();
     entity.id = attendee.id;
     entity.eventId = props.eventId;
@@ -79,4 +77,3 @@ export class TypeOrmEventAttendeeRepository
     });
   }
 }
-

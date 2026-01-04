@@ -25,6 +25,12 @@ export class Transaction extends Entity<TransactionProps> {
     });
   }
 
+  static fromPersistence(
+    props: TransactionProps & { id: string },
+  ): Transaction {
+    return new Transaction(props.id, props);
+  }
+
   get amount(): Money {
     return this.props.amount;
   }

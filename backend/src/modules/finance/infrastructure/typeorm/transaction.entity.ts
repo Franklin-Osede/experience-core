@@ -60,4 +60,3 @@ export class TransactionEntity {
   @JoinColumn({ name: 'walletId' })
   wallet?: any;
 }
-

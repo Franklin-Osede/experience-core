@@ -8,9 +8,7 @@ import { SplitPaymentPayerEntity } from './split-payment-payer.entity';
 import { Money } from '../../../../shared/domain/money.vo';
 
 @Injectable()
-export class TypeOrmSplitPaymentRepository
-  implements SplitPaymentRepository
-{
+export class TypeOrmSplitPaymentRepository implements SplitPaymentRepository {
   constructor(
     @InjectRepository(SplitPaymentEntity)
     private readonly splitPaymentRepository: Repository<SplitPaymentEntity>,
@@ -43,13 +41,13 @@ export class TypeOrmSplitPaymentRepository
         (p) => p.userId === payer.userId,
       );
       const payerEntity = existingPayer || new SplitPaymentPayerEntity();
-      
+
       if (!existingPayer) {
         payerEntity.id = `${splitPayment.id}-${payer.userId}`;
         payerEntity.splitPaymentId = splitPayment.id;
         payerEntity.userId = payer.userId;
       }
-      
+
       payerEntity.amount = payer.amount.amount;
       payerEntity.currency = payer.amount.currency;
       payerEntity.isPaid = payer.isPaid;
@@ -110,4 +108,3 @@ export class TypeOrmSplitPaymentRepository
     });
   }
 }
-

@@ -14,10 +14,7 @@ import { InMemoryUserRepository } from './infrastructure/in-memory-user.reposito
 const useTypeORM = process.env.USE_TYPEORM !== 'false';
 
 @Module({
-  imports: [
-    EventEmitterModule,
-    TypeOrmModule.forFeature([UserEntity]),
-  ],
+  imports: [EventEmitterModule, TypeOrmModule.forFeature([UserEntity])],
   controllers: [UserController],
   providers: [
     CreateUserUseCase,

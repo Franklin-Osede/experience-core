@@ -83,7 +83,7 @@ interface UserProps {
 | Role      | Initial Invites | Unlock Condition    |
 | --------- | --------------- | ------------------- |
 | `DJ`      | ∞ (Infinity)    | Immediate           |
-| `FOUNDER` | 10              | Immediate           |
+| `FOUNDER` | ∞ (Infinity)    | Immediate           |
 | `FAN`     | 0               | After 1st event → 3 |
 
 ---
@@ -156,9 +156,9 @@ npm test src/modules/identity/domain/user.entity.spec.ts
 **Current State → Future State:**
 
 ```
-Week 1-4:   FOUNDER-driven growth
+Week 1-4:   FOUNDER-driven growth (Unlimited Invites)
 Week 5-12:  Hybrid (FOUNDER + unlocked FANs)
-Month 4+:   Pure invite-only (no more FOUNDERs)
+Month 4+:   Pure invite-only (Configurable limits)
 ```
 
 **Configuration Flag (Future):**

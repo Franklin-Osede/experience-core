@@ -107,7 +107,7 @@ export class User extends Entity<UserProps> {
   public updateProfilePhoto(url: string): void {
     this.props.profilePhotoUrl = url;
     // Reset verification if photo changes? Strict rule: Yes.
-    this.props.isPhotoVerified = false; 
+    this.props.isPhotoVerified = false;
     this.props.updatedAt = new Date();
   }
 
@@ -171,7 +171,10 @@ export class User extends Entity<UserProps> {
   }
 
   public clearDebt(): void {
-    this.props.outstandingDebt = new Money(0, this.props.outstandingDebt.currency);
+    this.props.outstandingDebt = new Money(
+      0,
+      this.props.outstandingDebt.currency,
+    );
     this.props.updatedAt = new Date();
   }
 

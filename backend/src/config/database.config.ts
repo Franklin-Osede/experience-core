@@ -18,4 +18,3 @@ export default registerAs(
     migrationsRun: process.env.DB_MIGRATIONS_RUN === 'true' || false,
   }),
 );
-

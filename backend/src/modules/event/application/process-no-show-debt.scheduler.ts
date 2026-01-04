@@ -38,19 +38,23 @@ export class ProcessNoShowDebtScheduler {
           await this.processNoShowDebtUseCase.execute(event.id);
           this.logger.debug(`Processed no-shows for event ${event.id}`);
         } catch (error) {
+          const errorMessage =
+            error instanceof Error ? error.message : String(error);
           this.logger.error(
-            `Error processing event ${event.id}: ${error.message}`,
+            `Error processing event ${event.id}: ${errorMessage}`,
           );
         }
       }
 
       this.logger.log('No-show debt processing completed successfully');
     } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      const errorStack = error instanceof Error ? error.stack : undefined;
       this.logger.error(
-        `Error processing no-show debts: ${error.message}`,
-        error.stack,
+        `Error processing no-show debts: ${errorMessage}`,
+        errorStack,
       );
     }
   }
 }
-

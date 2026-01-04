@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, FindOptionsWhere } from 'typeorm';
 import { Event } from '../../domain/event.entity';
 import { EventRepository } from '../../domain/event.repository';
 import { EventEntity } from './event.entity';
@@ -31,7 +31,7 @@ export class TypeOrmEventRepository implements EventRepository {
     type?: EventType;
     status?: EventStatus;
   }): Promise<Event[]> {
-    const where: any = {};
+    const where: FindOptionsWhere<EventEntity> = {};
     if (filters?.type) {
       where.type = filters.type;
     }
@@ -44,7 +44,7 @@ export class TypeOrmEventRepository implements EventRepository {
   }
 
   private toEntity(event: Event): EventEntity {
-    const props = (event as any).props;
+    const props = event.getProps();
     const entity = new EventEntity();
     entity.id = event.id;
     entity.organizerId = props.organizerId;
@@ -84,4 +84,3 @@ export class TypeOrmEventRepository implements EventRepository {
     });
   }
 }
-

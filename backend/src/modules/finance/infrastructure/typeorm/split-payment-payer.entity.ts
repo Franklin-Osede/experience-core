@@ -56,4 +56,3 @@ export class SplitPaymentPayerEntity {
   @JoinColumn({ name: 'userId' })
   user?: any;
 }
-

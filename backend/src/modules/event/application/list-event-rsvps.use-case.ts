@@ -25,4 +25,3 @@ export class ListEventRsvpsUseCase {
     return attendees;
   }
 }
-

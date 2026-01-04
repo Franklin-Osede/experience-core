@@ -53,10 +53,9 @@ export class EventAttendeeEntity {
   // Foreign key relationships (using strings to avoid circular imports)
   @ManyToOne('EventEntity', { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'eventId' })
-  event?: any;
+  event?: unknown;
 
   @ManyToOne('UserEntity', { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'userId' })
-  user?: any;
+  user?: unknown;
 }
-

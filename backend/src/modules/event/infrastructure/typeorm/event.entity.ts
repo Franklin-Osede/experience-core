@@ -83,6 +83,5 @@ export class EventEntity {
   // Foreign key relationship (using string to avoid circular import)
   @ManyToOne('UserEntity', { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'organizerId' })
-  organizer?: any;
+  organizer?: unknown;
 }
-

@@ -1,4 +1,9 @@
-import { Inject, Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { EventRepository } from '../domain/event.repository';
 import { EventStatus } from '../domain/event-status.enum';
 
@@ -28,4 +33,3 @@ export class CancelEventUseCase {
     await this.eventRepository.save(event);
   }
 }
-

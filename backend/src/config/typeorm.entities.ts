@@ -11,4 +11,3 @@ export { EventEntity } from '../modules/event/infrastructure/typeorm/event.entit
 export { EventAttendeeEntity } from '../modules/event/infrastructure/typeorm/event-attendee.entity';
 export { VenueAvailabilityEntity } from '../modules/event/infrastructure/typeorm/venue-availability.entity';
 export { GigApplicationEntity } from '../modules/event/infrastructure/typeorm/gig-application.entity';
-

@@ -313,10 +313,14 @@ export class InitialSchema1700000000000 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     // Drop tables in reverse order (respecting foreign key dependencies)
-    await queryRunner.query(`DROP TABLE IF EXISTS "split_payment_payers" CASCADE;`);
+    await queryRunner.query(
+      `DROP TABLE IF EXISTS "split_payment_payers" CASCADE;`,
+    );
     await queryRunner.query(`DROP TABLE IF EXISTS "split_payments" CASCADE;`);
     await queryRunner.query(`DROP TABLE IF EXISTS "gig_applications" CASCADE;`);
-    await queryRunner.query(`DROP TABLE IF EXISTS "venue_availabilities" CASCADE;`);
+    await queryRunner.query(
+      `DROP TABLE IF EXISTS "venue_availabilities" CASCADE;`,
+    );
     await queryRunner.query(`DROP TABLE IF EXISTS "event_attendees" CASCADE;`);
     await queryRunner.query(`DROP TABLE IF EXISTS "events" CASCADE;`);
     await queryRunner.query(`DROP TABLE IF EXISTS "transactions" CASCADE;`);
@@ -324,15 +328,24 @@ export class InitialSchema1700000000000 implements MigrationInterface {
     await queryRunner.query(`DROP TABLE IF EXISTS "users" CASCADE;`);
 
     // Drop ENUM types
-    await queryRunner.query(`DROP TYPE IF EXISTS "split_payment_status_enum" CASCADE;`);
-    await queryRunner.query(`DROP TYPE IF EXISTS "transaction_type_enum" CASCADE;`);
-    await queryRunner.query(`DROP TYPE IF EXISTS "gig_application_status_enum" CASCADE;`);
-    await queryRunner.query(`DROP TYPE IF EXISTS "availability_status_enum" CASCADE;`);
-    await queryRunner.query(`DROP TYPE IF EXISTS "attendee_status_enum" CASCADE;`);
+    await queryRunner.query(
+      `DROP TYPE IF EXISTS "split_payment_status_enum" CASCADE;`,
+    );
+    await queryRunner.query(
+      `DROP TYPE IF EXISTS "transaction_type_enum" CASCADE;`,
+    );
+    await queryRunner.query(
+      `DROP TYPE IF EXISTS "gig_application_status_enum" CASCADE;`,
+    );
+    await queryRunner.query(
+      `DROP TYPE IF EXISTS "availability_status_enum" CASCADE;`,
+    );
+    await queryRunner.query(
+      `DROP TYPE IF EXISTS "attendee_status_enum" CASCADE;`,
+    );
     await queryRunner.query(`DROP TYPE IF EXISTS "event_status_enum" CASCADE;`);
     await queryRunner.query(`DROP TYPE IF EXISTS "event_genre_enum" CASCADE;`);
     await queryRunner.query(`DROP TYPE IF EXISTS "event_type_enum" CASCADE;`);
     await queryRunner.query(`DROP TYPE IF EXISTS "user_role_enum" CASCADE;`);
   }
 }
-

@@ -48,4 +48,3 @@ export class ListVenueAvailabilitiesUseCase {
     return filtered;
   }
 }
-

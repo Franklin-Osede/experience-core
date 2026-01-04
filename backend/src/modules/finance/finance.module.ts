@@ -13,6 +13,9 @@ import { TypeOrmWalletRepository } from './infrastructure/typeorm/wallet.reposit
 import { TypeOrmSplitPaymentRepository } from './infrastructure/typeorm/split-payment.repository';
 import { InMemoryWalletRepository } from './infrastructure/in-memory-wallet.repository';
 import { InMemorySplitPaymentRepository } from './infrastructure/in-memory-split-payment.repository';
+import { TransactionEntity } from './infrastructure/typeorm/transaction.entity';
+import { TypeOrmTransactionRepository } from './infrastructure/typeorm/transaction.repository';
+import { InMemoryTransactionRepository } from './infrastructure/in-memory-transaction.repository';
 import { FinanceController } from './infrastructure/finance.controller';
 
 // Use TypeORM repository in production, in-memory for testing
@@ -24,6 +27,7 @@ const useTypeORM = process.env.USE_TYPEORM !== 'false';
       WalletEntity,
       SplitPaymentEntity,
       SplitPaymentPayerEntity,
+      TransactionEntity,
     ]),
   ],
   controllers: [FinanceController],
@@ -35,6 +39,12 @@ const useTypeORM = process.env.USE_TYPEORM !== 'false';
       provide: 'WalletRepository',
       useClass: useTypeORM ? TypeOrmWalletRepository : InMemoryWalletRepository,
     },
+    {
+      provide: 'TransactionRepository',
+      useClass: useTypeORM
+        ? TypeOrmTransactionRepository
+        : InMemoryTransactionRepository,
+    },
     CreateSplitPaymentUseCase,
     PaySplitShareUseCase,
     {
@@ -44,6 +54,6 @@ const useTypeORM = process.env.USE_TYPEORM !== 'false';
         : InMemorySplitPaymentRepository,
     },
   ],
-  exports: ['WalletRepository'],
+  exports: ['WalletRepository', 'TransactionRepository'],
 })
 export class FinanceModule {}

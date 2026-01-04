@@ -32,6 +32,11 @@ import { EventType } from '../domain/event-type.enum';
 import { EventGenre } from '../domain/event-genre.enum';
 import { AvailabilityStatus } from '../domain/venue-availability.entity';
 import { GigApplicationStatus } from '../domain/gig-application.entity';
+import {
+  getVenueAvailabilityProps,
+  getGigApplicationProps,
+  getEventProps,
+} from '../../../shared/infrastructure/helpers/entity-helpers';
 
 interface AuthenticatedRequest {
   user?: {
@@ -123,17 +128,18 @@ export class GigController {
       terms: dto.terms,
     });
 
+    const props = getVenueAvailabilityProps(availability);
     return {
       id: availability.id,
       venueId: availability.venueId,
-      date: (availability as any).props.date,
+      date: props.date,
       minGuarantee: {
-        amount: (availability as any).props.minGuarantee.amount,
-        currency: (availability as any).props.minGuarantee.currency,
+        amount: props.minGuarantee.amount,
+        currency: props.minGuarantee.currency,
       },
-      terms: (availability as any).props.terms,
-      status: (availability as any).props.status,
-      createdAt: (availability as any).props.createdAt,
+      terms: props.terms,
+      status: props.status,
+      createdAt: props.createdAt,
     };
   }
 
@@ -158,18 +164,21 @@ export class GigController {
 
     return {
       total: availabilities.length,
-      availabilities: availabilities.map((a) => ({
-        id: a.id,
-        venueId: a.venueId,
-        date: (a as any).props.date,
-        minGuarantee: {
-          amount: (a as any).props.minGuarantee.amount,
-          currency: (a as any).props.minGuarantee.currency,
-        },
-        terms: (a as any).props.terms,
-        status: (a as any).props.status,
-        createdAt: (a as any).props.createdAt,
-      })),
+      availabilities: availabilities.map((a) => {
+        const props = getVenueAvailabilityProps(a);
+        return {
+          id: a.id,
+          venueId: a.venueId,
+          date: props.date,
+          minGuarantee: {
+            amount: props.minGuarantee.amount,
+            currency: props.minGuarantee.currency,
+          },
+          terms: props.terms,
+          status: props.status,
+          createdAt: props.createdAt,
+        };
+      }),
     };
   }
 
@@ -196,13 +205,14 @@ export class GigController {
       proposal: dto.proposal,
     });
 
+    const props = getGigApplicationProps(application);
     return {
       id: application.id,
       availabilityId: application.availabilityId,
       djId: application.djId,
       proposal: application.proposal,
-      status: (application as any).props.status,
-      createdAt: (application as any).props.createdAt,
+      status: props.status,
+      createdAt: props.createdAt,
     };
   }
 
@@ -225,16 +235,17 @@ export class GigController {
       endTime: new Date(dto.endTime),
     });
 
+    const props = getEventProps(event);
     return {
       id: event.id,
       organizerId: event.organizerId,
       title: event.title,
-      type: (event as any).props.type,
-      genre: (event as any).props.genre,
-      status: (event as any).props.status,
+      type: props.type,
+      genre: props.genre,
+      status: props.status,
       venueId: event.venueId,
-      startTime: (event as any).props.startTime,
-      endTime: (event as any).props.endTime,
+      startTime: props.startTime,
+      endTime: props.endTime,
       message: 'Application accepted and event created',
     };
   }
@@ -260,15 +271,17 @@ export class GigController {
 
     return {
       total: applications.length,
-      applications: applications.map((a) => ({
-        id: a.id,
-        availabilityId: a.availabilityId,
-        djId: a.djId,
-        proposal: a.proposal,
-        status: (a as any).props.status,
-        createdAt: (a as any).props.createdAt,
-      })),
+      applications: applications.map((a) => {
+        const props = getGigApplicationProps(a);
+        return {
+          id: a.id,
+          availabilityId: a.availabilityId,
+          djId: a.djId,
+          proposal: a.proposal,
+          status: props.status,
+          createdAt: props.createdAt,
+        };
+      }),
     };
   }
 }
-

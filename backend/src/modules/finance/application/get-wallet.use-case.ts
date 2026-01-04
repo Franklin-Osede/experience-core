@@ -19,4 +19,3 @@ export class GetWalletUseCase {
     return wallet;
   }
 }
-

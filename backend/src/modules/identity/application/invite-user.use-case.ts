@@ -24,7 +24,9 @@ export class InviteUserUseCase {
     private readonly createUserUseCase: CreateUserUseCase,
   ) {}
 
-  async execute(dto: InviteUserDto): Promise<{ user: User; inviteUsed: boolean }> {
+  async execute(
+    dto: InviteUserDto,
+  ): Promise<{ user: User; inviteUsed: boolean }> {
     // 1. Get inviter
     const inviter = await this.userRepository.findById(dto.inviterId);
     if (!inviter) {
@@ -64,4 +66,3 @@ export class InviteUserUseCase {
     return { user: newUser, inviteUsed };
   }
 }
-

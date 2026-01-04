@@ -57,6 +57,5 @@ export class VenueAvailabilityEntity {
   // Foreign key relationship (venue is a User with role VENUE, using string to avoid circular import)
   @ManyToOne('UserEntity', { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'venueId' })
-  venue?: any;
+  venue?: unknown;
 }
-

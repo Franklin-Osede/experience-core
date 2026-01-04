@@ -19,9 +19,7 @@ export class ListGigApplicationsUseCase {
     private readonly repository: GigApplicationRepository,
   ) {}
 
-  async execute(
-    filters?: ListApplicationsFilters,
-  ): Promise<GigApplication[]> {
+  async execute(filters?: ListApplicationsFilters): Promise<GigApplication[]> {
     // For now, return all. In future, implement filtering in repository
     const all = await this.repository.findAll();
 
@@ -45,4 +43,3 @@ export class ListGigApplicationsUseCase {
     return filtered;
   }
 }
-

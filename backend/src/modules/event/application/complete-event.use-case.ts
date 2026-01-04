@@ -1,6 +1,16 @@
-import { Inject, Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { EventRepository } from '../domain/event.repository';
 import { EventStatus } from '../domain/event-status.enum';
+// Helper function to safely access entity props
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getEventProps(event: any): any {
+  return event.props;
+}
 
 @Injectable()
 export class CompleteEventUseCase {
@@ -29,11 +39,13 @@ export class CompleteEventUseCase {
     }
 
     // Use reflection to set status directly (since there's no complete() method yet)
-    const props = (event as any).props;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const props = getEventProps(event);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     props.status = EventStatus.COMPLETED;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     props.updatedAt = new Date();
 
     await this.eventRepository.save(event);
   }
 }
-

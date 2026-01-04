@@ -6,11 +6,12 @@ import { SplitPayment } from '../domain/split-payment.entity';
 export class InMemorySplitPaymentRepository implements SplitPaymentRepository {
   private readonly items = new Map<string, SplitPayment>();
 
-  async save(splitPayment: SplitPayment): Promise<void> {
+  save(splitPayment: SplitPayment): Promise<void> {
     this.items.set(splitPayment.id, splitPayment);
+    return Promise.resolve();
   }
 
-  async findById(id: string): Promise<SplitPayment | null> {
-    return this.items.get(id) || null;
+  findById(id: string): Promise<SplitPayment | null> {
+    return Promise.resolve(this.items.get(id) || null);
   }
 }

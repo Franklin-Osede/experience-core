@@ -25,10 +25,7 @@ export class PostVenueAvailabilityUseCase {
     const availability = VenueAvailability.create({
       venueId: dto.venueId,
       date: dto.date,
-      minGuarantee: new Money(
-        dto.minGuaranteeAmount,
-        dto.minGuaranteeCurrency,
-      ),
+      minGuarantee: new Money(dto.minGuaranteeAmount, dto.minGuaranteeCurrency),
       terms: dto.terms,
     });
 

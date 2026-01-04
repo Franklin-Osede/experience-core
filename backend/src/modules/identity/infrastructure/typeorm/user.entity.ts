@@ -71,4 +71,3 @@ export class UserEntity {
   @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt: Date;
 }
-
