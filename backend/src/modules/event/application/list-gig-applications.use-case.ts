@@ -20,26 +20,17 @@ export class ListGigApplicationsUseCase {
   ) {}
 
   async execute(filters?: ListApplicationsFilters): Promise<GigApplication[]> {
-    // For now, return all. In future, implement filtering in repository
-    const all = await this.repository.findAll();
+    // Use repository pagination (database-level filtering)
+    const result = await this.repository.findAllPaginated(
+      {
+        availabilityId: filters?.availabilityId,
+        djId: filters?.djId,
+        status: filters?.status,
+      },
+      1, // page
+      1000, // large limit to get all (for backward compatibility)
+    );
 
-    // Simple in-memory filtering
-    let filtered = all;
-
-    if (filters?.availabilityId) {
-      filtered = filtered.filter(
-        (a) => a.availabilityId === filters.availabilityId,
-      );
-    }
-
-    if (filters?.djId) {
-      filtered = filtered.filter((a) => a.djId === filters.djId);
-    }
-
-    if (filters?.status) {
-      filtered = filtered.filter((a) => a.status === filters.status);
-    }
-
-    return filtered;
+    return result.data;
   }
 }

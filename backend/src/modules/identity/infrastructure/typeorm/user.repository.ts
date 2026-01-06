@@ -5,6 +5,7 @@ import { User } from '../../domain/user.entity';
 import { UserRepository } from '../../domain/user.repository';
 import { UserEntity } from './user.entity';
 import { UserRole } from '../../domain/user-role.enum';
+import { EventGenre } from '../../../event/domain/event-genre.enum';
 import { Money } from '../../../../shared/domain/money.vo';
 import * as bcrypt from 'bcrypt';
 
@@ -45,13 +46,19 @@ export class TypeOrmUserRepository implements UserRepository {
     entity.role = props.role;
     entity.isVerified = props.isVerified;
     entity.reputationScore = props.reputationScore;
-    entity.inviteCredits = props.inviteCredits;
+    // Map Infinity to -1 for database storage (PostgreSQL doesn't support Infinity in integers)
+    entity.inviteCredits =
+      props.inviteCredits === Infinity ? -1 : props.inviteCredits;
     entity.eventsAttended = props.eventsAttended;
     entity.hasUnlockedInvites = props.hasUnlockedInvites;
     entity.outstandingDebtAmount = props.outstandingDebt.amount;
     entity.outstandingDebtCurrency = props.outstandingDebt.currency;
     entity.profilePhotoUrl = props.profilePhotoUrl || null;
     entity.isPhotoVerified = props.isPhotoVerified;
+    entity.phoneNumber = props.phoneNumber || null;
+    entity.preferredGenres = props.preferredGenres
+      ? props.preferredGenres.map((g) => g.toString())
+      : null;
     entity.createdAt = props.createdAt;
     entity.updatedAt = props.updatedAt;
     return entity;
@@ -65,7 +72,8 @@ export class TypeOrmUserRepository implements UserRepository {
       role: entity.role,
       isVerified: entity.isVerified,
       reputationScore: entity.reputationScore,
-      inviteCredits: entity.inviteCredits,
+      // Map -1 back to Infinity for domain (DJs and FOUNDERs have unlimited invites)
+      inviteCredits: entity.inviteCredits === -1 ? Infinity : entity.inviteCredits,
       eventsAttended: entity.eventsAttended,
       hasUnlockedInvites: entity.hasUnlockedInvites,
       outstandingDebt: new Money(
@@ -74,6 +82,12 @@ export class TypeOrmUserRepository implements UserRepository {
       ),
       profilePhotoUrl: entity.profilePhotoUrl || undefined,
       isPhotoVerified: entity.isPhotoVerified,
+      phoneNumber: entity.phoneNumber || undefined,
+      preferredGenres: entity.preferredGenres
+        ? (entity.preferredGenres.map(
+            (g) => g as EventGenre,
+          ) as EventGenre[])
+        : undefined,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
     });

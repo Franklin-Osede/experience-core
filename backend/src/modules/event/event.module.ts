@@ -4,6 +4,7 @@ import { EventController } from './infrastructure/event.controller';
 import { GigController } from './infrastructure/gig.controller';
 import { CreateEventUseCase } from './application/create-event.use-case';
 import { ListEventsUseCase } from './application/list-events.use-case';
+import { GetEventUseCase } from './application/get-event.use-case';
 import { PublishEventUseCase } from './application/publish-event.use-case';
 import { RsvpEventUseCase } from './application/rsvp-event.use-case';
 import { CancelRsvpUseCase } from './application/cancel-rsvp.use-case';
@@ -37,21 +38,28 @@ import { InMemoryEventAttendeeRepository } from './infrastructure/in-memory-even
 
 // Use TypeORM repository in production, in-memory for testing
 const useTypeORM = process.env.USE_TYPEORM !== 'false';
+const typeOrmImports = useTypeORM
+  ? [
+      // Only register TypeORM repositories when using the DB; skip in in-memory mode for tests
+      TypeOrmModule.forFeature([
+        EventEntity,
+        EventAttendeeEntity,
+        VenueAvailabilityEntity,
+        GigApplicationEntity,
+      ]),
+    ]
+  : [];
 
 @Module({
   imports: [
     IdentityModule,
-    TypeOrmModule.forFeature([
-      EventEntity,
-      EventAttendeeEntity,
-      VenueAvailabilityEntity,
-      GigApplicationEntity,
-    ]),
+    ...typeOrmImports,
   ],
   controllers: [EventController, GigController],
   providers: [
     CreateEventUseCase,
     ListEventsUseCase,
+    GetEventUseCase,
     PublishEventUseCase,
     RsvpEventUseCase,
     CancelRsvpUseCase,
@@ -90,6 +98,6 @@ const useTypeORM = process.env.USE_TYPEORM !== 'false';
         : InMemoryGigApplicationRepository,
     },
   ],
-  exports: [],
+  exports: ['EventRepository'], // Export for use in other modules (e.g., ProviderModule)
 })
 export class EventModule {}

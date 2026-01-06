@@ -7,6 +7,7 @@ import {
   Request,
   HttpCode,
   HttpStatus,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import {
@@ -20,6 +21,8 @@ import { DepositWalletUseCase } from '../application/deposit-wallet.use-case';
 import { CreateSplitPaymentUseCase } from '../application/create-split-payment.use-case';
 import { PaySplitShareUseCase } from '../application/pay-split-share.use-case';
 import { IsNotEmpty, IsString, IsNumber, IsArray, Min } from 'class-validator';
+import { WalletResponseDto } from './dto/wallet-response.dto';
+import { SplitPaymentResponseDto } from './dto/split-payment-response.dto';
 
 interface AuthenticatedRequest {
   user?: {
@@ -83,26 +86,11 @@ export class FinanceController {
   async getWallet(@Request() req: AuthenticatedRequest) {
     const userId = req.user?.id;
     if (!userId) {
-      throw new Error('User not authenticated');
+      throw new UnauthorizedException('User not authenticated');
     }
 
     const wallet = await this.getWalletUseCase.execute(userId);
-
-    return {
-      id: wallet.id,
-      userId: wallet.userId,
-      balance: {
-        amount: wallet.balance.amount,
-        currency: wallet.balance.currency,
-        formatted: wallet.balance.toString(),
-      },
-      lockedBalance: {
-        amount: wallet.lockedBalance.amount,
-        currency: wallet.lockedBalance.currency,
-        formatted: wallet.lockedBalance.toString(),
-      },
-      updatedAt: (wallet as any).props.updatedAt,
-    };
+    return WalletResponseDto.fromDomain(wallet);
   }
 
   @Post('wallet/deposit')
@@ -119,7 +107,7 @@ export class FinanceController {
   ) {
     const userId = req.user?.id;
     if (!userId) {
-      throw new Error('User not authenticated');
+      throw new UnauthorizedException('User not authenticated');
     }
 
     const wallet = await this.depositWalletUseCase.execute({
@@ -128,12 +116,7 @@ export class FinanceController {
     });
 
     return {
-      id: wallet.id,
-      balance: {
-        amount: wallet.balance.amount,
-        currency: wallet.balance.currency,
-        formatted: wallet.balance.toString(),
-      },
+      ...WalletResponseDto.fromDomain(wallet),
       message: 'Funds deposited successfully',
     };
   }
@@ -151,28 +134,7 @@ export class FinanceController {
   ) {
     const splitPayment = await this.createSplitPaymentUseCase.execute(dto);
 
-    return {
-      id: splitPayment.id,
-      totalAmount: {
-        amount: splitPayment.payers.reduce(
-          (sum, p) => sum + (p.amount as any).amount,
-          0,
-        ),
-        currency: (splitPayment.payers[0]?.amount as any)?.currency || 'EUR',
-      },
-      reason: (splitPayment as any).props.reason,
-      status: splitPayment.status,
-      payers: splitPayment.payers.map((p) => ({
-        userId: p.userId,
-        amount: {
-          amount: (p.amount as any).amount,
-          currency: (p.amount as any).currency,
-        },
-        isPaid: p.isPaid,
-        paidAt: p.paidAt,
-      })),
-      createdAt: (splitPayment as any).props.createdAt,
-    };
+    return SplitPaymentResponseDto.fromDomain(splitPayment);
   }
 
   @Post('split-payments/:id/pay')
@@ -189,7 +151,7 @@ export class FinanceController {
   ) {
     const userId = req.user?.id;
     if (!userId) {
-      throw new Error('User not authenticated');
+      throw new UnauthorizedException('User not authenticated');
     }
 
     const splitPayment = await this.paySplitShareUseCase.execute({
@@ -198,13 +160,7 @@ export class FinanceController {
     });
 
     return {
-      id: splitPayment.id,
-      status: splitPayment.status,
-      payers: splitPayment.payers.map((p) => ({
-        userId: p.userId,
-        isPaid: p.isPaid,
-        paidAt: p.paidAt,
-      })),
+      ...SplitPaymentResponseDto.fromDomain(splitPayment),
       message: 'Payment recorded successfully',
     };
   }

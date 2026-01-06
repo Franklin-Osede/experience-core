@@ -2,10 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { VenueAvailability } from '../../domain/venue-availability.entity';
-import { VenueAvailabilityRepository } from '../../domain/venue-availability.repository';
+import {
+  VenueAvailabilityRepository,
+  VenueAvailabilityFindAllFilters,
+} from '../../domain/venue-availability.repository';
 import { VenueAvailabilityEntity } from './venue-availability.entity';
 import { Money } from '../../../../shared/domain/money.vo';
 import { AvailabilityStatus } from '../../domain/venue-availability.entity';
+import { PaginatedResult } from '../../domain/event.repository';
 
 @Injectable()
 export class TypeOrmVenueAvailabilityRepository implements VenueAvailabilityRepository {
@@ -56,6 +60,54 @@ export class TypeOrmVenueAvailabilityRepository implements VenueAvailabilityRepo
     return entities.map((e) => this.toDomain(e));
   }
 
+  async findAllPaginated(
+    filters?: VenueAvailabilityFindAllFilters,
+    page: number = 1,
+    limit: number = 20,
+  ): Promise<PaginatedResult<VenueAvailability>> {
+    const queryBuilder = this.typeOrmRepository.createQueryBuilder('availability');
+
+    // Apply filters
+    if (filters?.venueId) {
+      queryBuilder.andWhere('availability.venueId = :venueId', {
+        venueId: filters.venueId,
+      });
+    }
+
+    if (filters?.status) {
+      queryBuilder.andWhere('availability.status = :status', {
+        status: filters.status,
+      });
+    }
+
+    if (filters?.fromDate) {
+      queryBuilder.andWhere('availability.date >= :fromDate', {
+        fromDate: filters.fromDate,
+      });
+    }
+
+    if (filters?.toDate) {
+      queryBuilder.andWhere('availability.date <= :toDate', {
+        toDate: filters.toDate,
+      });
+    }
+
+    // Sort by date (upcoming first)
+    queryBuilder.orderBy('availability.date', 'ASC');
+
+    // Apply pagination
+    const skip = (page - 1) * limit;
+    queryBuilder.skip(skip).take(limit);
+
+    // Get results and total count
+    const [entities, total] = await queryBuilder.getManyAndCount();
+
+    return {
+      data: entities.map((e) => this.toDomain(e)),
+      total,
+    };
+  }
+
   private toEntity(availability: VenueAvailability): VenueAvailabilityEntity {
     const props = availability.getProps();
     const entity = new VenueAvailabilityEntity();
@@ -87,4 +139,5 @@ export class TypeOrmVenueAvailabilityRepository implements VenueAvailabilityRepo
     });
   }
 }
+
 

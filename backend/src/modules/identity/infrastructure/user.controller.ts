@@ -3,8 +3,10 @@ import {
   Controller,
   Post,
   Get,
+  Patch,
   UseGuards,
   Request,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import {
@@ -13,12 +15,17 @@ import {
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
+import { RolesGuard } from '../../../shared/infrastructure/guards/roles.guard';
+import { Roles } from '../../../shared/infrastructure/decorators/roles.decorator';
 import { CreateUserUseCase } from '../application/create-user.use-case';
 import { CreateUserDto } from '../application/create-user.dto';
 import { GetUserProfileUseCase } from '../application/get-user-profile.use-case';
+import { UpdateUserProfileUseCase } from '../application/update-user-profile.use-case';
+import { UpdateUserProfileDto } from '../application/update-user-profile.dto';
 import { InviteUserUseCase } from '../application/invite-user.use-case';
 import { IsEmail, IsNotEmpty, IsOptional, IsEnum } from 'class-validator';
 import { UserRole } from '../domain/user-role.enum';
+import { UserResponseDto } from './dto/user-response.dto';
 
 interface AuthenticatedRequest {
   user?: {
@@ -42,13 +49,21 @@ export class UserController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly getUserProfileUseCase: GetUserProfileUseCase,
+    private readonly updateUserProfileUseCase: UpdateUserProfileUseCase,
     private readonly inviteUserUseCase: InviteUserUseCase,
   ) {}
 
   @Post()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Create a new user (admin only)' })
   @ApiResponse({ status: 201, description: 'User created successfully.' })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Only ADMIN role can create users',
+  })
   @ApiResponse({ status: 409, description: 'Email already exists.' })
+  @ApiBearerAuth()
   async create(@Body() dto: CreateUserDto) {
     const user = await this.createUserUseCase.execute(dto);
     return {
@@ -69,30 +84,34 @@ export class UserController {
   async getProfile(@Request() req: AuthenticatedRequest) {
     const userId = req.user?.id;
     if (!userId) {
-      throw new Error('User not authenticated');
+      throw new UnauthorizedException('User not authenticated');
     }
 
     const user = await this.getUserProfileUseCase.execute(userId);
+    return UserResponseDto.fromDomain(user);
+  }
 
-    return {
-      id: user.id,
-      email: user.email,
-      role: user.role,
-      isVerified: user.isVerified,
-      reputationScore: user.reputationScore,
-      inviteCredits: user.inviteCredits,
-      eventsAttended: user.eventsAttended,
-      hasUnlockedInvites: user.hasUnlockedInvites,
-      outstandingDebt: {
-        amount: user.outstandingDebt.amount,
-        currency: user.outstandingDebt.currency,
-        formatted: user.outstandingDebt.toString(),
-      },
-      profilePhotoUrl: user.profilePhotoUrl,
-      isPhotoVerified: user.isPhotoVerified,
-      createdAt: (user as any).props.createdAt,
-      updatedAt: (user as any).props.updatedAt,
-    };
+  @Patch('me')
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Update current user profile' })
+  @ApiResponse({
+    status: 200,
+    description: 'User profile updated successfully',
+    type: UserResponseDto,
+  })
+  @ApiResponse({ status: 404, description: 'User not found' })
+  async updateProfile(
+    @Request() req: AuthenticatedRequest,
+    @Body() dto: UpdateUserProfileDto,
+  ) {
+    const userId = req.user?.id;
+    if (!userId) {
+      throw new UnauthorizedException('User not authenticated');
+    }
+
+    const user = await this.updateUserProfileUseCase.execute(userId, dto);
+    return UserResponseDto.fromDomain(user);
   }
 
   @Get('me/invites')
@@ -103,7 +122,7 @@ export class UserController {
   async getInvites(@Request() req: AuthenticatedRequest) {
     const userId = req.user?.id;
     if (!userId) {
-      throw new Error('User not authenticated');
+      throw new UnauthorizedException('User not authenticated');
     }
 
     const user = await this.getUserProfileUseCase.execute(userId);
@@ -129,7 +148,7 @@ export class UserController {
   ) {
     const inviterId = req.user?.id;
     if (!inviterId) {
-      throw new Error('User not authenticated');
+      throw new UnauthorizedException('User not authenticated');
     }
 
     const result = await this.inviteUserUseCase.execute({

@@ -84,7 +84,7 @@ describe('No-Show Penalty Logic', () => {
       location: 'Venue',
       venueId: 'v1',
     });
-    await publishEvent.execute(event.id);
+    await publishEvent.execute(event.id, organizer.id, UserRole.DJ);
 
     // 3. Both RSVP
     await rsvpEvent.execute(event.id, goodUser.id);
@@ -133,7 +133,7 @@ describe('No-Show Penalty Logic', () => {
       location: 'Venue',
       venueId: 'v1',
     });
-    await publishEvent.execute(event.id);
+    await publishEvent.execute(event.id, organizer.id, UserRole.DJ);
     await rsvpEvent.execute(event.id, sickUser.id);
 
     // 2. Mark as EXCUSED (Admin Action simulation)

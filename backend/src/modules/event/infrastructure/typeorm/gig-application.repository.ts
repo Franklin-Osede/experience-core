@@ -2,8 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { GigApplication } from '../../domain/gig-application.entity';
-import { GigApplicationRepository } from '../../domain/gig-application.repository';
+import {
+  GigApplicationRepository,
+  GigApplicationFindAllFilters,
+} from '../../domain/gig-application.repository';
 import { GigApplicationEntity } from './gig-application.entity';
+import { PaginatedResult } from '../../domain/event.repository';
 
 @Injectable()
 export class TypeOrmGigApplicationRepository implements GigApplicationRepository {
@@ -39,6 +43,48 @@ export class TypeOrmGigApplicationRepository implements GigApplicationRepository
     return entities.map((e) => this.toDomain(e));
   }
 
+  async findAllPaginated(
+    filters?: GigApplicationFindAllFilters,
+    page: number = 1,
+    limit: number = 20,
+  ): Promise<PaginatedResult<GigApplication>> {
+    const queryBuilder = this.typeOrmRepository.createQueryBuilder('application');
+
+    // Apply filters
+    if (filters?.availabilityId) {
+      queryBuilder.andWhere('application.availabilityId = :availabilityId', {
+        availabilityId: filters.availabilityId,
+      });
+    }
+
+    if (filters?.djId) {
+      queryBuilder.andWhere('application.djId = :djId', {
+        djId: filters.djId,
+      });
+    }
+
+    if (filters?.status) {
+      queryBuilder.andWhere('application.status = :status', {
+        status: filters.status,
+      });
+    }
+
+    // Sort by creation date (most recent first)
+    queryBuilder.orderBy('application.createdAt', 'DESC');
+
+    // Apply pagination
+    const skip = (page - 1) * limit;
+    queryBuilder.skip(skip).take(limit);
+
+    // Get results and total count
+    const [entities, total] = await queryBuilder.getManyAndCount();
+
+    return {
+      data: entities.map((e) => this.toDomain(e)),
+      total,
+    };
+  }
+
   private toEntity(application: GigApplication): GigApplicationEntity {
     const props = application.getProps();
     const entity = new GigApplicationEntity();
@@ -64,4 +110,5 @@ export class TypeOrmGigApplicationRepository implements GigApplicationRepository
     });
   }
 }
+
 

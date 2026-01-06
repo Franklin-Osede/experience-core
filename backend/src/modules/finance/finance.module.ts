@@ -20,16 +20,19 @@ import { FinanceController } from './infrastructure/finance.controller';
 
 // Use TypeORM repository in production, in-memory for testing
 const useTypeORM = process.env.USE_TYPEORM !== 'false';
+const typeOrmImports = useTypeORM
+  ? [
+      TypeOrmModule.forFeature([
+        WalletEntity,
+        SplitPaymentEntity,
+        SplitPaymentPayerEntity,
+        TransactionEntity,
+      ]),
+    ]
+  : [];
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([
-      WalletEntity,
-      SplitPaymentEntity,
-      SplitPaymentPayerEntity,
-      TransactionEntity,
-    ]),
-  ],
+  imports: [...typeOrmImports],
   controllers: [FinanceController],
   providers: [
     CreateWalletHandler,

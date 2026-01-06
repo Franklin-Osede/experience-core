@@ -1,0 +1,179 @@
+<div class="relative min-h-screen flex flex-col max-w-md mx-auto w-full pb-8 onboarding-container">
+  <!-- Header / Progress -->
+  <header class="flex w-full flex-row items-center justify-center gap-3 py-8 px-6">
+    <div class="h-1.5 w-8 rounded-full bg-primary transition-all duration-300 shadow-[0_0_10px_rgba(244,140,37,0.5)]"></div>
+    <div class="h-1.5 w-2 rounded-full bg-white/10 dark:bg-white/20"></div>
+  </header>
+
+  <!-- Main Content Scrollable Area -->
+  <main class="flex-grow flex flex-col px-6">
+    <!-- Headline Section -->
+    <div class="flex flex-col gap-2 mb-6">
+      <h1 class="text-3xl font-bold tracking-tight leading-tight text-slate-900 dark:text-white">
+        Curate Your Night
+      </h1>
+      <p class="text-base text-slate-500 dark:text-gray-400 font-normal leading-relaxed">
+        Select the sounds that move you to tailor your event recommendations.
+      </p>
+    </div>
+
+    <!-- Taste Selectors -->
+    <div class="flex flex-col gap-4 mb-10">
+      <!-- Afro House Card -->
+      <div 
+        class="group relative aspect-[16/9] cursor-pointer w-full"
+        [class.selected]="selectedGenres().includes('AFRO_HOUSE')"
+        (click)="toggleGenre('AFRO_HOUSE')">
+        <!-- Active Glow/Border Effect -->
+        <div 
+          *ngIf="selectedGenres().includes('AFRO_HOUSE')"
+          class="absolute -inset-0.5 bg-gradient-to-b from-primary to-primary/50 rounded-2xl opacity-100 blur-[2px]"></div>
+        <div 
+          class="relative h-full w-full rounded-2xl overflow-hidden bg-surface-dark border-2 transition-all"
+          [class.border-primary]="selectedGenres().includes('AFRO_HOUSE')"
+          [class.border-white/5]="!selectedGenres().includes('AFRO_HOUSE')"
+          [class.shadow-lg]="selectedGenres().includes('AFRO_HOUSE')"
+          [class.shadow-primary/20]="selectedGenres().includes('AFRO_HOUSE')">
+          <!-- Image Background -->
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 genre-bg-afro-house"></div>
+          
+          <!-- Selected Icon -->
+          <div 
+            *ngIf="selectedGenres().includes('AFRO_HOUSE')"
+            class="absolute top-4 right-4 bg-primary text-white rounded-full p-2 shadow-lg z-10 animate-in zoom-in duration-300">
+            <span class="material-symbols-outlined text-lg leading-none">check</span>
+          </div>
+          
+          <!-- Content -->
+          <div class="absolute bottom-0 left-0 w-full p-5 flex flex-col gap-1">
+            <h3 class="text-2xl font-bold text-white leading-none drop-shadow-lg">Afro House</h3>
+            <span 
+              *ngIf="selectedGenres().includes('AFRO_HOUSE')"
+              class="text-sm text-primary font-semibold tracking-wide uppercase">Selected</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- House Card -->
+      <div 
+        class="group relative aspect-[16/9] cursor-pointer w-full transition-all duration-300 active:scale-95"
+        [class.selected]="selectedGenres().includes('HOUSE')"
+        (click)="toggleGenre('HOUSE')">
+        <!-- Active Glow/Border Effect -->
+        <div 
+          *ngIf="selectedGenres().includes('HOUSE')"
+          class="absolute -inset-0.5 bg-gradient-to-b from-primary to-primary/50 rounded-2xl opacity-100 blur-[2px]"></div>
+        <div 
+          class="relative h-full w-full rounded-2xl overflow-hidden bg-surface-dark border-2 transition-all"
+          [class.border-primary]="selectedGenres().includes('HOUSE')"
+          [class.border-white/5]="!selectedGenres().includes('HOUSE')"
+          [class.opacity-60]="!selectedGenres().includes('HOUSE')"
+          [class.hover:opacity-100]="!selectedGenres().includes('HOUSE')">
+          <!-- Image Background -->
+          <div class="absolute inset-0 bg-cover bg-center transition-all duration-500 genre-bg-house"
+               [class.genre-unselected]="!selectedGenres().includes('HOUSE')"></div>
+          
+          <!-- Selected Icon -->
+          <div 
+            *ngIf="selectedGenres().includes('HOUSE')"
+            class="absolute top-4 right-4 bg-primary text-white rounded-full p-2 shadow-lg z-10 animate-in zoom-in duration-300">
+            <span class="material-symbols-outlined text-lg leading-none">check</span>
+          </div>
+          
+          <!-- Content -->
+          <div class="absolute bottom-0 left-0 w-full p-5 flex flex-col gap-1">
+            <h3 class="text-2xl font-bold text-white leading-none drop-shadow-lg">House</h3>
+            <span 
+              *ngIf="selectedGenres().includes('HOUSE')"
+              class="text-sm text-primary font-semibold tracking-wide uppercase">Selected</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Latin Card -->
+      <div 
+        class="group relative aspect-[16/9] cursor-pointer w-full transition-all duration-300 active:scale-95"
+        [class.selected]="selectedGenres().includes('REGGAETON')"
+        (click)="toggleGenre('REGGAETON')">
+        <!-- Active Glow/Border Effect -->
+        <div 
+          *ngIf="selectedGenres().includes('REGGAETON')"
+          class="absolute -inset-0.5 bg-gradient-to-b from-primary to-primary/50 rounded-2xl opacity-100 blur-[2px]"></div>
+        <div 
+          class="relative h-full w-full rounded-2xl overflow-hidden bg-surface-dark border-2 transition-all"
+          [class.border-primary]="selectedGenres().includes('REGGAETON')"
+          [class.border-white/5]="!selectedGenres().includes('REGGAETON')"
+          [class.shadow-lg]="selectedGenres().includes('REGGAETON')"
+          [class.shadow-primary/20]="selectedGenres().includes('REGGAETON')"
+          [class.opacity-60]="!selectedGenres().includes('REGGAETON')"
+          [class.hover:opacity-100]="!selectedGenres().includes('REGGAETON')">
+          <!-- Image Background -->
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 genre-bg-latin"
+               [class.genre-unselected]="!selectedGenres().includes('REGGAETON')"></div>
+          
+          <!-- Selected Icon -->
+          <div 
+            *ngIf="selectedGenres().includes('REGGAETON')"
+            class="absolute top-4 right-4 bg-primary text-white rounded-full p-2 shadow-lg z-10 animate-in zoom-in duration-300">
+            <span class="material-symbols-outlined text-lg leading-none">check</span>
+          </div>
+          
+          <!-- Content -->
+          <div class="absolute bottom-0 left-0 w-full p-5 flex flex-col gap-1">
+            <h3 class="text-2xl font-bold text-white leading-none drop-shadow-lg">Latin</h3>
+            <span 
+              *ngIf="selectedGenres().includes('REGGAETON')"
+              class="text-sm text-primary font-semibold tracking-wide uppercase">Selected</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone Verification Section -->
+    <div class="flex flex-col gap-4 mt-auto">
+      <div class="space-y-1">
+        <h3 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Secure your spot</h3>
+        <p class="text-sm text-gray-400">Verify your mobile to get exclusive access.</p>
+      </div>
+
+      <!-- Custom Phone Input -->
+      <div class="group relative flex items-center w-full bg-[#2c241b] dark:bg-white/5 border border-white/10 rounded-full focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all duration-300 h-14 overflow-hidden">
+        <!-- Country Selector Visual -->
+        <button 
+          type="button"
+          class="flex items-center gap-2 pl-5 pr-3 h-full border-r border-white/10 hover:bg-white/5 transition-colors">
+          <span class="text-xl">🇺🇸</span>
+          <span class="text-sm font-medium text-white/90">+1</span>
+          <span class="material-symbols-outlined text-white/50 text-sm">expand_more</span>
+        </button>
+
+        <!-- Input Field -->
+        <input 
+          class="w-full h-full bg-transparent border-none text-white placeholder-white/30 px-4 focus:ring-0 text-lg font-medium tracking-wide caret-primary"
+          placeholder="(555) 000-0000"
+          type="tel"
+          [value]="phoneNumber()"
+          (input)="onPhoneInput($event)"
+        />
+      </div>
+
+      <!-- Privacy Note -->
+      <div class="flex items-center justify-center gap-1.5 opacity-60 mt-1">
+        <span class="material-symbols-outlined text-[14px] text-primary">lock</span>
+        <p class="text-[11px] text-center text-white/80">Your privacy is our priority. No spam, just access.</p>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <button 
+      (click)="onSubmit()"
+      [disabled]="!canSubmit()"
+      class="mt-6 w-full bg-[#f48c25] hover:bg-[#ff9500] disabled:opacity-50 disabled:cursor-not-allowed text-white text-xl font-bold py-5 rounded-full shadow-[0_8px_30px_rgba(244,140,37,0.5)] hover:shadow-[0_12px_40px_rgba(255,149,0,0.8)] disabled:hover:shadow-[0_8px_30px_rgba(244,140,37,0.5)] transition-all transform active:scale-[0.98] disabled:transform-none flex items-center justify-center gap-3 border-2 border-[#f48c25] hover:border-[#ff9500] disabled:border-[#f48c25]">
+      <span>Verify & Enter</span>
+      <span class="material-symbols-outlined text-xl">arrow_forward</span>
+    </button>
+
+    <!-- Bottom Spacer -->
+    <div class="h-6"></div>
+  </main>
+</div>

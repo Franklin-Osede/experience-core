@@ -3,5 +3,6 @@ export enum UserRole {
   DJ = 'DJ',
   FOUNDER = 'FOUNDER', // Early adopters with more invites (launch phase)
   VENUE = 'VENUE',
+  PROVIDER = 'PROVIDER', // Sound, Lights, Visuals technicians/rentals
   ADMIN = 'ADMIN',
 }

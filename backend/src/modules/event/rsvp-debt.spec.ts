@@ -69,7 +69,7 @@ describe('RSVP with Debt Logic', () => {
       location: 'Venue',
       venueId: 'v1',
     });
-    await publishEventUseCase.execute(event.id);
+    await publishEventUseCase.execute(event.id, organizer.id, UserRole.DJ);
 
     // 3. Attempt RSVP
     await expect(rsvpUseCase.execute(event.id, debtor.id)).rejects.toThrow(
@@ -103,7 +103,7 @@ describe('RSVP with Debt Logic', () => {
       location: 'Venue',
       venueId: 'v1',
     });
-    await publishEventUseCase.execute(event.id);
+    await publishEventUseCase.execute(event.id, organizer.id, UserRole.DJ);
 
     // 3. Attempt RSVP
     const attendee = await rsvpUseCase.execute(event.id, goodUser.id);

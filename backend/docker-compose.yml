@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:14-alpine
+    container_name: experience-core-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: experience_core
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - experience-core-network
+
+  # Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: experience-core-backend
+    environment:
+      NODE_ENV: production
+      PORT: 5555
+      USE_TYPEORM: 'true'
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: experience_core
+      DB_SYNCHRONIZE: 'false'
+      DB_LOGGING: 'false'
+      DB_MIGRATIONS_RUN: 'true'
+      JWT_SECRET: ${JWT_SECRET:-change-this-secret-in-production-min-32-chars}
+      JWT_EXPIRES_IN: 7d
+      CORS_ORIGIN: '*'
+    ports:
+      - '5555:5555'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - experience-core-network
+    restart: unless-stopped
+    volumes:
+      # Mount .env file if exists (for local development)
+      - ./.env:/app/.env:ro
+    command: >
+      sh -c "
+        echo 'Waiting for database...' &&
+        sleep 5 &&
+        npm run migration:run &&
+        node dist/main.js
+      "
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  experience-core-network:
+    driver: bridge
+

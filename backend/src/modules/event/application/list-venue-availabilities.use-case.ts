@@ -23,28 +23,18 @@ export class ListVenueAvailabilitiesUseCase {
   async execute(
     filters?: ListAvailabilitiesFilters,
   ): Promise<VenueAvailability[]> {
-    // For now, return all. In future, implement filtering in repository
-    const all = await this.repository.findAll();
+    // Use repository pagination (database-level filtering)
+    const result = await this.repository.findAllPaginated(
+      {
+        venueId: filters?.venueId,
+        status: filters?.status,
+        fromDate: filters?.fromDate,
+        toDate: filters?.toDate,
+      },
+      1, // page
+      1000, // large limit to get all (for backward compatibility)
+    );
 
-    // Simple in-memory filtering (will be moved to repository when using TypeORM)
-    let filtered = all;
-
-    if (filters?.venueId) {
-      filtered = filtered.filter((a) => a.venueId === filters.venueId);
-    }
-
-    if (filters?.status) {
-      filtered = filtered.filter((a) => a.status === filters.status);
-    }
-
-    if (filters?.fromDate) {
-      filtered = filtered.filter((a) => a.date >= filters.fromDate!);
-    }
-
-    if (filters?.toDate) {
-      filtered = filtered.filter((a) => a.date <= filters.toDate!);
-    }
-
-    return filtered;
+    return result.data;
   }
 }

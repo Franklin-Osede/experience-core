@@ -7,6 +7,7 @@ import {
   Query,
   UseGuards,
   Request,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import {
@@ -15,6 +16,9 @@ import {
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
+import { RolesGuard } from '../../../shared/infrastructure/guards/roles.guard';
+import { Roles } from '../../../shared/infrastructure/decorators/roles.decorator';
+import { UserRole } from '../../../modules/identity/domain/user-role.enum';
 import { PostVenueAvailabilityUseCase } from '../application/post-venue-availability.use-case';
 import { ListVenueAvailabilitiesUseCase } from '../application/list-venue-availabilities.use-case';
 import { ApplyToGigUseCase } from '../application/apply-to-gig.use-case';
@@ -32,11 +36,9 @@ import { EventType } from '../domain/event-type.enum';
 import { EventGenre } from '../domain/event-genre.enum';
 import { AvailabilityStatus } from '../domain/venue-availability.entity';
 import { GigApplicationStatus } from '../domain/gig-application.entity';
-import {
-  getVenueAvailabilityProps,
-  getGigApplicationProps,
-  getEventProps,
-} from '../../../shared/infrastructure/helpers/entity-helpers';
+import { VenueAvailabilityResponseDto } from './dto/venue-availability-response.dto';
+import { GigApplicationResponseDto } from './dto/gig-application-response.dto';
+import { EventResponseDto } from './dto/event-response.dto';
 
 interface AuthenticatedRequest {
   user?: {
@@ -109,11 +111,16 @@ export class GigController {
   ) {}
 
   @Post('venues/availability')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(UserRole.VENUE)
   @ApiOperation({ summary: 'Post venue availability (VENUE role only)' })
   @ApiResponse({
     status: 201,
     description: 'Availability posted successfully',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Only VENUE role can post availability',
   })
   @ApiBearerAuth()
   async postAvailability(
@@ -128,19 +135,7 @@ export class GigController {
       terms: dto.terms,
     });
 
-    const props = getVenueAvailabilityProps(availability);
-    return {
-      id: availability.id,
-      venueId: availability.venueId,
-      date: props.date,
-      minGuarantee: {
-        amount: props.minGuarantee.amount,
-        currency: props.minGuarantee.currency,
-      },
-      terms: props.terms,
-      status: props.status,
-      createdAt: props.createdAt,
-    };
+    return VenueAvailabilityResponseDto.fromDomain(availability);
   }
 
   @Get('venues/availability')
@@ -164,30 +159,23 @@ export class GigController {
 
     return {
       total: availabilities.length,
-      availabilities: availabilities.map((a) => {
-        const props = getVenueAvailabilityProps(a);
-        return {
-          id: a.id,
-          venueId: a.venueId,
-          date: props.date,
-          minGuarantee: {
-            amount: props.minGuarantee.amount,
-            currency: props.minGuarantee.currency,
-          },
-          terms: props.terms,
-          status: props.status,
-          createdAt: props.createdAt,
-        };
-      }),
+      availabilities: availabilities.map((a) =>
+        VenueAvailabilityResponseDto.fromDomain(a),
+      ),
     };
   }
 
   @Post('apply')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(UserRole.DJ)
   @ApiOperation({ summary: 'Apply to a gig (DJ role only)' })
   @ApiResponse({
     status: 201,
     description: 'Application submitted successfully',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Only DJ role can apply to gigs',
   })
   @ApiBearerAuth()
   async applyToGig(
@@ -196,7 +184,7 @@ export class GigController {
   ) {
     const userId = req.user?.id;
     if (!userId) {
-      throw new Error('User not authenticated');
+      throw new UnauthorizedException('User not authenticated');
     }
 
     const application = await this.applyToGigUseCase.execute({
@@ -205,23 +193,20 @@ export class GigController {
       proposal: dto.proposal,
     });
 
-    const props = getGigApplicationProps(application);
-    return {
-      id: application.id,
-      availabilityId: application.availabilityId,
-      djId: application.djId,
-      proposal: application.proposal,
-      status: props.status,
-      createdAt: props.createdAt,
-    };
+    return GigApplicationResponseDto.fromDomain(application);
   }
 
   @Post('applications/:id/accept')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(UserRole.VENUE)
   @ApiOperation({ summary: 'Accept a gig application (VENUE role only)' })
   @ApiResponse({
     status: 201,
     description: 'Application accepted, event created',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Only VENUE role can accept applications',
   })
   @ApiBearerAuth()
   async acceptApplication(
@@ -235,17 +220,8 @@ export class GigController {
       endTime: new Date(dto.endTime),
     });
 
-    const props = getEventProps(event);
     return {
-      id: event.id,
-      organizerId: event.organizerId,
-      title: event.title,
-      type: props.type,
-      genre: props.genre,
-      status: props.status,
-      venueId: event.venueId,
-      startTime: props.startTime,
-      endTime: props.endTime,
+      ...EventResponseDto.fromDomain(event),
       message: 'Application accepted and event created',
     };
   }
@@ -271,17 +247,9 @@ export class GigController {
 
     return {
       total: applications.length,
-      applications: applications.map((a) => {
-        const props = getGigApplicationProps(a);
-        return {
-          id: a.id,
-          availabilityId: a.availabilityId,
-          djId: a.djId,
-          proposal: a.proposal,
-          status: props.status,
-          createdAt: props.createdAt,
-        };
-      }),
+      applications: applications.map((a) =>
+        GigApplicationResponseDto.fromDomain(a),
+      ),
     };
   }
 }

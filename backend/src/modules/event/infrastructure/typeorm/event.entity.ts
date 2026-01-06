@@ -12,6 +12,7 @@ import {
 import { EventType } from '../../domain/event-type.enum';
 import { EventGenre } from '../../domain/event-genre.enum';
 import { EventStatus } from '../../domain/event-status.enum';
+import { ProductionRiderProps } from '../../domain/production-rider.vo';
 
 /**
  * TypeORM Entity for Event persistence
@@ -73,6 +74,9 @@ export class EventEntity {
 
   @Column({ default: false })
   isEscrowFunded: boolean;
+
+  @Column({ type: 'jsonb', nullable: true })
+  productionRider: ProductionRiderProps | null;
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;

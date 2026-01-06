@@ -11,3 +11,5 @@ export { EventEntity } from '../modules/event/infrastructure/typeorm/event.entit
 export { EventAttendeeEntity } from '../modules/event/infrastructure/typeorm/event-attendee.entity';
 export { VenueAvailabilityEntity } from '../modules/event/infrastructure/typeorm/venue-availability.entity';
 export { GigApplicationEntity } from '../modules/event/infrastructure/typeorm/gig-application.entity';
+export { ServiceListingEntity } from '../modules/provider/infrastructure/typeorm/service-listing.entity';
+export { ServiceBookingEntity } from '../modules/provider/infrastructure/typeorm/service-booking.entity';

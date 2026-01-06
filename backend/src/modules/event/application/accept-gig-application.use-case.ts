@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import {
   GIG_APPLICATION_REPOSITORY,
   GigApplicationRepository,
@@ -37,13 +37,19 @@ export class AcceptGigApplicationUseCase {
     const application = await this.applicationRepository.findById(
       dto.applicationId,
     );
-    if (!application) throw new Error('Application not found');
+    if (!application) {
+      throw new NotFoundException(`Application with ID ${dto.applicationId} not found`);
+    }
 
     // 2. Get Availability
     const availability = await this.availabilityRepository.findById(
       application.availabilityId,
     );
-    if (!availability) throw new Error('Availability not found');
+    if (!availability) {
+      throw new NotFoundException(
+        `Availability with ID ${application.availabilityId} not found`,
+      );
+    }
 
     // 3. Mark Deal as Done
     application.accept();

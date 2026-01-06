@@ -80,7 +80,11 @@ describe('RSVP Flow Integration', () => {
       venueId: 'venue-id',
     });
 
-    await publishEventUseCase.execute(draftEvent.id);
+    await publishEventUseCase.execute(
+      draftEvent.id,
+      'organizer-id',
+      UserRole.DJ,
+    );
 
     // 3. RSVP to the event
     await rsvpUseCase.execute(draftEvent.id, user.id);

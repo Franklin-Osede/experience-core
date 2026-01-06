@@ -1,4 +1,9 @@
-import { Inject, Injectable } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import {
   GIG_APPLICATION_REPOSITORY,
   GigApplicationRepository,
@@ -31,10 +36,12 @@ export class ApplyToGigUseCase {
       dto.availabilityId,
     );
     if (!availability) {
-      throw new Error('Availability not found');
+      throw new NotFoundException(
+        `Availability with ID ${dto.availabilityId} not found`,
+      );
     }
     if (availability.status !== AvailabilityStatus.OPEN) {
-      throw new Error('This slot is no longer available');
+      throw new BadRequestException('This slot is no longer available');
     }
 
     // 2. Create Application

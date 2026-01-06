@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { EventAttendeeRepository } from '../domain/event-attendee.repository';
+import {
+  EventAttendeeRepository,
+  EventAttendeeFindAllFilters,
+} from '../domain/event-attendee.repository';
 import { EventAttendee } from '../domain/event-attendee.entity';
+import { PaginatedResult } from '../domain/event.repository';
 
 @Injectable()
 export class InMemoryEventAttendeeRepository implements EventAttendeeRepository {
@@ -41,5 +45,48 @@ export class InMemoryEventAttendeeRepository implements EventAttendeeRepository 
     return Array.from(this.attendees.values()).filter(
       (a) => a.eventId === eventId,
     ).length;
+  }
+
+  async findAllPaginated(
+    filters?: EventAttendeeFindAllFilters,
+    page: number = 1,
+    limit: number = 20,
+  ): Promise<PaginatedResult<EventAttendee>> {
+    await Promise.resolve();
+
+    let results = Array.from(this.attendees.values());
+
+    // Apply filters
+    if (filters?.eventId) {
+      results = results.filter((a) => a.eventId === filters.eventId);
+    }
+
+    if (filters?.userId) {
+      results = results.filter((a) => a.userId === filters.userId);
+    }
+
+    if (filters?.status) {
+      results = results.filter((a) => {
+        const props = (a as any).props;
+        return props.status === filters.status;
+      });
+    }
+
+    // Sort by RSVP date (most recent first)
+    results.sort((a, b) => {
+      const aProps = (a as any).props;
+      const bProps = (b as any).props;
+      return bProps.rsvpDate.getTime() - aProps.rsvpDate.getTime();
+    });
+
+    // Paginate
+    const total = results.length;
+    const skip = (page - 1) * limit;
+    const paginatedResults = results.slice(skip, skip + limit);
+
+    return {
+      data: paginatedResults,
+      total,
+    };
   }
 }

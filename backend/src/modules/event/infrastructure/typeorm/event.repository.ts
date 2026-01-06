@@ -2,10 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOptionsWhere } from 'typeorm';
 import { Event } from '../../domain/event.entity';
-import { EventRepository } from '../../domain/event.repository';
+import {
+  EventRepository,
+  EventFindAllFilters,
+  PaginatedResult,
+} from '../../domain/event.repository';
 import { EventEntity } from './event.entity';
 import { EventType } from '../../domain/event-type.enum';
 import { EventStatus } from '../../domain/event-status.enum';
+import { EventGenre } from '../../domain/event-genre.enum';
+import { ProductionRider, ProductionRiderProps } from '../../domain/production-rider.vo';
 
 /**
  * TypeORM implementation of EventRepository
@@ -43,6 +49,54 @@ export class TypeOrmEventRepository implements EventRepository {
     return entities.map((entity) => this.toDomain(entity));
   }
 
+  async findAllPaginated(
+    filters?: EventFindAllFilters,
+    page: number = 1,
+    limit: number = 20,
+  ): Promise<PaginatedResult<Event>> {
+    const queryBuilder = this.typeOrmRepository.createQueryBuilder('event');
+
+    // Apply filters
+    if (filters?.type) {
+      queryBuilder.andWhere('event.type = :type', { type: filters.type });
+    }
+
+    if (filters?.status) {
+      queryBuilder.andWhere('event.status = :status', { status: filters.status });
+    }
+
+    if (filters?.genre) {
+      queryBuilder.andWhere('event.genre = :genre', { genre: filters.genre });
+    }
+
+    if (filters?.fromDate) {
+      queryBuilder.andWhere('event.startTime >= :fromDate', {
+        fromDate: filters.fromDate,
+      });
+    }
+
+    if (filters?.toDate) {
+      queryBuilder.andWhere('event.endTime <= :toDate', {
+        toDate: filters.toDate,
+      });
+    }
+
+    // Sort by startTime (upcoming first)
+    queryBuilder.orderBy('event.startTime', 'ASC');
+
+    // Apply pagination
+    const skip = (page - 1) * limit;
+    queryBuilder.skip(skip).take(limit);
+
+    // Get results and total count
+    const [entities, total] = await queryBuilder.getManyAndCount();
+
+    return {
+      data: entities.map((entity) => this.toDomain(entity)),
+      total,
+    };
+  }
+
   private toEntity(event: Event): EventEntity {
     const props = event.getProps();
     const entity = new EventEntity();
@@ -59,6 +113,9 @@ export class TypeOrmEventRepository implements EventRepository {
     entity.venueId = props.venueId || null;
     entity.maxCapacity = props.maxCapacity || null;
     entity.isEscrowFunded = props.isEscrowFunded;
+    entity.productionRider = props.productionRider
+      ? props.productionRider.toJSON()
+      : null;
     entity.createdAt = props.createdAt;
     entity.updatedAt = props.updatedAt;
     return entity;
@@ -78,6 +135,9 @@ export class TypeOrmEventRepository implements EventRepository {
       location: entity.location,
       venueId: entity.venueId || undefined,
       maxCapacity: entity.maxCapacity || undefined,
+      productionRider: entity.productionRider
+        ? new ProductionRider(entity.productionRider as ProductionRiderProps)
+        : undefined,
       isEscrowFunded: entity.isEscrowFunded,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,

@@ -65,6 +65,12 @@ export class UserEntity {
   @Column({ default: false })
   isPhotoVerified: boolean;
 
+  @Column({ nullable: true, length: 20 })
+  phoneNumber: string | null;
+
+  @Column({ type: 'simple-array', nullable: true })
+  preferredGenres: string[] | null;
+
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
 

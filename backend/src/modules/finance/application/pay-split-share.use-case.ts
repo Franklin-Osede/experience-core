@@ -1,4 +1,8 @@
-import { Inject, Injectable } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import {
   SPLIT_PAYMENT_REPOSITORY,
   SplitPaymentRepository,
@@ -21,7 +25,9 @@ export class PaySplitShareUseCase {
     const splitPayment = await this.repository.findById(dto.splitPaymentId);
 
     if (!splitPayment) {
-      throw new Error('Split payment not found');
+      throw new NotFoundException(
+        `Split payment with ID ${dto.splitPaymentId} not found`,
+      );
     }
 
     // Capture Payment Logic:

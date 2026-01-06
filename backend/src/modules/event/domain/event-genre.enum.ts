@@ -1,6 +1,7 @@
 export enum EventGenre {
   // Electronic
   HOUSE = 'HOUSE',
+  AFRO_HOUSE = 'AFRO_HOUSE',
   TECHNO = 'TECHNO',
 
   // Latin / Social (The "Gatherings" Pivot)

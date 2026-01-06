@@ -9,8 +9,12 @@ import {
   Patch,
   Delete,
   UseGuards,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from '../../../shared/infrastructure/guards/roles.guard';
+import { Roles } from '../../../shared/infrastructure/decorators/roles.decorator';
+import { UserRole } from '../../../modules/identity/domain/user-role.enum';
 import {
   ApiTags,
   ApiOperation,
@@ -19,6 +23,7 @@ import {
 } from '@nestjs/swagger';
 import { CreateEventUseCase } from '../application/create-event.use-case';
 import { ListEventsUseCase } from '../application/list-events.use-case';
+import { GetEventUseCase } from '../application/get-event.use-case';
 import { PublishEventUseCase } from '../application/publish-event.use-case';
 import { RsvpEventUseCase } from '../application/rsvp-event.use-case';
 import { CancelRsvpUseCase } from '../application/cancel-rsvp.use-case';
@@ -29,20 +34,14 @@ import { CancelEventUseCase } from '../application/cancel-event.use-case';
 import { ListEventRsvpsUseCase } from '../application/list-event-rsvps.use-case';
 import { CreateEventDto } from '../application/create-event.dto';
 import { ListEventsDto } from '../application/list-events.dto';
-import { Event } from '../domain/event.entity';
-// Helper functions to safely access entity props
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getEventProps(event: any): any {
-  return event.props;
-}
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getEventAttendeeProps(attendee: any): any {
-  return attendee.props;
-}
+import { EventResponseDto } from './dto/event-response.dto';
+import { EventAttendeeResponseDto } from './dto/event-attendee-response.dto';
+import { PaginatedResponseDto } from '../../../shared/infrastructure/dto/paginated-response.dto';
 
 interface AuthenticatedRequest {
   user?: {
     id: string;
+    role: string;
   };
 }
 
@@ -52,6 +51,7 @@ export class EventController {
   constructor(
     private readonly createEventUseCase: CreateEventUseCase,
     private readonly listEventsUseCase: ListEventsUseCase,
+    private readonly getEventUseCase: GetEventUseCase,
     private readonly publishEventUseCase: PublishEventUseCase,
     private readonly rsvpEventUseCase: RsvpEventUseCase,
     private readonly cancelRsvpUseCase: CancelRsvpUseCase,
@@ -63,11 +63,16 @@ export class EventController {
   ) {}
 
   @Post()
-  @UseGuards(AuthGuard('jwt'))
-  @ApiOperation({ summary: 'Create a new draft event' })
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(UserRole.DJ, UserRole.VENUE)
+  @ApiOperation({ summary: 'Create a new draft event (DJ or VENUE only)' })
   @ApiResponse({
     status: 201,
     description: 'The event has been successfully created.',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Only DJ or VENUE roles can create events',
   })
   @ApiBearerAuth()
   async create(
@@ -76,9 +81,10 @@ export class EventController {
   ) {
     const userId = req.user?.id;
     if (!userId) {
-      throw new Error('User not authenticated');
+      throw new UnauthorizedException('User not authenticated');
     }
-    return this.createEventUseCase.execute(userId, createEventDto);
+    const event = await this.createEventUseCase.execute(userId, createEventDto);
+    return EventResponseDto.fromDomain(event);
   }
 
   @Get()
@@ -92,49 +98,37 @@ export class EventController {
 
     return {
       ...result,
-      data: result.data.map((event: Event) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const props = getEventProps(event);
-        return {
-          id: event.id,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          organizerId: props.organizerId,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          title: props.title,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          description: props.description,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          type: props.type,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          genre: props.genre,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          status: props.status,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          startTime: props.startTime,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          endTime: props.endTime,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          location: props.location,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          venueId: props.venueId,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          maxCapacity: props.maxCapacity,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          isEscrowFunded: props.isEscrowFunded,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          createdAt: props.createdAt,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          updatedAt: props.updatedAt,
-        };
-      }),
+      data: result.data.map((event) => EventResponseDto.fromDomain(event)),
     };
   }
 
+  @Get(':id')
+  @ApiOperation({ summary: 'Get event details by ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Event details returned.',
+    type: EventResponseDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Event not found.',
+  })
+  async getById(@Param('id') id: string) {
+    const event = await this.getEventUseCase.execute(id);
+    return EventResponseDto.fromDomain(event);
+  }
+
   @Patch(':id/publish')
-  @ApiOperation({ summary: 'Publish a draft event (DRAFT → PUBLISHED)' })
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(UserRole.DJ, UserRole.VENUE)
+  @ApiOperation({ summary: 'Publish a draft event (DRAFT → PUBLISHED) - DJ or VENUE only' })
   @ApiResponse({
     status: 200,
     description: 'Event successfully published.',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Only event organizer or ADMIN can publish events',
   })
   @ApiResponse({
     status: 404,
@@ -145,8 +139,17 @@ export class EventController {
     description: 'Cannot publish (e.g., missing venue).',
   })
   @ApiBearerAuth()
-  async publish(@Param('id') id: string) {
-    return this.publishEventUseCase.execute(id);
+  async publish(
+    @Param('id') id: string,
+    @Request() req: AuthenticatedRequest,
+  ) {
+    const userId = req.user?.id;
+    const userRole = req.user?.role as UserRole;
+    if (!userId || !userRole) {
+      throw new UnauthorizedException('User not authenticated');
+    }
+    const event = await this.publishEventUseCase.execute(id, userId, userRole);
+    return EventResponseDto.fromDomain(event);
   }
 
   @Post(':id/rsvp')
@@ -163,7 +166,7 @@ export class EventController {
   ) {
     const userId = req.user?.id;
     if (!userId) {
-      throw new Error('User not authenticated');
+      throw new UnauthorizedException('User not authenticated');
     }
     return this.rsvpEventUseCase.execute(eventId, userId);
   }
@@ -182,7 +185,7 @@ export class EventController {
   ) {
     const userId = req.user?.id;
     if (!userId) {
-      throw new Error('User not authenticated');
+      throw new UnauthorizedException('User not authenticated');
     }
     return this.cancelRsvpUseCase.execute(eventId, userId);
   }
@@ -206,57 +209,101 @@ export class EventController {
   }
 
   @Post(':id/fund')
-  @UseGuards(AuthGuard('jwt'))
-  @ApiOperation({ summary: 'Mark event as funded (Escrow)' })
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(UserRole.DJ, UserRole.VENUE, UserRole.ADMIN)
+  @ApiOperation({ summary: 'Mark event as funded (Escrow) - DJ, VENUE or ADMIN only' })
   @ApiResponse({
     status: 200,
     description: 'Event marked as funded and confirmed.',
   })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Only event organizer or ADMIN can fund events',
+  })
   @ApiResponse({ status: 404, description: 'Event not found' })
   @ApiResponse({ status: 400, description: 'Event cannot be funded' })
   @ApiBearerAuth()
-  async fund(@Param('id') id: string) {
-    await this.fundEventUseCase.execute(id);
+  async fund(
+    @Param('id') id: string,
+    @Request() req: AuthenticatedRequest,
+  ) {
+    const userId = req.user?.id;
+    const userRole = req.user?.role as UserRole;
+    if (!userId || !userRole) {
+      throw new UnauthorizedException('User not authenticated');
+    }
+    await this.fundEventUseCase.execute(id, userId, userRole);
     return { message: 'Event funded and confirmed successfully' };
   }
 
   @Post(':id/complete')
-  @UseGuards(AuthGuard('jwt'))
-  @ApiOperation({ summary: 'Mark event as completed' })
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(UserRole.DJ, UserRole.VENUE, UserRole.ADMIN)
+  @ApiOperation({ summary: 'Mark event as completed - DJ, VENUE or ADMIN only' })
   @ApiResponse({
     status: 200,
     description: 'Event marked as completed.',
   })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Only event organizer or ADMIN can complete events',
+  })
   @ApiResponse({ status: 404, description: 'Event not found' })
   @ApiResponse({ status: 400, description: 'Event cannot be completed' })
   @ApiBearerAuth()
-  async complete(@Param('id') id: string) {
-    await this.completeEventUseCase.execute(id);
+  async complete(
+    @Param('id') id: string,
+    @Request() req: AuthenticatedRequest,
+  ) {
+    const userId = req.user?.id;
+    const userRole = req.user?.role as UserRole;
+    if (!userId || !userRole) {
+      throw new UnauthorizedException('User not authenticated');
+    }
+    await this.completeEventUseCase.execute(id, userId, userRole);
     return { message: 'Event completed successfully' };
   }
 
   @Post(':id/cancel')
-  @UseGuards(AuthGuard('jwt'))
-  @ApiOperation({ summary: 'Cancel an event' })
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(UserRole.DJ, UserRole.VENUE, UserRole.ADMIN)
+  @ApiOperation({ summary: 'Cancel an event - DJ, VENUE or ADMIN only' })
   @ApiResponse({
     status: 200,
     description: 'Event cancelled successfully.',
   })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Only event organizer or ADMIN can cancel events',
+  })
   @ApiResponse({ status: 404, description: 'Event not found' })
   @ApiResponse({ status: 400, description: 'Event cannot be cancelled' })
   @ApiBearerAuth()
-  async cancel(@Param('id') id: string) {
-    await this.cancelEventUseCase.execute(id);
+  async cancel(
+    @Param('id') id: string,
+    @Request() req: AuthenticatedRequest,
+  ) {
+    const userId = req.user?.id;
+    const userRole = req.user?.role as UserRole;
+    if (!userId || !userRole) {
+      throw new UnauthorizedException('User not authenticated');
+    }
+    await this.cancelEventUseCase.execute(id, userId, userRole);
     return { message: 'Event cancelled successfully' };
   }
 
   @Get(':id/rsvps')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(UserRole.DJ, UserRole.VENUE, UserRole.ADMIN)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'List all RSVPs for an event' })
+  @ApiOperation({ summary: 'List all RSVPs for an event - DJ, VENUE or ADMIN only' })
   @ApiResponse({
     status: 200,
     description: 'List of RSVPs returned.',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Only DJ, VENUE or ADMIN roles can view RSVPs',
   })
   @ApiResponse({ status: 404, description: 'Event not found' })
   async listRsvps(@Param('id') id: string) {
@@ -265,24 +312,9 @@ export class EventController {
     return {
       eventId: id,
       total: attendees.length,
-      rsvps: attendees.map((attendee) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const props = getEventAttendeeProps(attendee);
-        return {
-          id: attendee.id,
-          userId: attendee.userId,
-          status: attendee.status,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          rsvpDate: props.rsvpDate,
-          checkInDate: attendee.checkInDate,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          cancelledDate: props.cancelledDate,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          createdAt: props.createdAt,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          updatedAt: props.updatedAt,
-        };
-      }),
+      rsvps: attendees.map((attendee) =>
+        EventAttendeeResponseDto.fromDomain(attendee),
+      ),
     };
   }
 }

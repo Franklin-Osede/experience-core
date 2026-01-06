@@ -1,51 +1,113 @@
 # Environment Variables
 
-Crea un archivo `.env` en la raíz del proyecto `backend/` con las siguientes variables:
+Crea un archivo `.env` en la raíz del proyecto `backend/` basándote en `.env.example`.
 
+## Configuración Rápida
+
+```bash
+# Copiar template
+cp .env.example .env
+
+# Editar con tus valores
+nano .env  # o tu editor preferido
+```
+
+## Variables Requeridas
+
+### Siempre Requeridas
+- `JWT_SECRET`: Clave secreta para JWT (mínimo 32 caracteres)
+- `NODE_ENV`: Entorno (development, production, test)
+
+### Condicionales (solo si USE_TYPEORM=true)
+- `DB_HOST`: Host de PostgreSQL
+- `DB_USERNAME`: Usuario de la base de datos
+- `DB_PASSWORD`: Contraseña de la base de datos
+- `DB_DATABASE`: Nombre de la base de datos
+
+## Descripción Detallada
+
+### Application Configuration
+| Variable | Tipo | Default | Descripción |
+|----------|------|---------|-------------|
+| `NODE_ENV` | string | `development` | Entorno de ejecución |
+| `PORT` | number | `5555` | Puerto del servidor |
+| `CORS_ORIGIN` | string | `*` | Orígenes permitidos para CORS |
+
+### TypeORM Configuration
+| Variable | Tipo | Default | Descripción |
+|----------|------|---------|-------------|
+| `USE_TYPEORM` | string | `true` | `true` para BD, `false` para in-memory (testing) |
+
+**Nota:** Cuando `USE_TYPEORM=false`, las variables `DB_*` son **opcionales** y no se validan.
+
+### Database Configuration (Opcional si USE_TYPEORM=false)
+| Variable | Tipo | Default | Descripción |
+|----------|------|---------|-------------|
+| `DB_HOST` | string | `localhost` | Host de PostgreSQL |
+| `DB_PORT` | number | `5432` | Puerto de PostgreSQL |
+| `DB_USERNAME` | string | - | Usuario de la base de datos |
+| `DB_PASSWORD` | string | - | Contraseña de la base de datos |
+| `DB_DATABASE` | string | - | Nombre de la base de datos |
+| `DB_SYNCHRONIZE` | string | `false` | Auto-sincronizar esquema (⚠️ false en producción) |
+| `DB_LOGGING` | string | `false` | Loggear queries SQL |
+| `DB_MIGRATIONS_RUN` | string | `false` | Ejecutar migraciones al iniciar |
+
+### JWT Configuration
+| Variable | Tipo | Default | Descripción |
+|----------|------|---------|-------------|
+| `JWT_SECRET` | string | - | **REQUERIDA** - Clave secreta (mínimo 32 caracteres) |
+| `JWT_EXPIRES_IN` | string | `7d` | Tiempo de expiración del token (ej: `7d`, `24h`) |
+
+## Ejemplos de Configuración
+
+### Desarrollo con Base de Datos
 ```env
-# Database Configuration
+NODE_ENV=development
+PORT=5555
+USE_TYPEORM=true
 DB_HOST=localhost
 DB_PORT=5432
 DB_USERNAME=postgres
 DB_PASSWORD=postgres
 DB_DATABASE=experience_core
-DB_SYNCHRONIZE=false
-DB_LOGGING=false
-
-# JWT Configuration
-JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-JWT_EXPIRES_IN=7d
-
-# Application Configuration
-NODE_ENV=development
-PORT=5555
-CORS_ORIGIN=*
-
-# TypeORM Configuration
-USE_TYPEORM=true
+JWT_SECRET=dev-secret-key-min-32-characters-long
 ```
 
-## Descripción de Variables
+### Testing sin Base de Datos
+```env
+NODE_ENV=test
+PORT=5555
+USE_TYPEORM=false
+JWT_SECRET=test-secret-key-min-32-characters-long
+# DB_* variables no son necesarias
+```
 
-### Database
-- `DB_HOST`: Host de PostgreSQL (default: localhost)
-- `DB_PORT`: Puerto de PostgreSQL (default: 5432)
-- `DB_USERNAME`: Usuario de la base de datos
-- `DB_PASSWORD`: Contraseña de la base de datos
-- `DB_DATABASE`: Nombre de la base de datos
-- `DB_SYNCHRONIZE`: Si TypeORM debe sincronizar el esquema automáticamente (false en producción)
-- `DB_LOGGING`: Si TypeORM debe loggear queries (false en producción)
+### Producción
+```env
+NODE_ENV=production
+PORT=5555
+USE_TYPEORM=true
+DB_HOST=your-db-host
+DB_PORT=5432
+DB_USERNAME=your-db-user
+DB_PASSWORD=your-secure-password
+DB_DATABASE=experience_core
+DB_SYNCHRONIZE=false
+DB_LOGGING=false
+JWT_SECRET=your-production-secret-min-32-chars-very-secure
+JWT_EXPIRES_IN=7d
+CORS_ORIGIN=https://yourdomain.com
+```
 
-### JWT
-- `JWT_SECRET`: Clave secreta para firmar tokens JWT (¡cambiar en producción!)
-- `JWT_EXPIRES_IN`: Tiempo de expiración del token (default: 7d)
+## Seguridad
 
-### Application
-- `NODE_ENV`: Entorno de ejecución (development, production, test)
-- `PORT`: Puerto donde corre la aplicación (default: 5555)
-- `CORS_ORIGIN`: Orígenes permitidos para CORS (* para todos)
+⚠️ **IMPORTANTE:**
+- Nunca commitees el archivo `.env` al repositorio
+- Usa `.env.example` como template
+- En producción, usa secretos seguros y variables de entorno del sistema
+- `JWT_SECRET` debe ser una cadena aleatoria segura de al menos 32 caracteres
 
-### TypeORM
-- `USE_TYPEORM`: Si usar repositorios TypeORM o in-memory (true en producción)
+
+
 
 

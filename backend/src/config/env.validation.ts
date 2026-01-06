@@ -8,6 +8,7 @@ import {
   validateSync,
   Min,
   Max,
+  ValidateIf,
 } from 'class-validator';
 
 enum Environment {
@@ -28,27 +29,37 @@ class EnvironmentVariables {
   PORT: number = 5555;
 
   // Database
+  // Only required if USE_TYPEORM is not 'false'
+  @ValidateIf((o) => o.USE_TYPEORM !== 'false')
   @IsString()
   @IsNotEmpty()
-  DB_HOST: string;
+  @IsOptional()
+  DB_HOST?: string;
 
+  @ValidateIf((o) => o.USE_TYPEORM !== 'false')
   @IsNumber()
   @Min(1)
   @Max(65535)
   @IsOptional()
-  DB_PORT: number = 5432;
+  DB_PORT?: number = 5432;
 
+  @ValidateIf((o) => o.USE_TYPEORM !== 'false')
   @IsString()
   @IsNotEmpty()
-  DB_USERNAME: string;
+  @IsOptional()
+  DB_USERNAME?: string;
 
+  @ValidateIf((o) => o.USE_TYPEORM !== 'false')
   @IsString()
   @IsNotEmpty()
-  DB_PASSWORD: string;
+  @IsOptional()
+  DB_PASSWORD?: string;
 
+  @ValidateIf((o) => o.USE_TYPEORM !== 'false')
   @IsString()
   @IsNotEmpty()
-  DB_DATABASE: string;
+  @IsOptional()
+  DB_DATABASE?: string;
 
   @IsOptional()
   DB_SYNCHRONIZE: string = 'false';

@@ -10,9 +10,12 @@ import { IdentityModule } from './modules/identity/identity.module';
 import { FinanceModule } from './modules/finance/finance.module';
 import { EventModule } from './modules/event/event.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { ProviderModule } from './modules/provider/provider.module';
 import databaseConfig from './config/database.config';
 import { validate } from './config/env.validation';
 import { createLoggerConfig } from './config/logger.config';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -22,18 +25,23 @@ import { createLoggerConfig } from './config/logger.config';
       validate,
       envFilePath: ['.env.local', '.env'],
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => {
-        const config =
-          configService.get<ReturnType<typeof databaseConfig>>('database');
-        if (!config) {
-          throw new Error('Database configuration not found');
-        }
-        return config;
-      },
-      inject: [ConfigService],
-    }),
+    // Conditionally load TypeORM based on USE_TYPEORM env variable
+    ...(process.env.USE_TYPEORM !== 'false'
+      ? [
+          TypeOrmModule.forRootAsync({
+            imports: [ConfigModule],
+            useFactory: (configService: ConfigService) => {
+              const config =
+                configService.get<ReturnType<typeof databaseConfig>>('database');
+              if (!config) {
+                throw new Error('Database configuration not found');
+              }
+              return config;
+            },
+            inject: [ConfigService],
+          }),
+        ]
+      : []),
     ThrottlerModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => [
@@ -55,9 +63,11 @@ import { createLoggerConfig } from './config/logger.config';
     FinanceModule,
     EventModule,
     AuthModule,
+    ProviderModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [
+    AppService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

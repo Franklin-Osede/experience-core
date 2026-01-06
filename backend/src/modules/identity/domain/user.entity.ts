@@ -1,6 +1,7 @@
 import { Entity } from '../../../shared/domain/entity.base';
 import { UserRole } from './user-role.enum';
 import { Money } from '../../../shared/domain/money.vo';
+import { EventGenre } from '../../event/domain/event-genre.enum';
 import { v4 as uuidv4 } from 'uuid';
 import * as bcrypt from 'bcrypt';
 
@@ -16,6 +17,8 @@ export interface UserProps {
   outstandingDebt: Money;
   profilePhotoUrl?: string; // New: Face check
   isPhotoVerified: boolean; // New: Bouncer verified
+  phoneNumber?: string; // Phone number for verification
+  preferredGenres?: EventGenre[]; // User's preferred music genres
   createdAt: Date;
   updatedAt: Date;
 }
@@ -94,6 +97,8 @@ export class User extends Entity<UserProps> {
       outstandingDebt: props.outstandingDebt,
       profilePhotoUrl: props.profilePhotoUrl,
       isPhotoVerified: props.isPhotoVerified,
+      phoneNumber: props.phoneNumber,
+      preferredGenres: props.preferredGenres,
       createdAt: props.createdAt,
       updatedAt: props.updatedAt,
     });
@@ -178,6 +183,16 @@ export class User extends Entity<UserProps> {
     this.props.updatedAt = new Date();
   }
 
+  public updatePhoneNumber(phoneNumber: string): void {
+    this.props.phoneNumber = phoneNumber;
+    this.props.updatedAt = new Date();
+  }
+
+  public updatePreferredGenres(genres: EventGenre[]): void {
+    this.props.preferredGenres = genres;
+    this.props.updatedAt = new Date();
+  }
+
   public async validatePassword(plain: string): Promise<boolean> {
     return bcrypt.compare(plain, this.props.password);
   }
@@ -221,5 +236,13 @@ export class User extends Entity<UserProps> {
 
   get isPhotoVerified(): boolean {
     return this.props.isPhotoVerified;
+  }
+
+  get phoneNumber(): string | undefined {
+    return this.props.phoneNumber;
+  }
+
+  get preferredGenres(): EventGenre[] | undefined {
+    return this.props.preferredGenres;
   }
 }

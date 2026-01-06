@@ -31,65 +31,43 @@ export class ListEventsUseCase {
     const page: number = dto.page ?? 1;
     const limit: number = dto.limit ?? 20;
 
-    // Get all events (filtering will be done in repository when TypeORM is fully implemented)
-    let events = await this.eventRepository.findAll({
-      type: dto.type,
-      status: dto.status,
-    });
+    // Build filters object
+    const filters: {
+      type?: any;
+      status?: any;
+      genre?: any;
+      fromDate?: Date;
+      toDate?: Date;
+    } = {};
 
-    // Apply additional filters
+    if (dto.type) {
+      filters.type = dto.type;
+    }
+    if (dto.status) {
+      filters.status = dto.status;
+    }
     if (dto.genre) {
-      events = events.filter((e) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const props = getEventProps(e);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        return props.genre === dto.genre;
-      });
+      filters.genre = dto.genre;
     }
-
     if (dto.fromDate) {
-      const from = new Date(dto.fromDate);
-      events = events.filter((e) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const props = getEventProps(e);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        return props.startTime >= from;
-      });
+      filters.fromDate = new Date(dto.fromDate);
     }
-
     if (dto.toDate) {
-      const to = new Date(dto.toDate);
-      events = events.filter((e) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const props = getEventProps(e);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        return props.endTime <= to;
-      });
+      filters.toDate = new Date(dto.toDate);
     }
 
-    // Sort by startTime (upcoming first)
-    events.sort((a, b) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const aProps = getEventProps(a);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const bProps = getEventProps(b);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-      const aTime = aProps.startTime.getTime();
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-      const bTime = bProps.startTime.getTime();
-      return aTime - bTime;
-    });
+    // Use repository pagination (database-level filtering and pagination)
+    const result = await this.eventRepository.findAllPaginated(
+      filters,
+      page,
+      limit,
+    );
 
-    // Paginate
-    const total = events.length;
-    const start = (page - 1) * limit;
-    const end = start + limit;
-    const paginatedEvents = events.slice(start, end);
-    const totalPages = Math.ceil(total / limit);
+    const totalPages = Math.ceil(result.total / limit);
 
     return {
-      data: paginatedEvents,
-      total,
+      data: result.data,
+      total: result.total,
       page,
       limit,
       totalPages,

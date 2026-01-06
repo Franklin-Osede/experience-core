@@ -1,0 +1,70 @@
+version: '3.8'
+
+# Development docker-compose with hot reload
+# Usage: docker-compose -f docker-compose.dev.yml up
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:14-alpine
+    container_name: experience-core-db-dev
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: experience_core
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - experience-core-network
+
+  # Backend API (Development)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: experience-core-backend-dev
+    environment:
+      NODE_ENV: development
+      PORT: 5555
+      USE_TYPEORM: 'true'
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: experience_core
+      DB_SYNCHRONIZE: 'false'
+      DB_LOGGING: 'true'
+      DB_MIGRATIONS_RUN: 'true'
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-key-min-32-characters-long}
+      JWT_EXPIRES_IN: 7d
+      CORS_ORIGIN: '*'
+    ports:
+      - '5555:5555'
+      - '9229:9229' # Debug port
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - experience-core-network
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+    command: npm run start:dev
+    restart: unless-stopped
+
+volumes:
+  postgres_data_dev:
+    driver: local
+
+networks:
+  experience-core-network:
+    driver: bridge
+

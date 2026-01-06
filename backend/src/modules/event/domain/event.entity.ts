@@ -2,6 +2,7 @@ import { Entity } from '../../../shared/domain/entity.base';
 import { EventType } from './event-type.enum';
 import { EventGenre } from './event-genre.enum';
 import { EventStatus } from './event-status.enum';
+import { ProductionRider } from './production-rider.vo';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface EventProps {
@@ -16,6 +17,7 @@ export interface EventProps {
   location: string; // Could be a Value Object later (Address)
   venueId?: string; // Optional initially if venue is TBD
   maxCapacity?: number;
+  productionRider?: ProductionRider; // Technical requirements
   isEscrowFunded: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -113,5 +115,14 @@ export class Event extends Entity<EventProps> {
 
   get venueId(): string | undefined {
     return this.props.venueId;
+  }
+
+  get productionRider(): ProductionRider | undefined {
+    return this.props.productionRider;
+  }
+
+  public updateProductionRider(rider: ProductionRider): void {
+    this.props.productionRider = rider;
+    this.props.updatedAt = new Date();
   }
 }
