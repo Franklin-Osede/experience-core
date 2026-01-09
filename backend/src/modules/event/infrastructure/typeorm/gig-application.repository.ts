@@ -48,7 +48,8 @@ export class TypeOrmGigApplicationRepository implements GigApplicationRepository
     page: number = 1,
     limit: number = 20,
   ): Promise<PaginatedResult<GigApplication>> {
-    const queryBuilder = this.typeOrmRepository.createQueryBuilder('application');
+    const queryBuilder =
+      this.typeOrmRepository.createQueryBuilder('application');
 
     // Apply filters
     if (filters?.availabilityId) {
@@ -110,5 +111,3 @@ export class TypeOrmGigApplicationRepository implements GigApplicationRepository
     });
   }
 }
-
-

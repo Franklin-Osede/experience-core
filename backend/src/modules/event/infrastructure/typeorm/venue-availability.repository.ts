@@ -65,7 +65,8 @@ export class TypeOrmVenueAvailabilityRepository implements VenueAvailabilityRepo
     page: number = 1,
     limit: number = 20,
   ): Promise<PaginatedResult<VenueAvailability>> {
-    const queryBuilder = this.typeOrmRepository.createQueryBuilder('availability');
+    const queryBuilder =
+      this.typeOrmRepository.createQueryBuilder('availability');
 
     // Apply filters
     if (filters?.venueId) {
@@ -139,5 +140,3 @@ export class TypeOrmVenueAvailabilityRepository implements VenueAvailabilityRepo
     });
   }
 }
-
-

@@ -42,7 +42,11 @@ describe('Roles Authorization (e2e)', () => {
 
     const providerRes = await request(app.getHttpServer())
       .post('/auth/signup')
-      .send({ email: 'provider@test.com', password: 'pass123', role: 'PROVIDER' })
+      .send({
+        email: 'provider@test.com',
+        password: 'pass123',
+        role: 'PROVIDER',
+      })
       .expect(201);
     providerToken = providerRes.body.access_token;
 
@@ -179,8 +183,12 @@ describe('Roles Authorization (e2e)', () => {
           description: 'Created by founder',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 10 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 10 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
         })
         .expect(201);
     });
@@ -193,10 +201,7 @@ describe('Roles Authorization (e2e)', () => {
     });
 
     it('should allow unauthenticated users to list events', () => {
-      return request(app.getHttpServer())
-        .get('/events')
-        .expect(200);
+      return request(app.getHttpServer()).get('/events').expect(200);
     });
   });
 });
-

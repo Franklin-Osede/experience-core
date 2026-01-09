@@ -57,7 +57,7 @@ export class TypeOrmUserRepository implements UserRepository {
     entity.isPhotoVerified = props.isPhotoVerified;
     entity.phoneNumber = props.phoneNumber || null;
     entity.preferredGenres = props.preferredGenres
-      ? props.preferredGenres.map((g) => g.toString())
+      ? props.preferredGenres.map((g: EventGenre) => g.toString())
       : null;
     entity.createdAt = props.createdAt;
     entity.updatedAt = props.updatedAt;
@@ -73,7 +73,8 @@ export class TypeOrmUserRepository implements UserRepository {
       isVerified: entity.isVerified,
       reputationScore: entity.reputationScore,
       // Map -1 back to Infinity for domain (DJs and FOUNDERs have unlimited invites)
-      inviteCredits: entity.inviteCredits === -1 ? Infinity : entity.inviteCredits,
+      inviteCredits:
+        entity.inviteCredits === -1 ? Infinity : entity.inviteCredits,
       eventsAttended: entity.eventsAttended,
       hasUnlockedInvites: entity.hasUnlockedInvites,
       outstandingDebt: new Money(
@@ -84,9 +85,7 @@ export class TypeOrmUserRepository implements UserRepository {
       isPhotoVerified: entity.isPhotoVerified,
       phoneNumber: entity.phoneNumber || undefined,
       preferredGenres: entity.preferredGenres
-        ? (entity.preferredGenres.map(
-            (g) => g as EventGenre,
-          ) as EventGenre[])
+        ? entity.preferredGenres.map((g) => g as EventGenre)
         : undefined,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,

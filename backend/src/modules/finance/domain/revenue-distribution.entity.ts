@@ -1,4 +1,3 @@
-
 import { Entity } from '../../../shared/domain/entity.base';
 import { Money } from '../../../shared/domain/money.vo';
 import { UserRole } from '../../identity/domain/user-role.enum';
@@ -76,7 +75,7 @@ export class RevenueDistribution extends Entity<RevenueDistributionProps> {
     // For now, let's say the rest goes to a "Profit Pool" or main organizer.
     // We would need an explicit 'Organizer' recipient passed in costs or separate argument.
     // For MVP, simplistic: Assume 'costs' includes everyone's share.
-    
+
     return new RevenueDistribution(id, {
       eventId,
       totalRevenue,

@@ -67,16 +67,13 @@ export class InMemoryEventAttendeeRepository implements EventAttendeeRepository 
 
     if (filters?.status) {
       results = results.filter((a) => {
-        const props = (a as any).props;
-        return props.status === filters.status;
+        return a.status === filters.status;
       });
     }
 
     // Sort by RSVP date (most recent first)
     results.sort((a, b) => {
-      const aProps = (a as any).props;
-      const bProps = (b as any).props;
-      return bProps.rsvpDate.getTime() - aProps.rsvpDate.getTime();
+      return b.rsvpDate.getTime() - a.rsvpDate.getTime();
     });
 
     // Paginate

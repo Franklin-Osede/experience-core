@@ -1,0 +1,138 @@
+<div class="relative flex h-full min-h-screen w-full flex-col max-w-md mx-auto shadow-2xl overflow-hidden bg-background-light dark:bg-background-dark">
+  <!-- Progress Indicators -->
+  <div class="sticky top-0 z-30 w-full bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md pt-6 pb-2 px-6">
+    <div class="flex items-center justify-between mb-4">
+        <button 
+          (click)="goBack()"
+          class="flex items-center justify-center size-10 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-gray-900/80 dark:text-white/80 hover:text-gray-900 dark:hover:text-white">
+          <span class="material-symbols-outlined" style="font-size: 24px;">arrow_back_ios_new</span>
+        </button>
+        <div class="flex-1"></div> <!-- Spacer -->
+    </div>
+    <div class="flex w-full flex-row items-center justify-center gap-2">
+      <div class="h-1.5 flex-1 rounded-full bg-primary"></div>
+      <div class="h-1.5 flex-1 rounded-full bg-primary"></div>
+      <div class="h-1.5 flex-1 rounded-full bg-surface-dark/20 dark:bg-white/10"></div>
+      <div class="h-1.5 flex-1 rounded-full bg-surface-dark/20 dark:bg-white/10"></div>
+    </div>
+  </div>
+
+  <!-- Main Content Scroll Area -->
+  <div class="flex-1 overflow-y-auto pb-32 px-6 no-scrollbar">
+    <!-- Headline Text -->
+    <div class="pt-6 pb-6">
+      <h2 class="text-3xl font-bold tracking-tight leading-tight text-gray-900 dark:text-white mb-2">
+        Perfil de Artista
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300 text-base font-normal leading-relaxed">
+        Define tu sonido y tu setup para conectar con los mejores clubs.
+      </p>
+    </div>
+
+    <!-- Section: Estilos -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-text-secondary text-sm">equalizer</span>
+        <h3 class="text-text-secondary text-xs font-bold tracking-widest uppercase">Estilos</h3>
+      </div>
+      <div class="flex flex-col gap-3">
+        @for (genre of genres; track genre) {
+          <label class="group relative flex cursor-pointer items-center justify-between rounded-full border border-gray-200 dark:border-white/10 bg-white dark:bg-surface-dark p-4 pr-5 transition-all hover:border-primary/50 dark:hover:border-primary/50 shadow-sm"
+                 [class.border-primary]="isGenreSelected(genre)"
+                 [class.bg-primary-5]="isGenreSelected(genre)"
+                 [class.dark:bg-primary-10]="isGenreSelected(genre)">
+            <span class="font-display text-base font-medium text-gray-900 dark:text-white pl-1"
+                  [class.text-primary]="isGenreSelected(genre)">{{ genre }}</span>
+            <input 
+              type="checkbox" 
+              class="peer sr-only" 
+              [checked]="isGenreSelected(genre)"
+              (change)="toggleGenre(genre)"/>
+            <div class="flex h-6 w-6 items-center justify-center rounded-full border-2 border-gray-300 dark:border-white/20 text-transparent transition-all"
+                 [class.border-primary]="isGenreSelected(genre)"
+                 [class.bg-primary]="isGenreSelected(genre)"
+                 [class.text-white]="isGenreSelected(genre)">
+              <span class="material-symbols-outlined text-sm font-bold">check</span>
+            </div>
+          </label>
+        }
+      </div>
+    </div>
+
+    <!-- Section: Equipamiento -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-text-secondary text-sm">speaker_group</span>
+        <h3 class="text-text-secondary text-xs font-bold tracking-widest uppercase">Equipamiento</h3>
+      </div>
+      <div class="flex flex-col gap-3">
+        @for (option of equipmentOptions; track option.value) {
+          <label class="group relative flex cursor-pointer items-center justify-between rounded-full border border-gray-200 dark:border-white/10 bg-white dark:bg-surface-dark p-4 pr-5 transition-all hover:border-primary/50 dark:hover:border-primary/50 shadow-sm"
+                 [class.border-primary]="selectedEquipment() === option.value"
+                 [class.bg-primary-5]="selectedEquipment() === option.value"
+                 [class.dark:bg-primary-10]="selectedEquipment() === option.value">
+            <div class="flex items-center gap-3 pl-1">
+              <span class="font-display text-base font-medium text-gray-900 dark:text-white"
+                    [class.text-primary]="selectedEquipment() === option.value">{{ option.label }}</span>
+            </div>
+            <input 
+              type="radio" 
+              name="equipment" 
+              class="peer sr-only" 
+              [value]="option.value"
+              [checked]="selectedEquipment() === option.value"
+              (change)="selectEquipment(option.value)"/>
+            <div class="flex h-6 w-6 items-center justify-center rounded-full border-2 border-gray-300 dark:border-white/20 text-transparent transition-all"
+                 [class.border-primary]="selectedEquipment() === option.value"
+                 [class.bg-primary]="selectedEquipment() === option.value"
+                 [class.text-white]="selectedEquipment() === option.value">
+              <div class="h-2.5 w-2.5 rounded-full bg-current"></div>
+            </div>
+          </label>
+        }
+      </div>
+    </div>
+
+    <!-- Section: Vibe -->
+    <div class="mb-4">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-text-secondary text-sm">nightlife</span>
+        <h3 class="text-text-secondary text-xs font-bold tracking-widest uppercase">Experiencia & Vibe</h3>
+      </div>
+      <div class="flex flex-col gap-3">
+        @for (vibe of vibeOptions; track vibe) {
+          <label class="group relative flex cursor-pointer items-center justify-between rounded-full border border-gray-200 dark:border-white/10 bg-white dark:bg-surface-dark p-4 pr-5 transition-all hover:border-primary/50 dark:hover:border-primary/50 shadow-sm"
+                 [class.border-primary]="isVibeSelected(vibe)"
+                 [class.bg-primary-5]="isVibeSelected(vibe)"
+                 [class.dark:bg-primary-10]="isVibeSelected(vibe)">
+            <span class="font-display text-base font-medium text-gray-900 dark:text-white pl-1"
+                  [class.text-primary]="isVibeSelected(vibe)">{{ vibe }}</span>
+            <input 
+              type="checkbox" 
+              class="peer sr-only" 
+              [checked]="isVibeSelected(vibe)"
+              (change)="toggleVibe(vibe)"/>
+            <div class="flex h-6 w-6 items-center justify-center rounded-full border-2 border-gray-300 dark:border-white/20 text-transparent transition-all"
+                 [class.border-primary]="isVibeSelected(vibe)"
+                 [class.bg-primary]="isVibeSelected(vibe)"
+                 [class.text-white]="isVibeSelected(vibe)">
+              <span class="material-symbols-outlined text-sm font-bold">check</span>
+            </div>
+          </label>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Footer -->
+  <div class="fixed bottom-0 z-40 w-full max-w-md bg-gradient-to-t from-background-light dark:from-background-dark via-background-light/90 dark:via-background-dark/95 to-transparent pt-10 pb-6 px-6 pointer-events-none">
+    <div class="pointer-events-auto">
+        <button 
+        (click)="onContinue()"
+        class="w-full rounded-full bg-primary py-4 px-6 text-white font-bold text-lg shadow-lg shadow-primary/20 hover:bg-primary-dark active:scale-[0.98] transition-all flex items-center justify-center gap-2 group">
+        Guardar y Continuar
+        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </button>
+    </div>
+  </div>
+</div>

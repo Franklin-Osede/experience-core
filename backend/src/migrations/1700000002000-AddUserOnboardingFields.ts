@@ -1,8 +1,6 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class AddUserOnboardingFields1700000002000
-  implements MigrationInterface
-{
+export class AddUserOnboardingFields1700000002000 implements MigrationInterface {
   name = 'AddUserOnboardingFields1700000002000';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -44,4 +42,3 @@ export class AddUserOnboardingFields1700000002000
     // The AFRO_HOUSE value will remain in the enum but won't cause issues
   }
 }
-

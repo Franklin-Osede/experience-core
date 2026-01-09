@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ServiceListing } from '../../domain/service-listing.entity';
-import { ServiceListingRepository } from '../../domain/provider.repository';
-import { ServiceCategory } from '../../domain/service-category.enum';
+import { ServiceListing } from '../domain/service-listing.entity';
+import { ServiceListingRepository } from '../domain/provider.repository';
+import { ServiceCategory } from '../domain/service-category.enum';
 
 /**
  * In-memory implementation of ServiceListingRepository for testing
@@ -40,10 +40,7 @@ export class InMemoryServiceListingRepository implements ServiceListingRepositor
     return Array.from(this.listings.values())
       .filter((listing) => listing.providerId === providerId)
       .sort((a, b) => {
-        const aProps = (a as any).props;
-        const bProps = (b as any).props;
-        return bProps.createdAt.getTime() - aProps.createdAt.getTime();
+        return b.createdAt.getTime() - a.createdAt.getTime();
       });
   }
 }
-

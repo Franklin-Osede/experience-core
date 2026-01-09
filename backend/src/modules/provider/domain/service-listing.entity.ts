@@ -1,4 +1,3 @@
-
 import { Entity } from '../../../shared/domain/entity.base';
 import { Money } from '../../../shared/domain/money.vo';
 import { ServiceCategory } from './service-category.enum';
@@ -6,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export interface ServiceListingProps {
   providerId: string; // The user with role PROVIDER
-  title: string;      // e.g. "Pioneer CDJ-3000 Nexus Set"
+  title: string; // e.g. "Pioneer CDJ-3000 Nexus Set"
   description: string;
   category: ServiceCategory;
   pricePerDay: Money;
@@ -22,7 +21,10 @@ export class ServiceListing extends Entity<ServiceListingProps> {
   }
 
   static create(
-    props: Omit<ServiceListingProps, 'id' | 'createdAt' | 'updatedAt' | 'isAvailable'>,
+    props: Omit<
+      ServiceListingProps,
+      'id' | 'createdAt' | 'updatedAt' | 'isAvailable'
+    >,
   ): ServiceListing {
     const now = new Date();
     return new ServiceListing(uuidv4(), {
@@ -75,6 +77,10 @@ export class ServiceListing extends Entity<ServiceListingProps> {
 
   get updatedAt(): Date {
     return this.props.updatedAt;
+  }
+
+  get createdAt(): Date {
+    return this.props.createdAt;
   }
 
   /**

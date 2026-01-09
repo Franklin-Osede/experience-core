@@ -42,7 +42,9 @@ export class InMemoryGigApplicationRepository implements GigApplicationRepositor
 
     // Apply filters
     if (filters?.availabilityId) {
-      results = results.filter((a) => a.availabilityId === filters.availabilityId);
+      results = results.filter(
+        (a) => a.availabilityId === filters.availabilityId,
+      );
     }
 
     if (filters?.djId) {

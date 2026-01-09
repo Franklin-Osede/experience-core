@@ -11,7 +11,10 @@ import { EventEntity } from './event.entity';
 import { EventType } from '../../domain/event-type.enum';
 import { EventStatus } from '../../domain/event-status.enum';
 import { EventGenre } from '../../domain/event-genre.enum';
-import { ProductionRider, ProductionRiderProps } from '../../domain/production-rider.vo';
+import {
+  ProductionRider,
+  ProductionRiderProps,
+} from '../../domain/production-rider.vo';
 
 /**
  * TypeORM implementation of EventRepository
@@ -62,7 +65,9 @@ export class TypeOrmEventRepository implements EventRepository {
     }
 
     if (filters?.status) {
-      queryBuilder.andWhere('event.status = :status', { status: filters.status });
+      queryBuilder.andWhere('event.status = :status', {
+        status: filters.status,
+      });
     }
 
     if (filters?.genre) {
@@ -136,7 +141,7 @@ export class TypeOrmEventRepository implements EventRepository {
       venueId: entity.venueId || undefined,
       maxCapacity: entity.maxCapacity || undefined,
       productionRider: entity.productionRider
-        ? new ProductionRider(entity.productionRider as ProductionRiderProps)
+        ? new ProductionRider(entity.productionRider)
         : undefined,
       isEscrowFunded: entity.isEscrowFunded,
       createdAt: entity.createdAt,

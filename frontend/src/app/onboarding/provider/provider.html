@@ -1,0 +1,202 @@
+<div class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex flex-col overflow-x-hidden">
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-border-dark/30">
+    <div class="flex items-center justify-start gap-4 px-6 py-4 pb-2">
+      <button 
+        (click)="goBack()"
+        class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-slate-900 dark:text-white">
+        <span class="material-symbols-outlined text-[24px]">arrow_back_ios_new</span>
+      </button>
+      <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Servicios y Precios</h2>
+    </div>
+    <!-- Progress Indicators -->
+    <div class="flex w-full flex-row items-center justify-center gap-2 pb-4 pt-1">
+      <div class="h-1.5 w-8 rounded-full bg-border-dark"></div>
+      <div class="h-1.5 w-8 rounded-full bg-primary shadow-[0_0_10px_rgba(244,140,37,0.5)]"></div>
+      <div class="h-1.5 w-8 rounded-full bg-border-dark"></div>
+      <div class="h-1.5 w-8 rounded-full bg-border-dark"></div>
+    </div>
+  </header>
+
+  <!-- Main Content Form -->
+  <main class="flex-1 flex flex-col pb-32 px-6 max-w-md mx-auto w-full">
+    <!-- Section 1: My Services -->
+    <section class="mt-6">
+      <div class="flex items-center justify-between mb-4 pl-1">
+        <h2 class="text-text-muted text-xs font-bold tracking-widest uppercase">Mis Servicios</h2>
+        <span class="text-xs text-primary font-medium">{{ services().length }} Activos</span>
+      </div>
+      <div class="flex flex-col gap-3">
+        @for (service of services(); track service.id) {
+          <div class="bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-border-dark/50 p-4 flex justify-between items-start group hover:border-primary/40 transition-all shadow-sm">
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-2">
+                <span class="bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">{{ service.category }}</span>
+                <h3 class="text-slate-900 dark:text-white font-semibold text-base">{{ service.name }}</h3>
+              </div>
+              <p class="text-text-muted text-sm line-clamp-1">{{ service.description }}</p>
+              <div class="mt-2 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-primary text-[16px]">payments</span>
+                <span class="text-slate-900 dark:text-white font-bold text-sm">${{ service.price }} <span class="text-text-muted font-normal text-xs">/ {{ service.rateType }}</span></span>
+              </div>
+            </div>
+            <button class="size-8 rounded-full hover:bg-black/5 dark:hover:bg-white/10 flex items-center justify-center text-text-muted transition-colors">
+              <span class="material-symbols-outlined text-[20px]">edit</span>
+            </button>
+          </div>
+        }
+      </div>
+    </section>
+
+    <div class="h-px bg-gray-200 dark:bg-border-dark/50 w-full my-8"></div>
+
+    <!-- Section 2: Add New Service -->
+    <section>
+      <h2 class="text-text-muted text-xs font-bold tracking-widest uppercase mb-4 pl-1">Añadir Nuevo Servicio</h2>
+      <div class="flex flex-col gap-5 p-5 bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-border-dark shadow-sm">
+        <div class="flex flex-col gap-2">
+          <label class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Nombre del Servicio</label>
+          <input 
+            [value]="newServiceName()"
+            (input)="newServiceName.set($any($event.target).value)"
+            class="w-full rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary border border-gray-200 dark:border-border-dark bg-gray-50 dark:bg-background-dark h-12 placeholder:text-text-muted/60 px-4 text-base font-normal transition-all" 
+            placeholder="ej. Diseño de Iluminación"/>
+        </div>
+        
+        <div class="flex flex-col gap-2">
+          <label class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Categoría</label>
+          <div class="relative">
+            <select 
+                [ngModel]="newServiceCategory()"
+                (ngModelChange)="newServiceCategory.set($event)"
+                class="w-full rounded-xl text-slate-900 dark:text-white appearance-none focus:outline-none focus:ring-1 focus:ring-primary border border-gray-200 dark:border-border-dark bg-gray-50 dark:bg-background-dark h-12 px-4 text-base font-normal transition-all pr-10">
+              @for (cat of categories; track cat) {
+                <option [value]="cat">{{ cat }}</option>
+              }
+            </select>
+            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none">expand_more</span>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <div class="flex flex-col gap-2 flex-1">
+            <label class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Precio ($)</label>
+            <input 
+                type="number"
+                [ngModel]="newServicePrice()"
+                (ngModelChange)="newServicePrice.set($event)"
+                class="w-full rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary border border-gray-200 dark:border-border-dark bg-gray-50 dark:bg-background-dark h-12 placeholder:text-text-muted/60 px-4 text-base font-normal transition-all" 
+                placeholder="0.00"/>
+          </div>
+          <div class="flex flex-col gap-2 flex-[1.2]">
+            <label class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Por</label>
+            <div class="relative">
+              <select 
+                [ngModel]="newServiceRateType()"
+                (ngModelChange)="newServiceRateType.set($event)"
+                class="w-full rounded-xl text-slate-900 dark:text-white appearance-none focus:outline-none focus:ring-1 focus:ring-primary border border-gray-200 dark:border-border-dark bg-gray-50 dark:bg-background-dark h-12 px-4 text-base font-normal transition-all pr-10">
+                @for (rate of rateTypes; track rate) {
+                  <option [value]="rate">{{ rate }}</option>
+                }
+              </select>
+              <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none">expand_more</span>
+            </div>
+          </div>
+        </div>
+        
+        <button 
+            (click)="addService()"
+            class="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-primary/10 border border-primary/50 text-primary hover:bg-primary/20 hover:border-primary transition-all mt-1 disabled:opacity-50 disabled:cursor-not-allowed">
+          <span class="material-symbols-outlined text-[20px]">add_circle</span>
+          <span class="text-sm font-bold">Añadir a Servicios</span>
+        </button>
+      </div>
+    </section>
+
+    <div class="h-px bg-gray-200 dark:bg-border-dark/50 w-full my-8"></div>
+
+    <!-- Section 3: Availability & Terms -->
+    <section>
+      <h2 class="text-text-muted text-xs font-bold tracking-widest uppercase mb-4 pl-1">Disponibilidad y Términos</h2>
+      <div class="flex flex-col gap-3">
+        <!-- Toggle: Open to Travel -->
+        <label class="flex items-center justify-between p-4 rounded-xl border cursor-pointer hover:border-gray-300 dark:hover:border-border-dark/80 transition-all"
+               [class.border-gray-200]="!openToTravel()"
+               [class.dark:border-border-dark]="!openToTravel()"
+               [class.border-primary-40]="openToTravel()"
+               [class.bg-white]="true"
+               [class.dark:bg-surface-dark]="true">
+          <div class="flex flex-col">
+            <span class="text-slate-900 dark:text-white font-medium text-base">Disponible para Viajar</span>
+            <span class="text-text-muted text-xs">Disponible para eventos fuera de la ciudad</span>
+          </div>
+          <div class="relative inline-flex items-center cursor-pointer">
+            <input 
+                type="checkbox" 
+                class="sr-only peer" 
+                [checked]="openToTravel()"
+                (change)="toggleTravel()"/>
+            <div class="w-11 h-6 bg-gray-200 dark:bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </div>
+        </label>
+        
+        <!-- Toggle: Insurance -->
+        <label class="flex items-center justify-between p-4 rounded-xl border cursor-pointer hover:border-gray-300 dark:hover:border-border-dark/80 transition-all"
+               [class.border-gray-200]="!insuranceIncluded()"
+               [class.dark:border-border-dark]="!insuranceIncluded()"
+               [class.border-primary-40]="insuranceIncluded()"
+               [class.bg-white]="true"
+               [class.dark:bg-surface-dark]="true">
+          <div class="flex flex-col">
+            <span class="text-slate-900 dark:text-white font-medium text-base">Seguro Incluido</span>
+            <span class="text-text-muted text-xs">La cobertura del equipo está incluida en el precio</span>
+          </div>
+          <div class="relative inline-flex items-center cursor-pointer">
+            <input 
+                type="checkbox" 
+                class="sr-only peer" 
+                [checked]="insuranceIncluded()"
+                (change)="toggleInsurance()"/>
+            <div class="w-11 h-6 bg-gray-200 dark:bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </div>
+        </label>
+
+        <!-- Minimum Notice -->
+        <div class="mt-2 flex flex-col gap-2">
+          <label class="text-slate-900 dark:text-white text-sm font-medium leading-normal pl-1">Aviso Mínimo de Reserva</label>
+          <div class="grid grid-cols-3 gap-2">
+            @for (notice of noticeOptions; track notice) {
+              <button 
+                (click)="setNotice(notice)"
+                class="border rounded-lg py-2.5 text-sm font-medium transition-all"
+                [class.border-primary]="minBookingNotice() === notice"
+                [class.bg-primary-20]="minBookingNotice() === notice"
+                [class.text-white]="minBookingNotice() === notice"
+                [class.border-gray-200]="minBookingNotice() !== notice"
+                [class.dark:border-border-dark]="minBookingNotice() !== notice"
+                [class.bg-white]="minBookingNotice() !== notice"
+                [class.dark:bg-surface-dark]="minBookingNotice() !== notice"
+                [class.text-slate-900]="minBookingNotice() !== notice"
+                [class.dark:text-white]="minBookingNotice() !== notice"
+                [class.hover:border-primary-50]="minBookingNotice() !== notice">
+                {{ notice }}
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="fixed bottom-0 left-0 w-full bg-gradient-to-t from-background-light dark:from-background-dark via-background-light/95 dark:via-background-dark to-transparent pt-12 pb-6 px-4 z-40 pointer-events-none">
+    <div class="max-w-md mx-auto pointer-events-auto">
+      <button 
+        (click)="onNext()"
+        class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-[0_4px_20px_rgba(244,140,37,0.3)] active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+        <span>Siguiente: Perfil de Proveedor</span>
+        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+      </button>
+    </div>
+  </footer>
+</div>

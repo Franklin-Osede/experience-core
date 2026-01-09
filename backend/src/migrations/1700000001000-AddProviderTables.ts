@@ -170,4 +170,3 @@ export class AddProviderTables1700000001000 implements MigrationInterface {
     // Note: We don't remove PROVIDER from user_role_enum to avoid breaking existing data
   }
 }
-

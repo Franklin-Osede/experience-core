@@ -16,9 +16,7 @@ export class ListServiceListingsUseCase {
     private readonly listingRepository: ServiceListingRepository,
   ) {}
 
-  async execute(
-    filters?: ListServiceListingsDto,
-  ): Promise<ServiceListing[]> {
+  async execute(filters?: ListServiceListingsDto): Promise<ServiceListing[]> {
     // If filtering by provider, use specific method
     if (filters?.providerId) {
       const listings = await this.listingRepository.findByProviderId(
@@ -29,9 +27,7 @@ export class ListServiceListingsUseCase {
     }
 
     // Otherwise use search method
-    const listings = await this.listingRepository.search(
-      filters?.category,
-    );
+    const listings = await this.listingRepository.search(filters?.category);
 
     return this.applyFilters(listings, filters);
   }
@@ -51,4 +47,3 @@ export class ListServiceListingsUseCase {
     return results;
   }
 }
-

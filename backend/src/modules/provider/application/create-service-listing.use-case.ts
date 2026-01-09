@@ -31,7 +31,9 @@ export class CreateServiceListingUseCase {
     // 1. Verify that the user is a PROVIDER
     const user = await this.userRepository.findById(providerId);
     if (!user || user.role !== UserRole.PROVIDER) {
-      throw new ForbiddenException('Only PROVIDERs can create service listings');
+      throw new ForbiddenException(
+        'Only PROVIDERs can create service listings',
+      );
     }
 
     // 2. Create listing
@@ -49,4 +51,3 @@ export class CreateServiceListingUseCase {
     return listing;
   }
 }
-

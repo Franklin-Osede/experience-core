@@ -159,7 +159,12 @@ export class ProviderController {
     const listings = await this.listListingsUseCase.execute({
       category,
       providerId,
-      isAvailable: isAvailable === 'true' ? true : isAvailable === 'false' ? false : undefined,
+      isAvailable:
+        isAvailable === 'true'
+          ? true
+          : isAvailable === 'false'
+            ? false
+            : undefined,
     });
 
     return {
@@ -320,4 +325,3 @@ export class ProviderController {
     };
   }
 }
-

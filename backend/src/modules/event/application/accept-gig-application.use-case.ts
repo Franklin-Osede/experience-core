@@ -38,7 +38,9 @@ export class AcceptGigApplicationUseCase {
       dto.applicationId,
     );
     if (!application) {
-      throw new NotFoundException(`Application with ID ${dto.applicationId} not found`);
+      throw new NotFoundException(
+        `Application with ID ${dto.applicationId} not found`,
+      );
     }
 
     // 2. Get Availability

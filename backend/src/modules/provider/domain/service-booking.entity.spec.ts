@@ -142,7 +142,9 @@ describe('ServiceBooking Entity', () => {
 
     booking.confirm();
 
-    expect(() => booking.confirm()).toThrow('Can only confirm pending bookings');
+    expect(() => booking.confirm()).toThrow(
+      'Can only confirm pending bookings',
+    );
   });
 
   it('should throw error when rejecting non-pending booking', () => {
@@ -170,7 +172,9 @@ describe('ServiceBooking Entity', () => {
       pricePerDay,
     );
 
-    expect(() => booking.complete()).toThrow('Can only complete confirmed bookings');
+    expect(() => booking.complete()).toThrow(
+      'Can only complete confirmed bookings',
+    );
   });
 
   it('should handle end date before start date (absolute difference)', () => {
@@ -190,4 +194,3 @@ describe('ServiceBooking Entity', () => {
     expect(booking.totalCost.amount).toBeGreaterThan(0);
   });
 });
-

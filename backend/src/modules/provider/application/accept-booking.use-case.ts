@@ -5,7 +5,10 @@ import {
   ForbiddenException,
   BadRequestException,
 } from '@nestjs/common';
-import { ServiceBooking, BookingStatus } from '../domain/service-booking.entity';
+import {
+  ServiceBooking,
+  BookingStatus,
+} from '../domain/service-booking.entity';
 import { ServiceBookingRepository } from '../domain/provider.repository';
 
 @Injectable()
@@ -46,4 +49,3 @@ export class AcceptBookingUseCase {
     return booking;
   }
 }
-

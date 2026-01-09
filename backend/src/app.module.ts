@@ -32,7 +32,9 @@ import { AppService } from './app.service';
             imports: [ConfigModule],
             useFactory: (configService: ConfigService) => {
               const config =
-                configService.get<ReturnType<typeof databaseConfig>>('database');
+                configService.get<ReturnType<typeof databaseConfig>>(
+                  'database',
+                );
               if (!config) {
                 throw new Error('Database configuration not found');
               }

@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  Inject,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { Event } from '../domain/event.entity';
 import { EventRepository } from '../domain/event.repository';
 
@@ -23,4 +19,3 @@ export class GetEventUseCase {
     return event;
   }
 }
-

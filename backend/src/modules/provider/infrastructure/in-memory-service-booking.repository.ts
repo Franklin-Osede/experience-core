@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { ServiceBooking, BookingStatus } from '../../domain/service-booking.entity';
-import { ServiceBookingRepository } from '../../domain/provider.repository';
+import {
+  ServiceBooking,
+  BookingStatus,
+} from '../domain/service-booking.entity';
+import { ServiceBookingRepository } from '../domain/provider.repository';
 
 /**
  * In-memory implementation of ServiceBookingRepository for testing
@@ -27,13 +30,12 @@ export class InMemoryServiceBookingRepository implements ServiceBookingRepositor
     await Promise.resolve(); // Simulate async I/O
 
     return Array.from(this.bookings.values()).filter((booking) => {
-      const props = (booking as any).props;
       return (
         booking.serviceListingId === serviceListingId &&
-        (props.status === BookingStatus.PENDING ||
-          props.status === BookingStatus.CONFIRMED) &&
-        props.startDate <= end &&
-        props.endDate >= start
+        (booking.status === BookingStatus.PENDING ||
+          booking.status === BookingStatus.CONFIRMED) &&
+        booking.startDate <= end &&
+        booking.endDate >= start
       );
     });
   }
@@ -44,10 +46,7 @@ export class InMemoryServiceBookingRepository implements ServiceBookingRepositor
     return Array.from(this.bookings.values())
       .filter((booking) => booking.eventId === eventId)
       .sort((a, b) => {
-        const aProps = (a as any).props;
-        const bProps = (b as any).props;
-        return bProps.createdAt.getTime() - aProps.createdAt.getTime();
+        return b.createdAt.getTime() - a.createdAt.getTime();
       });
   }
 }
-

@@ -1,4 +1,7 @@
-import { VenueAvailability, AvailabilityStatus } from './venue-availability.entity';
+import {
+  VenueAvailability,
+  AvailabilityStatus,
+} from './venue-availability.entity';
 import { PaginatedResult } from './event.repository';
 
 export const VENUE_AVAILABILITY_REPOSITORY = 'VENUE_AVAILABILITY_REPOSITORY';

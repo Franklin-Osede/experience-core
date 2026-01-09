@@ -53,4 +53,3 @@ export class ServiceListingEntity {
   @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt: Date;
 }
-

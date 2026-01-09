@@ -506,3 +506,6 @@ Este documento lista **todas las pantallas** que se crearán en el frontend, org
 **Última actualización:** $(date)
 
 
+
+
+

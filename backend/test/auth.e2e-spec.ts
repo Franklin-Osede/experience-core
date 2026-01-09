@@ -171,9 +171,7 @@ describe('Auth (e2e)', () => {
     });
 
     it('should reject request without token', () => {
-      return request(app.getHttpServer())
-        .get(`/users/${userId}`)
-        .expect(401);
+      return request(app.getHttpServer()).get(`/users/${userId}`).expect(401);
     });
 
     it('should reject request with invalid token', () => {
@@ -184,4 +182,3 @@ describe('Auth (e2e)', () => {
     });
   });
 });
-

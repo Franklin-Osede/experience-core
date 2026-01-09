@@ -46,9 +46,7 @@ export class BookServiceUseCase {
     }
 
     // 2. Get the listing
-    const listing = await this.listingRepository.findById(
-      dto.serviceListingId,
-    );
+    const listing = await this.listingRepository.findById(dto.serviceListingId);
     if (!listing) {
       throw new NotFoundException(
         `Service listing with ID ${dto.serviceListingId} not found`,
@@ -94,4 +92,3 @@ export class BookServiceUseCase {
     return booking;
   }
 }
-

@@ -51,10 +51,7 @@ const typeOrmImports = useTypeORM
   : [];
 
 @Module({
-  imports: [
-    IdentityModule,
-    ...typeOrmImports,
-  ],
+  imports: [IdentityModule, ...typeOrmImports],
   controllers: [EventController, GigController],
   providers: [
     CreateEventUseCase,

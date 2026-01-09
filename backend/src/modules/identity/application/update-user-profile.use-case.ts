@@ -15,10 +15,7 @@ export class UpdateUserProfileUseCase {
     private readonly userRepository: UserRepository,
   ) {}
 
-  async execute(
-    userId: string,
-    dto: UpdateUserProfileDto,
-  ): Promise<User> {
+  async execute(userId: string, dto: UpdateUserProfileDto): Promise<User> {
     const user = await this.userRepository.findById(userId);
 
     if (!user) {
@@ -40,4 +37,3 @@ export class UpdateUserProfileUseCase {
     return user;
   }
 }
-

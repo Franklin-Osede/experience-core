@@ -8,7 +8,7 @@ import { UserRole } from '../modules/identity/domain/user-role.enum';
 
 /**
  * Seed script to populate database with initial data for development
- * 
+ *
  * Usage:
  *   npm run seed
  *   or
@@ -278,8 +278,6 @@ async function seed() {
           balanceCurrency: 'EUR',
           lockedBalanceAmount: 0,
           lockedBalanceCurrency: 'EUR',
-          createdAt: new Date(),
-          updatedAt: new Date(),
         });
         return await walletRepository.save(wallet);
       }),
@@ -319,4 +317,3 @@ if (require.main === module) {
 }
 
 export { seed };
-

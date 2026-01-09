@@ -35,7 +35,9 @@ export class VenueAvailabilityResponseDto {
   /**
    * Maps a domain VenueAvailability entity to VenueAvailabilityResponseDto
    */
-  static fromDomain(availability: VenueAvailability): VenueAvailabilityResponseDto {
+  static fromDomain(
+    availability: VenueAvailability,
+  ): VenueAvailabilityResponseDto {
     const props = (availability as any).props;
     return {
       id: availability.id,
@@ -51,4 +53,3 @@ export class VenueAvailabilityResponseDto {
     };
   }
 }
-

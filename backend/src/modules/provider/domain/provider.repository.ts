@@ -1,4 +1,3 @@
-
 import { ServiceListing } from './service-listing.entity';
 import { ServiceBooking } from './service-booking.entity';
 

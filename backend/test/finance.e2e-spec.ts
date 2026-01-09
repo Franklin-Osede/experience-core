@@ -51,9 +51,7 @@ describe('Finance (e2e)', () => {
     });
 
     it('should reject without auth', () => {
-      return request(app.getHttpServer())
-        .get('/finance/wallet')
-        .expect(401);
+      return request(app.getHttpServer()).get('/finance/wallet').expect(401);
     });
   });
 
@@ -224,4 +222,3 @@ describe('Finance (e2e)', () => {
     });
   });
 });
-

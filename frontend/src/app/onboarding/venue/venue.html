@@ -1,0 +1,219 @@
+<div class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex flex-col overflow-x-hidden">
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-border-dark/30">
+    <!-- Increased padding to px-6 to match DJ screen -->
+    <div class="flex items-center justify-start gap-4 px-6 py-4 pb-2">
+      <button 
+        (click)="goBack()"
+        class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-slate-900 dark:text-white">
+        <span class="material-symbols-outlined text-[24px]">arrow_back_ios_new</span>
+      </button>
+      <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Detalles del Venue</h2>
+    </div>
+    <!-- Progress Indicators -->
+    <div class="flex w-full flex-row items-center justify-center gap-2 pb-4 pt-1">
+      <div class="h-1.5 w-8 rounded-full bg-border-dark"></div>
+      <div class="h-1.5 w-8 rounded-full bg-primary shadow-[0_0_10px_rgba(244,140,37,0.5)]"></div>
+      <div class="h-1.5 w-8 rounded-full bg-border-dark"></div>
+      <div class="h-1.5 w-8 rounded-full bg-border-dark"></div>
+    </div>
+  </header>
+
+  <!-- Main Content Form -->
+  <main class="flex-1 flex flex-col pb-32 px-6 max-w-md mx-auto w-full">
+    <!-- Section 1: The Basics -->
+    <section class="mt-6">
+      <h2 class="text-text-muted text-xs font-bold tracking-widest uppercase mb-4 pl-1">Lo Básico</h2>
+      <div class="flex flex-col gap-5">
+        <!-- Venue Name Input -->
+        <div class="flex flex-col gap-2">
+          <label class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Nombre del Venue</label>
+          <input 
+            [value]="venueName()"
+            (input)="venueName.set($any($event.target).value)"
+            class="w-full rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-text-muted/60 px-4 text-base font-normal transition-all" 
+            placeholder="Introduce el nombre"/>
+        </div>
+        
+        <!-- Capacity & Type Row -->
+        <div class="flex gap-4">
+          <div class="flex flex-col gap-2 flex-1">
+            <label class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Capacidad</label>
+            <input 
+              type="number"
+              [ngModel]="capacity()"
+              (ngModelChange)="capacity.set($event)"
+              class="w-full rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-text-muted/60 px-4 text-base font-normal transition-all" 
+              placeholder="ej. 250"/>
+          </div>
+          <div class="flex flex-col gap-2 flex-1">
+            <label class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Tipo</label>
+            <div class="relative">
+              <select 
+                [ngModel]="selectedType()"
+                (ngModelChange)="selectedType.set($event)"
+                class="w-full rounded-xl text-slate-900 dark:text-white appearance-none focus:outline-none focus:ring-1 focus:ring-primary border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark h-14 px-4 text-base font-normal transition-all pr-10">
+                <option>Nightclub</option>
+                <option>Lounge</option>
+                <option>Beach Club</option>
+                <option>Rooftop</option>
+              </select>
+              <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none">expand_more</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Location Input -->
+        <div class="flex flex-col gap-2">
+          <label class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Ubicación</label>
+          <div class="relative">
+            <input 
+              [value]="location()"
+              (input)="location.set($any($event.target).value)"
+              class="w-full rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-text-muted/60 pl-11 pr-4 text-base font-normal transition-all" 
+              placeholder="Buscar dirección"/>
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">location_on</span>
+          </div>
+          
+          <!-- Map Preview Placeholder -->
+          <div class="w-full h-32 rounded-xl bg-surface-dark border border-gray-200 dark:border-border-dark overflow-hidden mt-1 relative group cursor-pointer">
+            <div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-80 transition-opacity duration-500" 
+                 data-alt="Dark stylized map background showing city streets" 
+                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuARi9dYm9kSQ3SrL2UDWymu5k-PMZCIYySSx8dad2irgTZRlKfIMXU7jyYWqfFRj6s48QPm-2uqBbb0fVPXx4UBYkooakS37AMRDLJqlQiifOtBj8sTe9kOqwYk1OtOg7qT3K9slwnjh-qe4e-ecAfIfvIVpI0P8-3nHp7r87QhnGrnmXco5ii72Q20118fLkYJTLMHrZ9_Q73P2x5nJAaX-80sUGgPT3ZVM2ZtlvvgyIefNI12V1YxS0kqwtwH3vD8G_fg8o87Lbvv');">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-background-light dark:from-background-dark via-transparent to-transparent"></div>
+            <div class="absolute bottom-3 left-3 flex items-center gap-1.5 text-xs text-white font-medium bg-black/50 backdrop-blur-sm px-2 py-1 rounded-md">
+              <span class="material-symbols-outlined text-[14px] text-primary">my_location</span>
+              Usar ubicación actual
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="h-px bg-gray-200 dark:bg-border-dark/50 w-full my-8"></div>
+
+    <!-- Section 2: Tech & Vibe -->
+    <section>
+      <h2 class="text-text-muted text-xs font-bold tracking-widest uppercase mb-4 pl-1">Tecnología y Ambiente</h2>
+      <p class="text-text-muted/80 text-sm mb-4">Selecciona las comodidades disponibles en tu venue.</p>
+      
+      <div class="grid grid-cols-2 gap-3">
+        @for (amenity of amenities; track amenity.id) {
+          <button 
+            (click)="toggleAmenity(amenity.label)"
+            class="flex items-center gap-3 p-3 rounded-xl border transition-all group"
+            [class.border-primary]="isAmenitySelected(amenity.label)"
+            [class.bg-primary-20]="isAmenitySelected(amenity.label)"
+            [class.border-gray-200]="!isAmenitySelected(amenity.label)"
+            [class.dark:border-border-dark]="!isAmenitySelected(amenity.label)"
+            [class.bg-white]="!isAmenitySelected(amenity.label)"
+            [class.dark:bg-surface-dark]="!isAmenitySelected(amenity.label)"
+            [class.hover:border-primary-50]="!isAmenitySelected(amenity.label)">
+            
+            <div class="size-8 rounded-full flex items-center justify-center shrink-0 transition-colors"
+                 [class.bg-primary]="isAmenitySelected(amenity.label)"
+                 [class.text-white]="isAmenitySelected(amenity.label)"
+                 [class.bg-gray-100]="!isAmenitySelected(amenity.label)"
+                 [class.dark:bg-white-5]="!isAmenitySelected(amenity.label)"
+                 [class.text-text-muted]="!isAmenitySelected(amenity.label)"
+                 [class.group-hover:text-slate-900]="!isAmenitySelected(amenity.label)"
+                 [class.dark:group-hover:text-white]="!isAmenitySelected(amenity.label)">
+              <span class="material-symbols-outlined text-[18px]">{{ amenity.icon }}</span>
+            </div>
+            
+            <span class="font-medium text-sm text-left transition-colors"
+                  [class.text-slate-900]="isAmenitySelected(amenity.label)"
+                  [class.dark:text-white]="isAmenitySelected(amenity.label)"
+                  [class.text-text-muted]="!isAmenitySelected(amenity.label)"
+                  [class.group-hover:text-slate-900]="!isAmenitySelected(amenity.label)"
+                  [class.dark:group-hover:text-white]="!isAmenitySelected(amenity.label)">
+              {{ amenity.label }}
+            </span>
+          </button>
+        }
+      </div>
+    </section>
+
+    <div class="h-px bg-gray-200 dark:bg-border-dark/50 w-full my-8"></div>
+
+    <!-- Section 3: House Rules -->
+    <section>
+      <h2 class="text-text-muted text-xs font-bold tracking-widest uppercase mb-4 pl-1">Reglas de la Casa</h2>
+      <div class="flex flex-col gap-3">
+        <!-- Toggle Item: Strict Dress Code -->
+        <label class="flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all"
+               [class.border-primary-40]="strictDressCode()"
+               [class.bg-white]="strictDressCode()"
+               [class.dark:bg-surface-dark]="strictDressCode()"
+               [class.border-gray-200]="!strictDressCode()"
+               [class.dark:border-border-dark]="!strictDressCode()"
+               [class.bg-white]="!strictDressCode()"
+               [class.dark:bg-surface-dark]="!strictDressCode()">
+          <div class="flex flex-col">
+            <span class="text-slate-900 dark:text-white font-medium text-base">Código de Vestimenta Estricto</span>
+            <span class="text-text-muted text-xs">Sin pantalones cortos, sin sandalias</span>
+          </div>
+          <div class="relative inline-flex items-center cursor-pointer">
+            <input 
+              type="checkbox" 
+              class="sr-only peer" 
+              [checked]="strictDressCode()"
+              (change)="toggleStrictDressCode()"/>
+            <div class="w-11 h-6 bg-gray-200 dark:bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </div>
+        </label>
+        
+        <!-- Expansion for dress code -->
+        @if (strictDressCode()) {
+          <div class="ml-4 pl-4 border-l-2 border-primary/30">
+            <input 
+              [value]="dressCodeDetails()"
+              (input)="dressCodeDetails.set($any($event.target).value)"
+              class="w-full bg-transparent border-0 border-b border-gray-200 dark:border-border-dark focus:border-primary focus:ring-0 text-slate-900 dark:text-white placeholder:text-text-muted/50 text-sm py-2 px-0" 
+              placeholder="Especifica detalles (ej. Smart Casual)"/>
+          </div>
+        }
+
+        <!-- Toggle Item: Members Only -->
+        <label class="flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all hover:border-gray-300 dark:hover:border-border-dark/80"
+               [class.border-gray-200]="!membersOnly()"
+               [class.dark:border-border-dark]="!membersOnly()"
+               [class.bg-white]="!membersOnly()"
+               [class.dark:bg-surface-dark]="!membersOnly()"
+               [class.border-primary-40]="membersOnly()">
+          <div class="flex flex-col">
+            <span class="text-slate-900 dark:text-white font-medium text-base">Solo Miembros</span>
+            <span class="text-text-muted text-xs">Requiere verificación de membresía</span>
+          </div>
+          <div class="relative inline-flex items-center cursor-pointer">
+            <input 
+              type="checkbox" 
+              class="sr-only peer" 
+              [checked]="membersOnly()"
+              (change)="toggleMembersOnly()"/>
+            <div class="w-11 h-6 bg-gray-200 dark:bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </div>
+        </label>
+
+        <!-- Add Custom Rule -->
+        <button class="flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-dashed border-text-muted/30 text-text-muted hover:text-slate-900 dark:hover:text-white hover:border-primary/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all mt-2">
+          <span class="material-symbols-outlined text-[20px]">add</span>
+          <span class="text-sm font-medium">Añadir regla personalizada</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Footer -->
+  <footer class="fixed bottom-0 left-0 w-full bg-gradient-to-t from-background-light dark:from-background-dark via-background-light/95 dark:via-background-dark to-transparent pt-12 pb-6 px-4 z-40 pointer-events-none">
+    <div class="max-w-md mx-auto pointer-events-auto">
+      <button 
+        (click)="onNext()"
+        class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-[0_4px_20px_rgba(244,140,37,0.3)] active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+        <span>Siguiente: Subir Fotos</span>
+        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+      </button>
+    </div>
+  </footer>
+</div>

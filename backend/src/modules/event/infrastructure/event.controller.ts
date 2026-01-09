@@ -121,7 +121,9 @@ export class EventController {
   @Patch(':id/publish')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(UserRole.DJ, UserRole.VENUE)
-  @ApiOperation({ summary: 'Publish a draft event (DRAFT → PUBLISHED) - DJ or VENUE only' })
+  @ApiOperation({
+    summary: 'Publish a draft event (DRAFT → PUBLISHED) - DJ or VENUE only',
+  })
   @ApiResponse({
     status: 200,
     description: 'Event successfully published.',
@@ -139,10 +141,7 @@ export class EventController {
     description: 'Cannot publish (e.g., missing venue).',
   })
   @ApiBearerAuth()
-  async publish(
-    @Param('id') id: string,
-    @Request() req: AuthenticatedRequest,
-  ) {
+  async publish(@Param('id') id: string, @Request() req: AuthenticatedRequest) {
     const userId = req.user?.id;
     const userRole = req.user?.role as UserRole;
     if (!userId || !userRole) {
@@ -211,7 +210,9 @@ export class EventController {
   @Post(':id/fund')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(UserRole.DJ, UserRole.VENUE, UserRole.ADMIN)
-  @ApiOperation({ summary: 'Mark event as funded (Escrow) - DJ, VENUE or ADMIN only' })
+  @ApiOperation({
+    summary: 'Mark event as funded (Escrow) - DJ, VENUE or ADMIN only',
+  })
   @ApiResponse({
     status: 200,
     description: 'Event marked as funded and confirmed.',
@@ -223,10 +224,7 @@ export class EventController {
   @ApiResponse({ status: 404, description: 'Event not found' })
   @ApiResponse({ status: 400, description: 'Event cannot be funded' })
   @ApiBearerAuth()
-  async fund(
-    @Param('id') id: string,
-    @Request() req: AuthenticatedRequest,
-  ) {
+  async fund(@Param('id') id: string, @Request() req: AuthenticatedRequest) {
     const userId = req.user?.id;
     const userRole = req.user?.role as UserRole;
     if (!userId || !userRole) {
@@ -239,14 +237,17 @@ export class EventController {
   @Post(':id/complete')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(UserRole.DJ, UserRole.VENUE, UserRole.ADMIN)
-  @ApiOperation({ summary: 'Mark event as completed - DJ, VENUE or ADMIN only' })
+  @ApiOperation({
+    summary: 'Mark event as completed - DJ, VENUE or ADMIN only',
+  })
   @ApiResponse({
     status: 200,
     description: 'Event marked as completed.',
   })
   @ApiResponse({
     status: 403,
-    description: 'Forbidden - Only event organizer or ADMIN can complete events',
+    description:
+      'Forbidden - Only event organizer or ADMIN can complete events',
   })
   @ApiResponse({ status: 404, description: 'Event not found' })
   @ApiResponse({ status: 400, description: 'Event cannot be completed' })
@@ -279,10 +280,7 @@ export class EventController {
   @ApiResponse({ status: 404, description: 'Event not found' })
   @ApiResponse({ status: 400, description: 'Event cannot be cancelled' })
   @ApiBearerAuth()
-  async cancel(
-    @Param('id') id: string,
-    @Request() req: AuthenticatedRequest,
-  ) {
+  async cancel(@Param('id') id: string, @Request() req: AuthenticatedRequest) {
     const userId = req.user?.id;
     const userRole = req.user?.role as UserRole;
     if (!userId || !userRole) {
@@ -296,7 +294,9 @@ export class EventController {
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(UserRole.DJ, UserRole.VENUE, UserRole.ADMIN)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'List all RSVPs for an event - DJ, VENUE or ADMIN only' })
+  @ApiOperation({
+    summary: 'List all RSVPs for an event - DJ, VENUE or ADMIN only',
+  })
   @ApiResponse({
     status: 200,
     description: 'List of RSVPs returned.',

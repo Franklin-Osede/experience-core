@@ -2,13 +2,15 @@
 <div class="relative flex flex-col flex-grow w-full max-w-md mx-auto px-4 pb-6 min-h-screen">
   <!-- Top Navigation -->
   <header class="flex items-center justify-between py-6">
-    <button 
+    <button
       (click)="goBack()"
-      class="flex items-center justify-center size-10 rounded-full hover:bg-white/5 transition-colors text-white/80 hover:text-white">
-      <span class="material-symbols-outlined" style="font-size: 24px;">arrow_back_ios_new</span>
+      class="flex items-center justify-center size-10 rounded-full hover:bg-white/5 transition-colors text-white/80 hover:text-white"
+    >
+      <span class="material-symbols-outlined" style="font-size: 24px">arrow_back_ios_new</span>
     </button>
     <h2 class="text-lg font-bold tracking-tight text-white/90">Role Selection</h2>
-    <div class="size-10"></div> <!-- Spacer for centering -->
+    <div class="size-10"></div>
+    <!-- Spacer for centering -->
   </header>
 
   <!-- Progress Indicators -->
@@ -22,7 +24,7 @@
   <!-- Headline Section -->
   <div class="pb-6">
     <h1 class="text-3xl font-extrabold leading-tight tracking-tight text-white mb-3">
-      Define Your <br/><span class="text-primary">Experience</span>
+      Define Your <br /><span class="text-primary">Experience</span>
     </h1>
     <p class="text-text-secondary text-base font-medium leading-relaxed">
       Select your role to unlock the right features and exclusive access.
@@ -33,16 +35,21 @@
   <form class="flex flex-col gap-4 flex-grow">
     <!-- DJ Card -->
     <label class="group cursor-pointer relative">
-      <input 
+      <input
         [checked]="selectedRole() === 'DJ'"
         (change)="selectRole('DJ')"
-        class="peer sr-only" 
-        name="role" 
-        type="radio" 
-        value="dj"/>
-      <div class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80">
+        class="peer sr-only"
+        name="role"
+        type="radio"
+        value="DJ"
+      />
+      <div
+        class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80"
+      >
         <!-- Icon -->
-        <div class="size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300 peer-checked:group-[]:bg-primary/20 peer-checked:group-[]:text-primary">
+        <div
+          class="size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300 peer-checked:group-[]:bg-primary/20 peer-checked:group-[]:text-primary"
+        >
           <span class="material-symbols-outlined">graphic_eq</span>
         </div>
         <!-- Text -->
@@ -51,90 +58,140 @@
           <span class="text-sm font-medium text-text-secondary">Share music & get booked.</span>
         </div>
         <!-- Radio Indicator -->
-        <div class="size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary peer-checked:scale-110">
-          <span class="material-symbols-outlined text-white text-[14px] opacity-0 peer-checked:opacity-100 transition-opacity duration-200" style="font-variation-settings: 'wght' 700;">check</span>
+        <div
+          class="size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary peer-checked:scale-110"
+        >
+          <span
+            class="material-symbols-outlined text-white text-[14px] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"
+            style="font-variation-settings: 'wght' 700"
+            >check</span
+          >
         </div>
       </div>
     </label>
 
     <!-- Venue Card -->
     <label class="group cursor-pointer relative">
-      <input 
+      <input
         [checked]="selectedRole() === 'VENUE'"
         (change)="selectRole('VENUE')"
-        class="peer sr-only" 
-        name="role" 
-        type="radio" 
-        value="venue"/>
-      <div class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80">
-        <div class="size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300 peer-checked:group-[]:bg-primary/20 peer-checked:group-[]:text-primary">
+        class="peer sr-only"
+        name="role"
+        type="radio"
+        value="VENUE"
+      />
+      <div
+        class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80"
+      >
+        <div
+          class="size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300 peer-checked:group-[]:bg-primary/20 peer-checked:group-[]:text-primary"
+        >
           <span class="material-symbols-outlined">nightlife</span>
         </div>
         <div class="flex flex-col grow">
           <span class="text-base font-bold text-white mb-0.5">Venue</span>
-          <span class="text-sm font-medium text-text-secondary">Host events & manage guestlists.</span>
+          <span class="text-sm font-medium text-text-secondary"
+            >Host events & manage guestlists.</span
+          >
         </div>
-        <div class="size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary peer-checked:scale-110">
-          <span class="material-symbols-outlined text-white text-[14px] opacity-0 peer-checked:opacity-100 transition-opacity duration-200" style="font-variation-settings: 'wght' 700;">check</span>
+        <div
+          class="size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary peer-checked:scale-110"
+        >
+          <span
+            class="material-symbols-outlined text-white text-[14px] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"
+            style="font-variation-settings: 'wght' 700"
+            >check</span
+          >
         </div>
       </div>
     </label>
 
     <!-- Provider Card -->
     <label class="group cursor-pointer relative">
-      <input 
+      <input
         [checked]="selectedRole() === 'PROVIDER'"
         (change)="selectRole('PROVIDER')"
-        class="peer sr-only" 
-        name="role" 
-        type="radio" 
-        value="provider"/>
-      <div class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80">
-        <div class="size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300 peer-checked:group-[]:bg-primary/20 peer-checked:group-[]:text-primary">
+        class="peer sr-only"
+        name="role"
+        type="radio"
+        value="PROVIDER"
+      />
+      <div
+        class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80"
+      >
+        <div
+          class="size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300 peer-checked:group-[]:bg-primary/20 peer-checked:group-[]:text-primary"
+        >
           <span class="material-symbols-outlined">speaker_group</span>
         </div>
         <div class="flex flex-col grow">
           <span class="text-base font-bold text-white mb-0.5">Provider</span>
-          <span class="text-sm font-medium text-text-secondary">Sound, light & production services.</span>
+          <span class="text-sm font-medium text-text-secondary"
+            >Sound, light & production services.</span
+          >
         </div>
-        <div class="size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary peer-checked:scale-110">
-          <span class="material-symbols-outlined text-white text-[14px] opacity-0 peer-checked:opacity-100 transition-opacity duration-200" style="font-variation-settings: 'wght' 700;">check</span>
+        <div
+          class="size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary peer-checked:scale-110"
+        >
+          <span
+            class="material-symbols-outlined text-white text-[14px] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"
+            style="font-variation-settings: 'wght' 700"
+            >check</span
+          >
         </div>
       </div>
     </label>
 
     <!-- Fan Card -->
     <label class="group cursor-pointer relative">
-      <input 
+      <input
         [checked]="selectedRole() === 'FAN'"
         (change)="selectRole('FAN')"
-        class="peer sr-only" 
-        name="role" 
-        type="radio" 
-        value="fan"/>
-      <div class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80">
-        <div class="size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300 peer-checked:group-[]:bg-primary/20 peer-checked:group-[]:text-primary">
+        class="peer sr-only"
+        name="role"
+        type="radio"
+        value="FAN"
+      />
+      <div
+        class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80"
+      >
+        <div
+          class="size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300 peer-checked:group-[]:bg-primary/20 peer-checked:group-[]:text-primary"
+        >
           <span class="material-symbols-outlined">celebration</span>
         </div>
         <div class="flex flex-col grow">
           <span class="text-base font-bold text-white mb-0.5">Fan</span>
-          <span class="text-sm font-medium text-text-secondary">Discover parties & premium access.</span>
+          <span class="text-sm font-medium text-text-secondary"
+            >Discover parties & premium access.</span
+          >
         </div>
-        <div class="size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary peer-checked:scale-110">
-          <span class="material-symbols-outlined text-white text-[14px] opacity-0 peer-checked:opacity-100 transition-opacity duration-200" style="font-variation-settings: 'wght' 700;">check</span>
+        <div
+          class="size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary peer-checked:scale-110"
+        >
+          <span
+            class="material-symbols-outlined text-white text-[14px] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"
+            style="font-variation-settings: 'wght' 700"
+            >check</span
+          >
         </div>
       </div>
     </label>
   </form>
 
   <!-- Footer / Continue Button -->
-  <div class="pt-8 mt-auto sticky bottom-0 bg-gradient-to-t from-background-dark via-background-dark/95 to-transparent pb-4">
-    <button 
+  <div
+    class="pt-8 mt-auto sticky bottom-0 bg-gradient-to-t from-background-dark via-background-dark/95 to-transparent pb-4"
+  >
+    <button
       (click)="onContinue()"
       [disabled]="!selectedRole()"
-      class="w-full bg-primary hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold h-14 rounded-xl shadow-[0_4px_14px_0_rgba(244,140,37,0.39)] hover:shadow-[0_6px_20px_0_rgba(244,140,37,0.5)] transition-all transform active:scale-[0.98] disabled:transform-none flex items-center justify-center gap-2">
+      class="w-full bg-primary hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold h-14 rounded-xl shadow-[0_4px_14px_0_rgba(244,140,37,0.39)] hover:shadow-[0_6px_20px_0_rgba(244,140,37,0.5)] transition-all transform active:scale-[0.98] disabled:transform-none flex items-center justify-center gap-2"
+    >
       <span>Continue</span>
-      <span class="material-symbols-outlined text-sm font-bold" style="font-size: 18px;">arrow_forward</span>
+      <span class="material-symbols-outlined text-sm font-bold" style="font-size: 18px"
+        >arrow_forward</span
+      >
     </button>
   </div>
 </div>

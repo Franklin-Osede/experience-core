@@ -117,4 +117,8 @@ export class EventAttendee extends Entity<EventAttendeeProps> {
   get checkInDate(): Date | undefined {
     return this.props.checkInDate;
   }
+
+  get rsvpDate(): Date {
+    return this.props.rsvpDate;
+  }
 }

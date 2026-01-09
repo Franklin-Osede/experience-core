@@ -1,23 +1,22 @@
-
 import { Entity } from '../../../shared/domain/entity.base';
 import { Money } from '../../../shared/domain/money.vo';
 import { v4 as uuidv4 } from 'uuid';
 
 export enum BookingStatus {
-  PENDING = 'PENDING',       // Requested by Organizer
-  CONFIRMED = 'CONFIRMED',   // Accepted by Provider
-  REJECTED = 'REJECTED',     // Denied by Provider
-  CANCELLED = 'CANCELLED',   // Cancelled by Organizer
-  COMPLETED = 'COMPLETED',   // Service delivered
+  PENDING = 'PENDING', // Requested by Organizer
+  CONFIRMED = 'CONFIRMED', // Accepted by Provider
+  REJECTED = 'REJECTED', // Denied by Provider
+  CANCELLED = 'CANCELLED', // Cancelled by Organizer
+  COMPLETED = 'COMPLETED', // Service delivered
 }
 
 export interface ServiceBookingProps {
   serviceListingId: string;
   providerId: string; // Redundant but useful for queries
-  eventId: string;    // The consumer
+  eventId: string; // The consumer
   startDate: Date;
   endDate: Date;
-  totalCost: Money;   // Locked price at time of booking
+  totalCost: Money; // Locked price at time of booking
   status: BookingStatus;
   createdAt: Date;
   updatedAt: Date;
@@ -108,6 +107,18 @@ export class ServiceBooking extends Entity<ServiceBookingProps> {
 
   get updatedAt(): Date {
     return this.props.updatedAt;
+  }
+
+  get startDate(): Date {
+    return this.props.startDate;
+  }
+
+  get endDate(): Date {
+    return this.props.endDate;
+  }
+
+  get createdAt(): Date {
+    return this.props.createdAt;
   }
 
   /**

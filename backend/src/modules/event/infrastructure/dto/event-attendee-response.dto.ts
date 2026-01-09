@@ -12,16 +12,23 @@ export class EventAttendeeResponseDto {
   @ApiProperty({ description: 'User ID who RSVPed' })
   userId: string;
 
-  @ApiProperty({ enum: AttendeeStatus, description: 'Current status of the RSVP' })
+  @ApiProperty({
+    enum: AttendeeStatus,
+    description: 'Current status of the RSVP',
+  })
   status: AttendeeStatus;
 
   @ApiProperty({ description: 'Date when user RSVPed' })
   rsvpDate: Date;
 
-  @ApiPropertyOptional({ description: 'Date when user checked in (if attended)' })
+  @ApiPropertyOptional({
+    description: 'Date when user checked in (if attended)',
+  })
   checkInDate?: Date;
 
-  @ApiPropertyOptional({ description: 'Date when RSVP was cancelled (if cancelled)' })
+  @ApiPropertyOptional({
+    description: 'Date when RSVP was cancelled (if cancelled)',
+  })
   cancelledDate?: Date;
 
   @ApiProperty({ description: 'Creation date' })
@@ -48,4 +55,3 @@ export class EventAttendeeResponseDto {
     };
   }
 }
-

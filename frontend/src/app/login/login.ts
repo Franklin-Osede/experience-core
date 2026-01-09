@@ -41,8 +41,10 @@ export class Login {
   }
 
   canSubmit(): boolean {
-    return this.email().trim().length > 0 && 
-           this.password().trim().length > 0;
+    // Desarrollo: Permitir continuar sin ingresar datos
+    return true; 
+    /* return this.email().trim().length > 0 && 
+           this.password().trim().length > 0; */
   }
 
   onSubmit(): void {
@@ -50,6 +52,18 @@ export class Login {
       return;
     }
 
+    // TODO: Implementar funcionalidad cuando todas las pantallas estén creadas
+    // Por ahora, solo navegar a role-selection para probar el flujo
+    console.log('Login/Apply clicked:', {
+      mode: this.authMode(),
+      email: this.email(),
+      password: this.password()
+    });
+    
+    // Navegación temporal para probar el flujo
+    this.router.navigate(['/role-selection']);
+
+    /* Código comentado - se implementará después de crear todas las pantallas
     this.isLoading.set(true);
 
     if (this.authMode() === 'login') {
@@ -59,12 +73,10 @@ export class Login {
       }).subscribe({
         next: (response) => {
           console.log('Login exitoso:', response);
-          // Guardar token si viene en la respuesta
           if (response.access_token) {
             localStorage.setItem('access_token', response.access_token);
           }
           this.isLoading.set(false);
-          // Navegar a selección de rol o dashboard según el caso
           this.router.navigate(['/role-selection']);
         },
         error: (error) => {
@@ -74,11 +86,10 @@ export class Login {
         }
       });
     } else {
-      // Modo "Apply" - registro
       this.apiService.signup({
         email: this.email(),
         password: this.password(),
-        role: 'FAN' // Por defecto, luego pueden cambiar en role-selection
+        role: 'FAN'
       }).subscribe({
         next: (response) => {
           console.log('Registro exitoso:', response);
@@ -95,6 +106,7 @@ export class Login {
         }
       });
     }
+    */
   }
 
   onAppleLogin(): void {

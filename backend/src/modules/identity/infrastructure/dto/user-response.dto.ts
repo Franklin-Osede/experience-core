@@ -30,7 +30,9 @@ export class UserResponseDto {
   @ApiProperty({ description: 'Reputation score' })
   reputationScore: number;
 
-  @ApiProperty({ description: 'Number of invite credits available (-1 means unlimited)' })
+  @ApiProperty({
+    description: 'Number of invite credits available (-1 means unlimited)',
+  })
   inviteCredits: number;
 
   @ApiProperty({ description: 'Number of events attended' })
@@ -75,7 +77,8 @@ export class UserResponseDto {
       role: props.role,
       isVerified: props.isVerified,
       reputationScore: props.reputationScore,
-      inviteCredits: props.inviteCredits === Infinity ? -1 : props.inviteCredits,
+      inviteCredits:
+        props.inviteCredits === Infinity ? -1 : props.inviteCredits,
       eventsAttended: props.eventsAttended,
       hasUnlockedInvites: props.hasUnlockedInvites,
       outstandingDebt: {
@@ -92,4 +95,3 @@ export class UserResponseDto {
     };
   }
 }
-

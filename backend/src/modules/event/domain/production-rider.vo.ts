@@ -1,4 +1,3 @@
-
 export interface ProductionRiderProps {
   audioRequirements?: string; // e.g. "L-Acoustics K1 System, DJ Booth with CDJ-3000s"
   lightingRequirements?: string; // e.g. "Strobe heavy, 40 moving heads, lasers"

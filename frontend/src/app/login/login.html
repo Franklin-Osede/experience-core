@@ -1,11 +1,17 @@
-<div class="relative flex h-full min-h-screen w-full max-w-[480px] flex-col overflow-x-hidden bg-background-light dark:bg-background-dark shadow-2xl mx-auto">
+<!-- Background Image - Full Width, Fixed -->
+<div class="fixed inset-0 w-full h-full -z-10">
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#221910]/60 to-[#221910] z-10"></div>
+  <div class="w-full h-full bg-center bg-cover bg-no-repeat" 
+       style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBP5xEuc7oKrmZe7oBvFcY4qhI3pmgUbupuC6Ggwy9ed4epVorWKldjxhLPWn5JZZnzAAdAEVmPU1nyOw2xXXeUMEEYBtAAj3NjZxg54Mel1Vj0qhKXG8nvarXksUvwazUvqheTlFwYJJUzxUgLXSVimbVGHKDOlrDkQ0WKPxmnLinj2qqdE0J8XRnsFEvyrgM5O3fGZd5Xhaji3hBetOjDG4SbuOZzIYHeLnMUJLshO2X5xFtrJFWpYbnAMBSWJf_ci8oPflEukfMf");'>
+  </div>
+</div>
+
+<!-- Content Container - Centered with max width for mobile, full width background -->
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden">
+  <!-- Content Wrapper - Max width 480px centered -->
+  <div class="w-full max-w-[480px] mx-auto flex flex-col min-h-screen">
   <!-- Header Image Section -->
   <div class="relative w-full h-64 shrink-0">
-    <!-- Using a dark overlay gradient for text readability and mood -->
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#221910]/60 to-[#221910] z-10"></div>
-    <div class="w-full h-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden" 
-         style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBP5xEuc7oKrmZe7oBvFcY4qhI3pmgUbupuC6Ggwy9ed4epVorWKldjxhLPWn5JZZnzAAdAEVmPU1nyOw2xXXeUMEEYBtAAj3NjZxg54Mel1Vj0qhKXG8nvarXksUvwazUvqheTlFwYJJUzxUgLXSVimbVGHKDOlrDkQ0WKPxmnLinj2qqdE0J8XRnsFEvyrgM5O3fGZd5Xhaji3hBetOjDG4SbuOZzIYHeLnMUJLshO2X5xFtrJFWpYbnAMBSWJf_ci8oPflEukfMf");'>
-    </div>
     <!-- Branding Overlay -->
     <div class="absolute bottom-0 left-0 w-full z-20 pb-6 pt-12 bg-gradient-to-t from-[#221910] to-transparent flex flex-col items-center">
       <h1 class="text-white tracking-widest text-[32px] font-bold leading-tight px-4 text-center uppercase drop-shadow-lg">NOIR</h1>
@@ -128,5 +134,6 @@
       </div>
       <p class="text-[10px] text-white/40">Private Membership. Invite Only.</p>
     </div>
+  </div>
   </div>
 </div>

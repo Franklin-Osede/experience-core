@@ -67,7 +67,9 @@ describe('Event Ownership (e2e)', () => {
         type: 'HOUSE_DAY',
         genre: 'HOUSE',
         startTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-        endTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+        endTime: new Date(
+          Date.now() + 7 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+        ).toISOString(),
         venueId: 'test-venue-id',
       })
       .expect(201);
@@ -95,8 +97,12 @@ describe('Event Ownership (e2e)', () => {
           description: 'My own event',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 10 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 10 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
           venueId: 'test-venue-id',
         })
         .expect(201)
@@ -128,8 +134,12 @@ describe('Event Ownership (e2e)', () => {
           description: 'Admin can publish',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 15 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 15 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
           venueId: 'test-venue-id',
         })
         .expect(201)
@@ -153,8 +163,12 @@ describe('Event Ownership (e2e)', () => {
           description: 'Testing fund ownership',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 20 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 20 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
           venueId: 'test-venue-id',
         })
         .expect(201)
@@ -193,8 +207,12 @@ describe('Event Ownership (e2e)', () => {
           description: 'Admin can fund',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 25 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 25 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 25 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 25 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
           venueId: 'test-venue-id',
         })
         .expect(201)
@@ -225,8 +243,12 @@ describe('Event Ownership (e2e)', () => {
           description: 'Testing cancel ownership',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 30 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 30 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
         })
         .expect(201)
         .then((res) => {
@@ -247,8 +269,12 @@ describe('Event Ownership (e2e)', () => {
           description: 'Should not be cancelable by other DJ',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 35 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 35 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
         })
         .expect(201)
         .then((res) => {
@@ -272,8 +298,12 @@ describe('Event Ownership (e2e)', () => {
           description: 'Admin can cancel',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 40 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 40 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 40 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 40 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
         })
         .expect(201)
         .then((res) => {
@@ -296,8 +326,12 @@ describe('Event Ownership (e2e)', () => {
           description: 'Testing complete ownership',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 45 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 45 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
           venueId: 'test-venue-id',
         })
         .expect(201)
@@ -332,8 +366,12 @@ describe('Event Ownership (e2e)', () => {
           description: 'Should not be completable by other DJ',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 50 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 50 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 50 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 50 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
           venueId: 'test-venue-id',
         })
         .expect(201)
@@ -354,7 +392,9 @@ describe('Event Ownership (e2e)', () => {
                     .set('Authorization', `Bearer ${otherDjToken}`)
                     .expect(403)
                     .expect((res) => {
-                      expect(res.body.message).toContain('Only the event organizer');
+                      expect(res.body.message).toContain(
+                        'Only the event organizer',
+                      );
                     });
                 });
             });
@@ -362,4 +402,3 @@ describe('Event Ownership (e2e)', () => {
     });
   });
 });
-

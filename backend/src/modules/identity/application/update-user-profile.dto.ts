@@ -22,4 +22,3 @@ export class UpdateUserProfileDto {
   @IsEnum(EventGenre, { each: true })
   preferredGenres?: EventGenre[];
 }
-

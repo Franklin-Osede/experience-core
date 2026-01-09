@@ -23,7 +23,10 @@ export class EventResponseDto {
   @ApiProperty({ enum: EventGenre, description: 'Music genre' })
   genre: EventGenre;
 
-  @ApiProperty({ enum: EventStatus, description: 'Current status of the event' })
+  @ApiProperty({
+    enum: EventStatus,
+    description: 'Current status of the event',
+  })
   status: EventStatus;
 
   @ApiProperty({ description: 'Event start date and time (ISO string)' })
@@ -74,4 +77,3 @@ export class EventResponseDto {
     };
   }
 }
-

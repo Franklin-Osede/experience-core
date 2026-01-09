@@ -59,8 +59,12 @@ describe('Events (e2e)', () => {
           description: 'A test event',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days from now
-          endTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(), // +4 hours
+          startTime: new Date(
+            Date.now() + 7 * 24 * 60 * 60 * 1000,
+          ).toISOString(), // 7 days from now
+          endTime: new Date(
+            Date.now() + 7 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(), // +4 hours
           maxCapacity: 100,
         })
         .expect(201)
@@ -99,8 +103,12 @@ describe('Events (e2e)', () => {
           description: 'For listing test',
           type: 'CLUB_NIGHT',
           genre: 'TECHNO',
-          startTime: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000 + 6 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 14 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 14 * 24 * 60 * 60 * 1000 + 6 * 60 * 60 * 1000,
+          ).toISOString(),
         })
         .expect(201);
       eventId = res.body.id;
@@ -141,8 +149,12 @@ describe('Events (e2e)', () => {
           description: 'Will be published',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 10 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 10 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
         })
         .expect(201);
       draftEventId = res.body.id;
@@ -179,8 +191,12 @@ describe('Events (e2e)', () => {
           description: 'For RSVP testing',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 20 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 20 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
           maxCapacity: 50,
         })
         .expect(201);
@@ -241,8 +257,12 @@ describe('Events (e2e)', () => {
           description: 'For check-in testing',
           type: 'HOUSE_DAY',
           genre: 'HOUSE',
-          startTime: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-          endTime: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+          startTime: new Date(
+            Date.now() + 30 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endTime: new Date(
+            Date.now() + 30 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+          ).toISOString(),
         })
         .expect(201);
       eventId = createRes.body.id;
@@ -279,4 +299,3 @@ describe('Events (e2e)', () => {
     });
   });
 });
-

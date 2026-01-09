@@ -55,8 +55,12 @@ describe('Provider Marketplace (e2e)', () => {
         description: 'Testing provider bookings',
         type: 'HOUSE_DAY',
         genre: 'HOUSE',
-        startTime: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000).toISOString(),
-        endTime: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000).toISOString(),
+        startTime: new Date(
+          Date.now() + 20 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
+        endTime: new Date(
+          Date.now() + 20 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000,
+        ).toISOString(),
       })
       .expect(201);
     eventId = eventRes.body.id;
@@ -269,8 +273,12 @@ describe('Provider Marketplace (e2e)', () => {
         .send({
           serviceListingId: availableListingId,
           eventId: eventId,
-          startDate: new Date(Date.now() + 31 * 24 * 60 * 60 * 1000).toISOString(),
-          endDate: new Date(Date.now() + 33 * 24 * 60 * 60 * 1000).toISOString(),
+          startDate: new Date(
+            Date.now() + 31 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          endDate: new Date(
+            Date.now() + 33 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
         })
         .expect(400);
     });
@@ -371,7 +379,3 @@ describe('Provider Marketplace (e2e)', () => {
     });
   });
 });
-
-
-
-

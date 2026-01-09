@@ -24,7 +24,7 @@ type EntityWithProps<T> = Entity<T> & {
  * Safely access Event props
  */
 export function getEventProps(event: Event): EventProps {
-  return (event as EntityWithProps<EventProps>).props;
+  return (event as unknown as EntityWithProps<EventProps>).props;
 }
 
 /**
@@ -33,7 +33,8 @@ export function getEventProps(event: Event): EventProps {
 export function getVenueAvailabilityProps(
   availability: VenueAvailability,
 ): VenueAvailabilityProps {
-  return (availability as EntityWithProps<VenueAvailabilityProps>).props;
+  return (availability as unknown as EntityWithProps<VenueAvailabilityProps>)
+    .props;
 }
 
 /**
@@ -42,7 +43,7 @@ export function getVenueAvailabilityProps(
 export function getGigApplicationProps(
   application: GigApplication,
 ): GigApplicationProps {
-  return (application as EntityWithProps<GigApplicationProps>).props;
+  return (application as unknown as EntityWithProps<GigApplicationProps>).props;
 }
 
 /**
@@ -51,5 +52,5 @@ export function getGigApplicationProps(
 export function getEventAttendeeProps(
   attendee: EventAttendee,
 ): EventAttendeeProps {
-  return (attendee as EntityWithProps<EventAttendeeProps>).props;
+  return (attendee as unknown as EntityWithProps<EventAttendeeProps>).props;
 }

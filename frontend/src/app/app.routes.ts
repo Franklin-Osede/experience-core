@@ -18,18 +18,23 @@ export const routes: Routes = [
   },
   {
     path: 'onboarding',
-    component: Onboarding,
+    loadComponent: () => import('./onboarding/fan/fan').then(m => m.OnboardingFanComponent),
+  },
+  {
+    path: 'onboarding/fan',
+    redirectTo: 'onboarding',
+    pathMatch: 'full'
   },
   {
     path: 'onboarding/dj',
-    component: Onboarding, // TODO: Crear componente específico para DJ
+    loadComponent: () => import('./onboarding/dj/dj').then(m => m.OnboardingDjComponent), 
   },
   {
     path: 'onboarding/venue',
-    component: Onboarding, // TODO: Crear componente específico para Venue
+    loadComponent: () => import('./onboarding/venue/venue').then(m => m.OnboardingVenueComponent), 
   },
   {
     path: 'onboarding/provider',
-    component: Onboarding, // TODO: Crear componente específico para Provider
+    loadComponent: () => import('./onboarding/provider/provider').then(m => m.OnboardingProviderComponent), 
   },
 ];

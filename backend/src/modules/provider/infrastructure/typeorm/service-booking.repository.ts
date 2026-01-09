@@ -42,10 +42,10 @@ export class TypeOrmServiceBookingRepository implements ServiceBookingRepository
       .andWhere('booking.status IN (:...statuses)', {
         statuses: [BookingStatus.PENDING, BookingStatus.CONFIRMED],
       })
-      .andWhere(
-        '(booking.startDate <= :end AND booking.endDate >= :start)',
-        { start, end },
-      )
+      .andWhere('(booking.startDate <= :end AND booking.endDate >= :start)', {
+        start,
+        end,
+      })
       .getMany();
 
     return entities.map((entity) => this.toDomain(entity));
@@ -84,14 +84,10 @@ export class TypeOrmServiceBookingRepository implements ServiceBookingRepository
       eventId: entity.eventId,
       startDate: entity.startDate,
       endDate: entity.endDate,
-      totalCost: new Money(
-        entity.totalCostAmount,
-        entity.totalCostCurrency,
-      ),
+      totalCost: new Money(entity.totalCostAmount, entity.totalCostCurrency),
       status: entity.status,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
     });
   }
 }
-

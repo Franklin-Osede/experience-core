@@ -55,4 +55,3 @@ export class ServiceBookingEntity {
   @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt: Date;
 }
-
