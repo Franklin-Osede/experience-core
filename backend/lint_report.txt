@@ -1,149 +1,224 @@
 
+> backend@0.0.1 lint
+> eslint "{src,apps,libs,test}/**/*.ts" --fix
+
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/app.service.ts
+  18:7  error  Unsafe assignment of an `any` value  @typescript-eslint/no-unsafe-assignment
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/config/env.validation.ts
+  33:24  error  Unsafe member access .USE_TYPEORM on an `any` value  @typescript-eslint/no-unsafe-member-access
+  39:24  error  Unsafe member access .USE_TYPEORM on an `any` value  @typescript-eslint/no-unsafe-member-access
+  46:24  error  Unsafe member access .USE_TYPEORM on an `any` value  @typescript-eslint/no-unsafe-member-access
+  52:24  error  Unsafe member access .USE_TYPEORM on an `any` value  @typescript-eslint/no-unsafe-member-access
+  58:24  error  Unsafe member access .USE_TYPEORM on an `any` value  @typescript-eslint/no-unsafe-member-access
+
 /Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/application/complete-event.use-case.ts
-  12:16  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
+  14:16  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
 
 /Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/application/list-events.use-case.ts
-  10:3   error  Unsafe return of a value of type `any`  @typescript-eslint/no-unsafe-return
-  77:13  error  Unsafe assignment of an `any` value     @typescript-eslint/no-unsafe-assignment
-  79:13  error  Unsafe assignment of an `any` value     @typescript-eslint/no-unsafe-assignment
+   8:10  error  'getEventProps' is defined but never used  @typescript-eslint/no-unused-vars
+  10:3   error  Unsafe return of a value of type `any`     @typescript-eslint/no-unsafe-return
+  36:14  error  Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  37:16  error  Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  38:15  error  Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/dto/event-attendee-response.dto.ts
+  44:11  error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  44:32  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  44:37  error  Unsafe member access .props on an `any` value          @typescript-eslint/no-unsafe-member-access
+  47:7   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  47:22  error  Unsafe member access .eventId on an `any` value        @typescript-eslint/no-unsafe-member-access
+  48:7   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  48:21  error  Unsafe member access .userId on an `any` value         @typescript-eslint/no-unsafe-member-access
+  49:7   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  49:21  error  Unsafe member access .status on an `any` value         @typescript-eslint/no-unsafe-member-access
+  50:7   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  50:23  error  Unsafe member access .rsvpDate on an `any` value       @typescript-eslint/no-unsafe-member-access
+  51:7   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  51:26  error  Unsafe member access .checkInDate on an `any` value    @typescript-eslint/no-unsafe-member-access
+  52:7   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  52:28  error  Unsafe member access .cancelledDate on an `any` value  @typescript-eslint/no-unsafe-member-access
+  53:7   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  53:24  error  Unsafe member access .createdAt on an `any` value      @typescript-eslint/no-unsafe-member-access
+  54:7   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  54:24  error  Unsafe member access .updatedAt on an `any` value      @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/dto/event-response.dto.ts
+  60:11  error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  60:29  error  Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+  60:34  error  Unsafe member access .props on an `any` value           @typescript-eslint/no-unsafe-member-access
+  63:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  63:26  error  Unsafe member access .organizerId on an `any` value     @typescript-eslint/no-unsafe-member-access
+  64:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  64:20  error  Unsafe member access .title on an `any` value           @typescript-eslint/no-unsafe-member-access
+  65:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  65:26  error  Unsafe member access .description on an `any` value     @typescript-eslint/no-unsafe-member-access
+  66:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  66:19  error  Unsafe member access .type on an `any` value            @typescript-eslint/no-unsafe-member-access
+  67:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  67:20  error  Unsafe member access .genre on an `any` value           @typescript-eslint/no-unsafe-member-access
+  68:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  68:21  error  Unsafe member access .status on an `any` value          @typescript-eslint/no-unsafe-member-access
+  69:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  69:24  error  Unsafe member access .startTime on an `any` value       @typescript-eslint/no-unsafe-member-access
+  70:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  70:22  error  Unsafe member access .endTime on an `any` value         @typescript-eslint/no-unsafe-member-access
+  71:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  71:23  error  Unsafe member access .location on an `any` value        @typescript-eslint/no-unsafe-member-access
+  72:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  72:22  error  Unsafe member access .venueId on an `any` value         @typescript-eslint/no-unsafe-member-access
+  73:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  73:26  error  Unsafe member access .maxCapacity on an `any` value     @typescript-eslint/no-unsafe-member-access
+  74:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  74:29  error  Unsafe member access .isEscrowFunded on an `any` value  @typescript-eslint/no-unsafe-member-access
+  75:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  75:24  error  Unsafe member access .createdAt on an `any` value       @typescript-eslint/no-unsafe-member-access
+  76:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  76:24  error  Unsafe member access .updatedAt on an `any` value       @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/dto/gig-application-response.dto.ts
+  28:11  error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  28:35  error  Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
+  28:40  error  Unsafe member access .props on an `any` value           @typescript-eslint/no-unsafe-member-access
+  31:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  31:29  error  Unsafe member access .availabilityId on an `any` value  @typescript-eslint/no-unsafe-member-access
+  32:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  32:19  error  Unsafe member access .djId on an `any` value            @typescript-eslint/no-unsafe-member-access
+  33:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  33:23  error  Unsafe member access .proposal on an `any` value        @typescript-eslint/no-unsafe-member-access
+  34:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  34:21  error  Unsafe member access .status on an `any` value          @typescript-eslint/no-unsafe-member-access
+  35:7   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
+  35:24  error  Unsafe member access .createdAt on an `any` value       @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/dto/venue-availability-response.dto.ts
+  41:11  error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
+  41:36  error  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
+  41:41  error  Unsafe member access .props on an `any` value         @typescript-eslint/no-unsafe-member-access
+  44:7   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
+  44:22  error  Unsafe member access .venueId on an `any` value       @typescript-eslint/no-unsafe-member-access
+  45:7   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
+  45:19  error  Unsafe member access .date on an `any` value          @typescript-eslint/no-unsafe-member-access
+  47:9   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
+  47:23  error  Unsafe member access .minGuarantee on an `any` value  @typescript-eslint/no-unsafe-member-access
+  48:9   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
+  48:25  error  Unsafe member access .minGuarantee on an `any` value  @typescript-eslint/no-unsafe-member-access
+  50:7   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
+  50:20  error  Unsafe member access .terms on an `any` value         @typescript-eslint/no-unsafe-member-access
+  51:7   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
+  51:21  error  Unsafe member access .status on an `any` value        @typescript-eslint/no-unsafe-member-access
+  52:7   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
+  52:24  error  Unsafe member access .createdAt on an `any` value     @typescript-eslint/no-unsafe-member-access
 
 /Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/event.controller.ts
-  36:16  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
-  40:19  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
+  39:10  error  'PaginatedResponseDto' is defined but never used  @typescript-eslint/no-unused-vars
 
-/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/typeorm/event-attendee.entity.ts
-  56:11  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  60:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/in-memory-event-attendee.repository.verify.spec.ts
+  24:20  error  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  24:25  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
+  25:20  error  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  25:25  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
 
-/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/typeorm/event-attendee.repository.ts
-  52:11  error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
-  52:32  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
-  52:37  error  Unsafe member access .props on an `any` value          @typescript-eslint/no-unsafe-member-access
-  55:5   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
-  55:28  error  Unsafe member access .eventId on an `any` value        @typescript-eslint/no-unsafe-member-access
-  56:5   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
-  56:27  error  Unsafe member access .userId on an `any` value         @typescript-eslint/no-unsafe-member-access
-  57:5   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
-  57:27  error  Unsafe member access .status on an `any` value         @typescript-eslint/no-unsafe-member-access
-  58:5   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
-  58:29  error  Unsafe member access .rsvpDate on an `any` value       @typescript-eslint/no-unsafe-member-access
-  59:5   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
-  59:32  error  Unsafe member access .checkInDate on an `any` value    @typescript-eslint/no-unsafe-member-access
-  60:5   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
-  60:34  error  Unsafe member access .cancelledDate on an `any` value  @typescript-eslint/no-unsafe-member-access
-  61:5   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
-  61:30  error  Unsafe member access .createdAt on an `any` value      @typescript-eslint/no-unsafe-member-access
-  62:5   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
-  62:30  error  Unsafe member access .updatedAt on an `any` value      @typescript-eslint/no-unsafe-member-access
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/in-memory-event.repository.ts
+  56:15  error  Unsafe assignment of an `any` value                @typescript-eslint/no-unsafe-assignment
+  56:29  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  56:34  error  Unsafe member access .props on an `any` value      @typescript-eslint/no-unsafe-member-access
+  57:22  error  Unsafe member access .type on an `any` value       @typescript-eslint/no-unsafe-member-access
+  63:15  error  Unsafe assignment of an `any` value                @typescript-eslint/no-unsafe-assignment
+  63:29  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  63:34  error  Unsafe member access .props on an `any` value      @typescript-eslint/no-unsafe-member-access
+  64:22  error  Unsafe member access .status on an `any` value     @typescript-eslint/no-unsafe-member-access
+  70:15  error  Unsafe assignment of an `any` value                @typescript-eslint/no-unsafe-assignment
+  70:29  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  70:34  error  Unsafe member access .props on an `any` value      @typescript-eslint/no-unsafe-member-access
+  71:22  error  Unsafe member access .genre on an `any` value      @typescript-eslint/no-unsafe-member-access
+  78:15  error  Unsafe assignment of an `any` value                @typescript-eslint/no-unsafe-assignment
+  78:29  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  78:34  error  Unsafe member access .props on an `any` value      @typescript-eslint/no-unsafe-member-access
+  79:22  error  Unsafe member access .startTime on an `any` value  @typescript-eslint/no-unsafe-member-access
+  86:15  error  Unsafe assignment of an `any` value                @typescript-eslint/no-unsafe-assignment
+  86:29  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  86:34  error  Unsafe member access .props on an `any` value      @typescript-eslint/no-unsafe-member-access
+  87:22  error  Unsafe member access .endTime on an `any` value    @typescript-eslint/no-unsafe-member-access
+  93:13  error  Unsafe assignment of an `any` value                @typescript-eslint/no-unsafe-assignment
+  93:28  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  93:33  error  Unsafe member access .props on an `any` value      @typescript-eslint/no-unsafe-member-access
+  94:13  error  Unsafe assignment of an `any` value                @typescript-eslint/no-unsafe-assignment
+  94:28  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  94:33  error  Unsafe member access .props on an `any` value      @typescript-eslint/no-unsafe-member-access
+  95:14  error  Unsafe call of a(n) `any` typed value              @typescript-eslint/no-unsafe-call
+  95:21  error  Unsafe member access .startTime on an `any` value  @typescript-eslint/no-unsafe-member-access
+  95:43  error  Unsafe call of a(n) `any` typed value              @typescript-eslint/no-unsafe-call
+  95:50  error  Unsafe member access .startTime on an `any` value  @typescript-eslint/no-unsafe-member-access
 
-/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/typeorm/event.entity.ts
-  86:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/in-memory-gig-application.repository.ts
+  56:15  error  Unsafe assignment of an `any` value                @typescript-eslint/no-unsafe-assignment
+  56:29  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  56:34  error  Unsafe member access .props on an `any` value      @typescript-eslint/no-unsafe-member-access
+  57:22  error  Unsafe member access .status on an `any` value     @typescript-eslint/no-unsafe-member-access
+  63:13  error  Unsafe assignment of an `any` value                @typescript-eslint/no-unsafe-assignment
+  63:28  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  63:33  error  Unsafe member access .props on an `any` value      @typescript-eslint/no-unsafe-member-access
+  64:13  error  Unsafe assignment of an `any` value                @typescript-eslint/no-unsafe-assignment
+  64:28  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  64:33  error  Unsafe member access .props on an `any` value      @typescript-eslint/no-unsafe-member-access
+  65:14  error  Unsafe call of a(n) `any` typed value              @typescript-eslint/no-unsafe-call
+  65:21  error  Unsafe member access .createdAt on an `any` value  @typescript-eslint/no-unsafe-member-access
+  65:43  error  Unsafe call of a(n) `any` typed value              @typescript-eslint/no-unsafe-call
+  65:50  error  Unsafe member access .createdAt on an `any` value  @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/in-memory-venue-availability.repository.ts
+  66:15  error  Unsafe assignment of an `any` value            @typescript-eslint/no-unsafe-assignment
+  66:29  error  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  66:34  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
+  67:22  error  Unsafe member access .date on an `any` value   @typescript-eslint/no-unsafe-member-access
+  74:15  error  Unsafe assignment of an `any` value            @typescript-eslint/no-unsafe-assignment
+  74:29  error  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  74:34  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
+  75:22  error  Unsafe member access .date on an `any` value   @typescript-eslint/no-unsafe-member-access
+  81:13  error  Unsafe assignment of an `any` value            @typescript-eslint/no-unsafe-assignment
+  81:28  error  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  81:33  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
+  82:13  error  Unsafe assignment of an `any` value            @typescript-eslint/no-unsafe-assignment
+  82:28  error  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  82:33  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
+  83:14  error  Unsafe call of a(n) `any` typed value          @typescript-eslint/no-unsafe-call
+  83:21  error  Unsafe member access .date on an `any` value   @typescript-eslint/no-unsafe-member-access
+  83:38  error  Unsafe call of a(n) `any` typed value          @typescript-eslint/no-unsafe-call
+  83:45  error  Unsafe member access .date on an `any` value   @typescript-eslint/no-unsafe-member-access
 
 /Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/typeorm/event.repository.ts
-  34:18  error  Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
-  36:13  error  Unsafe member access .type on an `any` value            @typescript-eslint/no-unsafe-member-access
-  39:13  error  Unsafe member access .status on an `any` value          @typescript-eslint/no-unsafe-member-access
-  42:58  error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  47:11  error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  47:29  error  Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
-  47:34  error  Unsafe member access .props on an `any` value           @typescript-eslint/no-unsafe-member-access
-  50:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  50:32  error  Unsafe member access .organizerId on an `any` value     @typescript-eslint/no-unsafe-member-access
-  51:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  51:26  error  Unsafe member access .title on an `any` value           @typescript-eslint/no-unsafe-member-access
-  52:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  52:32  error  Unsafe member access .description on an `any` value     @typescript-eslint/no-unsafe-member-access
-  53:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  53:25  error  Unsafe member access .type on an `any` value            @typescript-eslint/no-unsafe-member-access
-  54:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  54:26  error  Unsafe member access .genre on an `any` value           @typescript-eslint/no-unsafe-member-access
-  55:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  55:27  error  Unsafe member access .status on an `any` value          @typescript-eslint/no-unsafe-member-access
-  56:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  56:30  error  Unsafe member access .startTime on an `any` value       @typescript-eslint/no-unsafe-member-access
-  57:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  57:28  error  Unsafe member access .endTime on an `any` value         @typescript-eslint/no-unsafe-member-access
-  58:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  58:29  error  Unsafe member access .location on an `any` value        @typescript-eslint/no-unsafe-member-access
-  59:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  59:28  error  Unsafe member access .venueId on an `any` value         @typescript-eslint/no-unsafe-member-access
-  60:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  60:32  error  Unsafe member access .maxCapacity on an `any` value     @typescript-eslint/no-unsafe-member-access
-  61:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  61:35  error  Unsafe member access .isEscrowFunded on an `any` value  @typescript-eslint/no-unsafe-member-access
-  62:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  62:30  error  Unsafe member access .createdAt on an `any` value       @typescript-eslint/no-unsafe-member-access
-  63:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  63:30  error  Unsafe member access .updatedAt on an `any` value       @typescript-eslint/no-unsafe-member-access
+  13:10  error  'EventGenre' is defined but never used            @typescript-eslint/no-unused-vars
+  16:3   error  'ProductionRiderProps' is defined but never used  @typescript-eslint/no-unused-vars
 
-/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/typeorm/gig-application.entity.ts
-  50:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  54:8   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/finance/infrastructure/dto/wallet-response.dto.ts
+  35:11  error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  35:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  35:35  error  Unsafe member access .props on an `any` value          @typescript-eslint/no-unsafe-member-access
+  38:7   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  38:21  error  Unsafe member access .userId on an `any` value         @typescript-eslint/no-unsafe-member-access
+  40:9   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  40:23  error  Unsafe member access .balance on an `any` value        @typescript-eslint/no-unsafe-member-access
+  41:9   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  41:25  error  Unsafe member access .balance on an `any` value        @typescript-eslint/no-unsafe-member-access
+  42:9   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  42:20  error  Unsafe call of a(n) `any` typed value                  @typescript-eslint/no-unsafe-call
+  42:26  error  Unsafe member access .balance on an `any` value        @typescript-eslint/no-unsafe-member-access
+  45:9   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  45:23  error  Unsafe member access .lockedBalance on an `any` value  @typescript-eslint/no-unsafe-member-access
+  46:9   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  46:25  error  Unsafe member access .lockedBalance on an `any` value  @typescript-eslint/no-unsafe-member-access
+  47:9   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  47:20  error  Unsafe call of a(n) `any` typed value                  @typescript-eslint/no-unsafe-call
+  47:26  error  Unsafe member access .lockedBalance on an `any` value  @typescript-eslint/no-unsafe-member-access
+  49:7   error  Unsafe assignment of an `any` value                    @typescript-eslint/no-unsafe-assignment
+  49:24  error  Unsafe member access .updatedAt on an `any` value      @typescript-eslint/no-unsafe-member-access
 
-/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/typeorm/gig-application.repository.ts
-  43:11  error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  43:35  error  Unexpected any. Specify a different type                @typescript-eslint/no-explicit-any
-  43:40  error  Unsafe member access .props on an `any` value           @typescript-eslint/no-unsafe-member-access
-  46:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  46:35  error  Unsafe member access .availabilityId on an `any` value  @typescript-eslint/no-unsafe-member-access
-  47:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  47:25  error  Unsafe member access .djId on an `any` value            @typescript-eslint/no-unsafe-member-access
-  48:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  48:29  error  Unsafe member access .proposal on an `any` value        @typescript-eslint/no-unsafe-member-access
-  49:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  49:27  error  Unsafe member access .status on an `any` value          @typescript-eslint/no-unsafe-member-access
-  50:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  50:30  error  Unsafe member access .createdAt on an `any` value       @typescript-eslint/no-unsafe-member-access
-  51:5   error  Unsafe assignment of an `any` value                     @typescript-eslint/no-unsafe-assignment
-  51:30  error  Unsafe member access .updatedAt on an `any` value       @typescript-eslint/no-unsafe-member-access
-
-/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/typeorm/venue-availability.entity.ts
-  60:11  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-
-/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/typeorm/venue-availability.repository.ts
-  60:11  error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
-  60:36  error  Unexpected any. Specify a different type              @typescript-eslint/no-explicit-any
-  60:41  error  Unsafe member access .props on an `any` value         @typescript-eslint/no-unsafe-member-access
-  63:5   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
-  63:28  error  Unsafe member access .venueId on an `any` value       @typescript-eslint/no-unsafe-member-access
-  64:5   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
-  64:25  error  Unsafe member access .date on an `any` value          @typescript-eslint/no-unsafe-member-access
-  65:5   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
-  65:39  error  Unsafe member access .minGuarantee on an `any` value  @typescript-eslint/no-unsafe-member-access
-  66:5   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
-  66:41  error  Unsafe member access .minGuarantee on an `any` value  @typescript-eslint/no-unsafe-member-access
-  67:5   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
-  67:26  error  Unsafe member access .terms on an `any` value         @typescript-eslint/no-unsafe-member-access
-  68:5   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
-  68:27  error  Unsafe member access .status on an `any` value        @typescript-eslint/no-unsafe-member-access
-  69:5   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
-  69:30  error  Unsafe member access .createdAt on an `any` value     @typescript-eslint/no-unsafe-member-access
-  70:5   error  Unsafe assignment of an `any` value                   @typescript-eslint/no-unsafe-assignment
-  70:30  error  Unsafe member access .updatedAt on an `any` value     @typescript-eslint/no-unsafe-member-access
-
-/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/finance/infrastructure/finance.controller.ts
-  104:7   error  Unsafe assignment of an `any` value               @typescript-eslint/no-unsafe-assignment
-  104:29  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-  104:34  error  Unsafe member access .props on an `any` value     @typescript-eslint/no-unsafe-member-access
-  157:9   error  Unsafe assignment of an `any` value               @typescript-eslint/no-unsafe-assignment
-  158:23  error  Unsafe return of a value of type `any`            @typescript-eslint/no-unsafe-return
-  158:42  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-  158:47  error  Unsafe member access .amount on an `any` value    @typescript-eslint/no-unsafe-member-access
-  161:9   error  Unsafe assignment of an `any` value               @typescript-eslint/no-unsafe-assignment
-  161:54  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-  161:60  error  Unsafe member access .currency on an `any` value  @typescript-eslint/no-unsafe-member-access
-  163:7   error  Unsafe assignment of an `any` value               @typescript-eslint/no-unsafe-assignment
-  163:32  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-  163:37  error  Unsafe member access .props on an `any` value     @typescript-eslint/no-unsafe-member-access
-  168:11  error  Unsafe assignment of an `any` value               @typescript-eslint/no-unsafe-assignment
-  168:32  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-  168:37  error  Unsafe member access .amount on an `any` value    @typescript-eslint/no-unsafe-member-access
-  169:11  error  Unsafe assignment of an `any` value               @typescript-eslint/no-unsafe-assignment
-  169:34  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-  169:39  error  Unsafe member access .currency on an `any` value  @typescript-eslint/no-unsafe-member-access
-  174:7   error  Unsafe assignment of an `any` value               @typescript-eslint/no-unsafe-assignment
-  174:35  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
-  174:40  error  Unsafe member access .props on an `any` value     @typescript-eslint/no-unsafe-member-access
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/finance/infrastructure/in-memory-transaction.repository.ts
+   7:3   error  Async method 'save' has no 'await' expression            @typescript-eslint/require-await
+  16:3   error  Async method 'findByWalletId' has no 'await' expression  @typescript-eslint/require-await
+  24:25  error  Unsafe member access .props on an `any` value            @typescript-eslint/no-unsafe-member-access
 
 /Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/finance/infrastructure/typeorm/split-payment-payer.entity.ts
   53:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
@@ -195,6 +270,26 @@
 /Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/finance/infrastructure/typeorm/transaction.entity.ts
   61:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/finance/infrastructure/typeorm/transaction.mapper.ts
+  11:11  error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  11:40  error  Unsafe member access .props on an `any` value        @typescript-eslint/no-unsafe-member-access
+  14:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  14:29  error  Unsafe member access .walletId on an `any` value     @typescript-eslint/no-unsafe-member-access
+  15:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  15:27  error  Unsafe member access .amount on an `any` value       @typescript-eslint/no-unsafe-member-access
+  16:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  16:29  error  Unsafe member access .amount on an `any` value       @typescript-eslint/no-unsafe-member-access
+  17:25  error  Unsafe member access .type on an `any` value         @typescript-eslint/no-unsafe-member-access
+  18:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  18:32  error  Unsafe member access .referenceId on an `any` value  @typescript-eslint/no-unsafe-member-access
+  19:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  19:30  error  Unsafe member access .createdAt on an `any` value    @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/finance/infrastructure/typeorm/transaction.repository.ts
+  26:25  error  A method that is not declared with `this: void` may cause unintentional scoping of `this` when separated from its object.
+Consider using an arrow function or explicitly `.bind()`ing the method to avoid calling the method with an unintended `this` value. 
+If a function does not access `this`, it can be annotated with `this: void`  @typescript-eslint/unbound-method
+
 /Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/finance/infrastructure/typeorm/wallet.entity.ts
   46:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 
@@ -219,56 +314,534 @@
   60:7   error  Unsafe assignment of an `any` value       @typescript-eslint/no-unsafe-assignment
   60:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/identity/application/update-user-profile.use-case.ts
+  5:3  error  'UnauthorizedException' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/identity/infrastructure/dto/user-response.dto.ts
+  73:11  error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  73:28  error  Unexpected any. Specify a different type                    @typescript-eslint/no-explicit-any
+  73:33  error  Unsafe member access .props on an `any` value               @typescript-eslint/no-unsafe-member-access
+  76:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  76:20  error  Unsafe member access .email on an `any` value               @typescript-eslint/no-unsafe-member-access
+  77:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  77:19  error  Unsafe member access .role on an `any` value                @typescript-eslint/no-unsafe-member-access
+  78:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  78:25  error  Unsafe member access .isVerified on an `any` value          @typescript-eslint/no-unsafe-member-access
+  79:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  79:30  error  Unsafe member access .reputationScore on an `any` value     @typescript-eslint/no-unsafe-member-access
+  80:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  81:15  error  Unsafe member access .inviteCredits on an `any` value       @typescript-eslint/no-unsafe-member-access
+  81:55  error  Unsafe member access .inviteCredits on an `any` value       @typescript-eslint/no-unsafe-member-access
+  82:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  82:29  error  Unsafe member access .eventsAttended on an `any` value      @typescript-eslint/no-unsafe-member-access
+  83:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  83:33  error  Unsafe member access .hasUnlockedInvites on an `any` value  @typescript-eslint/no-unsafe-member-access
+  85:9   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  85:23  error  Unsafe member access .outstandingDebt on an `any` value     @typescript-eslint/no-unsafe-member-access
+  86:9   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  86:25  error  Unsafe member access .outstandingDebt on an `any` value     @typescript-eslint/no-unsafe-member-access
+  87:9   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  87:20  error  Unsafe call of a(n) `any` typed value                       @typescript-eslint/no-unsafe-call
+  87:26  error  Unsafe member access .outstandingDebt on an `any` value     @typescript-eslint/no-unsafe-member-access
+  89:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  89:30  error  Unsafe member access .profilePhotoUrl on an `any` value     @typescript-eslint/no-unsafe-member-access
+  90:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  90:30  error  Unsafe member access .isPhotoVerified on an `any` value     @typescript-eslint/no-unsafe-member-access
+  91:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  91:26  error  Unsafe member access .phoneNumber on an `any` value         @typescript-eslint/no-unsafe-member-access
+  92:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  92:30  error  Unsafe member access .preferredGenres on an `any` value     @typescript-eslint/no-unsafe-member-access
+  93:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  93:24  error  Unsafe member access .createdAt on an `any` value           @typescript-eslint/no-unsafe-member-access
+  94:7   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  94:24  error  Unsafe member access .updatedAt on an `any` value           @typescript-eslint/no-unsafe-member-access
+
 /Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/identity/infrastructure/typeorm/user.repository.ts
    7:10  error  'UserRole' is defined but never used                        @typescript-eslint/no-unused-vars
-   9:13  error  'bcrypt' is defined but never used                          @typescript-eslint/no-unused-vars
-  40:11  error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  40:28  error  Unexpected any. Specify a different type                    @typescript-eslint/no-explicit-any
-  40:33  error  Unsafe member access .props on an `any` value               @typescript-eslint/no-unsafe-member-access
-  43:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  43:26  error  Unsafe member access .email on an `any` value               @typescript-eslint/no-unsafe-member-access
+  10:13  error  'bcrypt' is defined but never used                          @typescript-eslint/no-unused-vars
+  41:11  error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  41:28  error  Unexpected any. Specify a different type                    @typescript-eslint/no-explicit-any
+  41:33  error  Unsafe member access .props on an `any` value               @typescript-eslint/no-unsafe-member-access
   44:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  44:29  error  Unsafe member access .password on an `any` value            @typescript-eslint/no-unsafe-member-access
+  44:26  error  Unsafe member access .email on an `any` value               @typescript-eslint/no-unsafe-member-access
   45:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  45:25  error  Unsafe member access .role on an `any` value                @typescript-eslint/no-unsafe-member-access
+  45:29  error  Unsafe member access .password on an `any` value            @typescript-eslint/no-unsafe-member-access
   46:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  46:31  error  Unsafe member access .isVerified on an `any` value          @typescript-eslint/no-unsafe-member-access
+  46:25  error  Unsafe member access .role on an `any` value                @typescript-eslint/no-unsafe-member-access
   47:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  47:36  error  Unsafe member access .reputationScore on an `any` value     @typescript-eslint/no-unsafe-member-access
+  47:31  error  Unsafe member access .isVerified on an `any` value          @typescript-eslint/no-unsafe-member-access
   48:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  48:34  error  Unsafe member access .inviteCredits on an `any` value       @typescript-eslint/no-unsafe-member-access
-  49:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  49:35  error  Unsafe member access .eventsAttended on an `any` value      @typescript-eslint/no-unsafe-member-access
+  48:36  error  Unsafe member access .reputationScore on an `any` value     @typescript-eslint/no-unsafe-member-access
   50:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  50:39  error  Unsafe member access .hasUnlockedInvites on an `any` value  @typescript-eslint/no-unsafe-member-access
-  51:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  51:42  error  Unsafe member access .outstandingDebt on an `any` value     @typescript-eslint/no-unsafe-member-access
+  51:13  error  Unsafe member access .inviteCredits on an `any` value       @typescript-eslint/no-unsafe-member-access
+  51:53  error  Unsafe member access .inviteCredits on an `any` value       @typescript-eslint/no-unsafe-member-access
   52:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  52:44  error  Unsafe member access .outstandingDebt on an `any` value     @typescript-eslint/no-unsafe-member-access
+  52:35  error  Unsafe member access .eventsAttended on an `any` value      @typescript-eslint/no-unsafe-member-access
   53:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  53:36  error  Unsafe member access .profilePhotoUrl on an `any` value     @typescript-eslint/no-unsafe-member-access
+  53:39  error  Unsafe member access .hasUnlockedInvites on an `any` value  @typescript-eslint/no-unsafe-member-access
   54:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  54:36  error  Unsafe member access .isPhotoVerified on an `any` value     @typescript-eslint/no-unsafe-member-access
+  54:42  error  Unsafe member access .outstandingDebt on an `any` value     @typescript-eslint/no-unsafe-member-access
   55:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  55:30  error  Unsafe member access .createdAt on an `any` value           @typescript-eslint/no-unsafe-member-access
+  55:44  error  Unsafe member access .outstandingDebt on an `any` value     @typescript-eslint/no-unsafe-member-access
   56:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
-  56:30  error  Unsafe member access .updatedAt on an `any` value           @typescript-eslint/no-unsafe-member-access
+  56:36  error  Unsafe member access .profilePhotoUrl on an `any` value     @typescript-eslint/no-unsafe-member-access
+  57:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  57:36  error  Unsafe member access .isPhotoVerified on an `any` value     @typescript-eslint/no-unsafe-member-access
+  58:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  58:32  error  Unsafe member access .phoneNumber on an `any` value         @typescript-eslint/no-unsafe-member-access
+  59:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  59:36  error  Unsafe member access .preferredGenres on an `any` value     @typescript-eslint/no-unsafe-member-access
+  60:9   error  Unsafe call of a(n) `any` typed value                       @typescript-eslint/no-unsafe-call
+  60:15  error  Unsafe member access .preferredGenres on an `any` value     @typescript-eslint/no-unsafe-member-access
+  62:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  62:30  error  Unsafe member access .createdAt on an `any` value           @typescript-eslint/no-unsafe-member-access
+  63:5   error  Unsafe assignment of an `any` value                         @typescript-eslint/no-unsafe-assignment
+  63:30  error  Unsafe member access .updatedAt on an `any` value           @typescript-eslint/no-unsafe-member-access
 
-/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/identity/infrastructure/user.controller.ts
-  93:7   error  Unsafe assignment of an `any` value            @typescript-eslint/no-unsafe-assignment
-  93:27  error  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
-  93:32  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
-  94:7   error  Unsafe assignment of an `any` value            @typescript-eslint/no-unsafe-assignment
-  94:27  error  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
-  94:32  error  Unsafe member access .props on an `any` value  @typescript-eslint/no-unsafe-member-access
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/application/accept-booking.use-case.ts
+  39:11  error  Unsafe assignment of an `any` value             @typescript-eslint/no-unsafe-assignment
+  39:31  error  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  39:36  error  Unsafe member access .props on an `any` value   @typescript-eslint/no-unsafe-member-access
+  40:15  error  Unsafe member access .status on an `any` value  @typescript-eslint/no-unsafe-member-access
 
-/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/shared/infrastructure/filters/http-exception.filter.ts
-  31:9   error  Unsafe assignment of an `any` value              @typescript-eslint/no-unsafe-assignment
-  31:41  error  Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
-  31:46  error  Unsafe member access .message on an `any` value  @typescript-eslint/no-unsafe-member-access
-  32:9   error  Unsafe assignment of an `any` value              @typescript-eslint/no-unsafe-assignment
-  32:39  error  Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
-  32:44  error  Unsafe member access .error on an `any` value    @typescript-eslint/no-unsafe-member-access
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/application/book-service.use-case.ts
+  41:11  error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  41:34  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  41:39  error  Unsafe member access .props on an `any` value        @typescript-eslint/no-unsafe-member-access
+  42:20  error  Unsafe member access .organizerId on an `any` value  @typescript-eslint/no-unsafe-member-access
 
-✖ 227 problems (227 errors, 0 warnings)
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/application/create-service-listing.use-case.ts
+  15:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/application/reject-booking.use-case.ts
+  39:11  error  Unsafe assignment of an `any` value             @typescript-eslint/no-unsafe-assignment
+  39:31  error  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  39:36  error  Unsafe member access .props on an `any` value   @typescript-eslint/no-unsafe-member-access
+  40:15  error  Unsafe member access .status on an `any` value  @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/domain/service-listing.entity.ts
+  12:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  70:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/infrastructure/dto/service-booking-response.dto.ts
+  48:11  error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  48:31  error  Unexpected any. Specify a different type                  @typescript-eslint/no-explicit-any
+  48:36  error  Unsafe member access .props on an `any` value             @typescript-eslint/no-unsafe-member-access
+  51:7   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  51:31  error  Unsafe member access .serviceListingId on an `any` value  @typescript-eslint/no-unsafe-member-access
+  52:7   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  52:25  error  Unsafe member access .providerId on an `any` value        @typescript-eslint/no-unsafe-member-access
+  53:7   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  53:22  error  Unsafe member access .eventId on an `any` value           @typescript-eslint/no-unsafe-member-access
+  54:7   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  54:24  error  Unsafe member access .startDate on an `any` value         @typescript-eslint/no-unsafe-member-access
+  55:7   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  55:22  error  Unsafe member access .endDate on an `any` value           @typescript-eslint/no-unsafe-member-access
+  57:9   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  57:23  error  Unsafe member access .totalCost on an `any` value         @typescript-eslint/no-unsafe-member-access
+  58:9   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  58:25  error  Unsafe member access .totalCost on an `any` value         @typescript-eslint/no-unsafe-member-access
+  60:7   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  60:21  error  Unsafe member access .status on an `any` value            @typescript-eslint/no-unsafe-member-access
+  61:7   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  61:24  error  Unsafe member access .createdAt on an `any` value         @typescript-eslint/no-unsafe-member-access
+  62:7   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  62:24  error  Unsafe member access .updatedAt on an `any` value         @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/infrastructure/dto/service-listing-response.dto.ts
+  33:26  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  48:11  error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  48:31  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  48:36  error  Unsafe member access .props on an `any` value        @typescript-eslint/no-unsafe-member-access
+  51:7   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  51:25  error  Unsafe member access .providerId on an `any` value   @typescript-eslint/no-unsafe-member-access
+  52:7   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  52:20  error  Unsafe member access .title on an `any` value        @typescript-eslint/no-unsafe-member-access
+  53:7   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  53:26  error  Unsafe member access .description on an `any` value  @typescript-eslint/no-unsafe-member-access
+  54:7   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  54:23  error  Unsafe member access .category on an `any` value     @typescript-eslint/no-unsafe-member-access
+  56:9   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  56:23  error  Unsafe member access .pricePerDay on an `any` value  @typescript-eslint/no-unsafe-member-access
+  57:9   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  57:25  error  Unsafe member access .pricePerDay on an `any` value  @typescript-eslint/no-unsafe-member-access
+  59:7   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  59:20  error  Unsafe member access .specs on an `any` value        @typescript-eslint/no-unsafe-member-access
+  60:7   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  60:26  error  Unsafe member access .isAvailable on an `any` value  @typescript-eslint/no-unsafe-member-access
+  61:7   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  61:24  error  Unsafe member access .createdAt on an `any` value    @typescript-eslint/no-unsafe-member-access
+  62:7   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  62:24  error  Unsafe member access .updatedAt on an `any` value    @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/infrastructure/in-memory-service-listing.repository.ts
+   4:10  error  'ServiceCategory' is defined but never used                       @typescript-eslint/no-unused-vars
+  31:45  error  The two values in this comparison do not have a shared enum type  @typescript-eslint/no-unsafe-enum-comparison
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/infrastructure/provider.controller.ts
+   74:26  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  316:3   error  Async method 'listBookings' has no 'await' expression  @typescript-eslint/require-await
+  317:16  error  'req' is defined but never used                        @typescript-eslint/no-unused-vars
+  318:23  error  'eventId' is defined but never used                    @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/infrastructure/typeorm/service-booking.repository.ts
+  63:11  error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  63:31  error  Unexpected any. Specify a different type                  @typescript-eslint/no-explicit-any
+  63:36  error  Unsafe member access .props on an `any` value             @typescript-eslint/no-unsafe-member-access
+  66:5   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  66:37  error  Unsafe member access .serviceListingId on an `any` value  @typescript-eslint/no-unsafe-member-access
+  67:5   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  67:31  error  Unsafe member access .providerId on an `any` value        @typescript-eslint/no-unsafe-member-access
+  68:5   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  68:28  error  Unsafe member access .eventId on an `any` value           @typescript-eslint/no-unsafe-member-access
+  69:5   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  69:30  error  Unsafe member access .startDate on an `any` value         @typescript-eslint/no-unsafe-member-access
+  70:5   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  70:28  error  Unsafe member access .endDate on an `any` value           @typescript-eslint/no-unsafe-member-access
+  71:5   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  71:36  error  Unsafe member access .totalCost on an `any` value         @typescript-eslint/no-unsafe-member-access
+  72:5   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  72:38  error  Unsafe member access .totalCost on an `any` value         @typescript-eslint/no-unsafe-member-access
+  73:5   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  73:27  error  Unsafe member access .status on an `any` value            @typescript-eslint/no-unsafe-member-access
+  74:5   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  74:30  error  Unsafe member access .createdAt on an `any` value         @typescript-eslint/no-unsafe-member-access
+  75:5   error  Unsafe assignment of an `any` value                       @typescript-eslint/no-unsafe-assignment
+  75:30  error  Unsafe member access .updatedAt on an `any` value         @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/infrastructure/typeorm/service-listing.entity.ts
+  45:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/infrastructure/typeorm/service-listing.repository.ts
+  49:11  error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  49:31  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  49:36  error  Unsafe member access .props on an `any` value        @typescript-eslint/no-unsafe-member-access
+  52:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  52:31  error  Unsafe member access .providerId on an `any` value   @typescript-eslint/no-unsafe-member-access
+  53:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  53:26  error  Unsafe member access .title on an `any` value        @typescript-eslint/no-unsafe-member-access
+  54:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  54:32  error  Unsafe member access .description on an `any` value  @typescript-eslint/no-unsafe-member-access
+  55:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  55:29  error  Unsafe member access .category on an `any` value     @typescript-eslint/no-unsafe-member-access
+  56:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  56:38  error  Unsafe member access .pricePerDay on an `any` value  @typescript-eslint/no-unsafe-member-access
+  57:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  57:40  error  Unsafe member access .pricePerDay on an `any` value  @typescript-eslint/no-unsafe-member-access
+  58:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  58:26  error  Unsafe member access .specs on an `any` value        @typescript-eslint/no-unsafe-member-access
+  59:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  59:32  error  Unsafe member access .isAvailable on an `any` value  @typescript-eslint/no-unsafe-member-access
+  60:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  60:30  error  Unsafe member access .createdAt on an `any` value    @typescript-eslint/no-unsafe-member-access
+  61:5   error  Unsafe assignment of an `any` value                  @typescript-eslint/no-unsafe-assignment
+  61:30  error  Unsafe member access .updatedAt on an `any` value    @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/scripts/seed.ts
+  1:10  error  'DataSource' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/shared/infrastructure/guards/roles.guard.ts
+  31:11  error  Unsafe assignment of an `any` value           @typescript-eslint/no-unsafe-assignment
+  32:11  error  Unsafe assignment of an `any` value           @typescript-eslint/no-unsafe-assignment
+  32:26  error  Unsafe member access .user on an `any` value  @typescript-eslint/no-unsafe-member-access
+  39:27  error  Unsafe member access .role on an `any` value  @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/app.e2e-spec.ts
+  44:27  error  Unsafe member access .database on an `any` value                                        @typescript-eslint/no-unsafe-member-access
+  53:38  error  Unsafe argument of type `any` assigned to a parameter of type `string | number | Date`  @typescript-eslint/no-unsafe-argument
+  53:47  error  Unsafe member access .timestamp on an `any` value                                       @typescript-eslint/no-unsafe-member-access
+  55:57  error  Unsafe member access .timestamp on an `any` value                                       @typescript-eslint/no-unsafe-member-access
+  64:27  error  Unsafe member access .uptime on an `any` value                                          @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/auth.e2e-spec.ts
+   27:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   38:27  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   39:27  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   44:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   53:27  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   60:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   70:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   81:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  102:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  112:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  119:27  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+  124:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  134:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  150:38  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  159:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  159:35  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+  160:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  160:30  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+  164:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  169:27  error  Unsafe member access .email on an `any` value                        @typescript-eslint/no-unsafe-member-access
+  174:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  178:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/events.e2e-spec.ts
+    9:7   error  'organizerId' is assigned a value but never used                     @typescript-eslint/no-unused-vars
+   24:40  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   32:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   32:40  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   33:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   33:37  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   36:34  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   44:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   44:28  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   45:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   45:25  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   54:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   73:27  error  Unsafe member access .title on an `any` value                        @typescript-eslint/no-unsafe-member-access
+   74:27  error  Unsafe member access .status on an `any` value                       @typescript-eslint/no-unsafe-member-access
+   79:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   94:9   error  'eventId' is assigned a value but never used                         @typescript-eslint/no-unused-vars
+   98:33  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  114:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  114:26  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  118:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  122:41  error  Unsafe member access .data on an `any` value                         @typescript-eslint/no-unsafe-member-access
+  123:27  error  Unsafe member access .data on an `any` value                         @typescript-eslint/no-unsafe-member-access
+  128:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  132:11  error  Unsafe call of a(n) `any` typed value                                @typescript-eslint/no-unsafe-call
+  132:20  error  Unsafe member access .data on an `any` value                         @typescript-eslint/no-unsafe-member-access
+  132:41  error  Unexpected any. Specify a different type                             @typescript-eslint/no-explicit-any
+  133:26  error  Unsafe member access .type on an `any` value                         @typescript-eslint/no-unsafe-member-access
+  144:33  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  160:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  160:31  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  164:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  169:27  error  Unsafe member access .status on an `any` value                       @typescript-eslint/no-unsafe-member-access
+  174:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  186:39  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  204:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  204:41  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  206:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  213:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  218:27  error  Unsafe member access .status on an `any` value                       @typescript-eslint/no-unsafe-member-access
+  219:27  error  Unsafe member access .userId on an `any` value                       @typescript-eslint/no-unsafe-member-access
+  220:27  error  Unsafe member access .eventId on an `any` value                      @typescript-eslint/no-unsafe-member-access
+  225:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  233:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  239:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  252:39  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  268:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  268:32  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  270:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  275:37  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  279:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  279:33  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  283:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  289:27  error  Unsafe member access .status on an `any` value                       @typescript-eslint/no-unsafe-member-access
+  294:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/finance.e2e-spec.ts
+   10:7   error  'walletId' is assigned a value but never used                        @typescript-eslint/no-unused-vars
+   23:35  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   31:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   31:30  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   32:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   32:27  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   41:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   48:27  error  Unsafe member access .balance on an `any` value                      @typescript-eslint/no-unsafe-member-access
+   49:11  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   49:31  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+   54:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   60:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   70:27  error  Unsafe member access .type on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   71:27  error  Unsafe member access .amount on an `any` value                       @typescript-eslint/no-unsafe-member-access
+   77:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   87:39  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   93:29  error  Unsafe member access .balance on an `any` value                      @typescript-eslint/no-unsafe-member-access
+   97:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  111:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  122:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  131:27  error  Unsafe member access .type on an `any` value                         @typescript-eslint/no-unsafe-member-access
+  132:27  error  Unsafe member access .amount on an `any` value                       @typescript-eslint/no-unsafe-member-access
+  138:39  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  143:13  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  143:45  error  Unsafe member access .balance on an `any` value                      @typescript-eslint/no-unsafe-member-access
+  146:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  150:11  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  163:38  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  171:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  171:34  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+  172:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  172:31  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+  175:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  181:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  189:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  203:27  error  Unsafe member access .totalAmount on an `any` value                  @typescript-eslint/no-unsafe-member-access
+  204:27  error  Unsafe member access .status on an `any` value                       @typescript-eslint/no-unsafe-member-access
+  205:27  error  Unsafe member access .payers on an `any` value                       @typescript-eslint/no-unsafe-member-access
+  210:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/ownership.e2e-spec.ts
+    9:7   error  'organizerId' is assigned a value but never used                     @typescript-eslint/no-unused-vars
+   11:7   error  'otherDjId' is assigned a value but never used                       @typescript-eslint/no-unused-vars
+   26:40  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   34:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   34:40  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   35:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   35:37  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   38:38  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   46:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   46:36  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   47:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   47:33  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   50:36  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   58:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   58:32  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   61:36  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   76:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   76:29  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+   79:19  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   92:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  110:26  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  111:40  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  118:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  123:27  error  Unsafe member access .message on an `any` value                      @typescript-eslint/no-unsafe-member-access
+  129:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  147:26  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  148:40  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  158:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  176:17  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  176:39  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  177:26  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  182:30  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  191:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  196:27  error  Unsafe member access .message on an `any` value                      @typescript-eslint/no-unsafe-member-access
+  202:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  220:17  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  220:39  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  221:26  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  226:30  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  238:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  255:26  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  256:39  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  264:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  281:26  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  282:39  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  286:31  error  Unsafe member access .message on an `any` value                      @typescript-eslint/no-unsafe-member-access
+  293:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  310:26  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  311:39  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  321:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  339:17  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  339:39  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  340:26  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  345:30  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  350:34  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  361:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  379:17  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  379:39  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  380:26  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  385:30  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  390:34  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  395:39  error  Unsafe member access .message on an `any` value                      @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/provider.e2e-spec.ts
+   11:7   error  'organizerId' is assigned a value but never used                     @typescript-eslint/no-unused-vars
+   26:39  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   34:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   34:38  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   35:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   35:35  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   38:40  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   46:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   46:40  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   47:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   47:37  error  Unsafe member access .user on an `any` value                         @typescript-eslint/no-unsafe-member-access
+   50:36  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   66:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   66:29  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+   75:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   92:27  error  Unsafe member access .title on an `any` value                        @typescript-eslint/no-unsafe-member-access
+   93:27  error  Unsafe member access .category on an `any` value                     @typescript-eslint/no-unsafe-member-access
+   94:27  error  Unsafe member access .isAvailable on an `any` value                  @typescript-eslint/no-unsafe-member-access
+   95:11  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   95:32  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  100:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  117:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  131:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  137:41  error  Unsafe member access .listings on an `any` value                     @typescript-eslint/no-unsafe-member-access
+  138:27  error  Unsafe member access .listings on an `any` value                     @typescript-eslint/no-unsafe-member-access
+  143:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  147:11  error  Unsafe call of a(n) `any` typed value                                @typescript-eslint/no-unsafe-call
+  147:20  error  Unsafe member access .listings on an `any` value                     @typescript-eslint/no-unsafe-member-access
+  147:47  error  Unexpected any. Specify a different type                             @typescript-eslint/no-explicit-any
+  148:28  error  Unsafe member access .category on an `any` value                     @typescript-eslint/no-unsafe-member-access
+  154:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  158:11  error  Unsafe call of a(n) `any` typed value                                @typescript-eslint/no-unsafe-call
+  158:20  error  Unsafe member access .listings on an `any` value                     @typescript-eslint/no-unsafe-member-access
+  158:47  error  Unexpected any. Specify a different type                             @typescript-eslint/no-explicit-any
+  159:28  error  Unsafe member access .providerId on an `any` value                   @typescript-eslint/no-unsafe-member-access
+  167:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  176:27  error  Unsafe member access .pricePerDay on an `any` value                  @typescript-eslint/no-unsafe-member-access
+  181:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  189:27  error  Unsafe member access .isAvailable on an `any` value                  @typescript-eslint/no-unsafe-member-access
+  199:33  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  210:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  210:37  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  217:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  229:27  error  Unsafe member access .status on an `any` value                       @typescript-eslint/no-unsafe-member-access
+  230:27  error  Unsafe member access .eventId on an `any` value                      @typescript-eslint/no-unsafe-member-access
+  231:27  error  Unsafe member access .serviceListingId on an `any` value             @typescript-eslint/no-unsafe-member-access
+  233:27  error  Unsafe member access .totalCost on an `any` value                    @typescript-eslint/no-unsafe-member-access
+  241:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  258:21  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  270:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  292:40  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  307:40  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  311:11  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  311:45  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  317:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  317:35  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  321:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  326:27  error  Unsafe member access .status on an `any` value                       @typescript-eslint/no-unsafe-member-access
+  331:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  343:40  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  358:40  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  362:11  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  362:45  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  368:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  368:35  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  372:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  377:27  error  Unsafe member access .status on an `any` value                       @typescript-eslint/no-unsafe-member-access
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/roles-authorization.e2e-spec.ts
+   25:34  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   29:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   29:28  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   31:33  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   35:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   35:26  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   37:36  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   41:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   41:32  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   43:39  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   51:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   51:38  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   53:38  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   57:5   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+   57:36  error  Unsafe member access .access_token on an `any` value                 @typescript-eslint/no-unsafe-member-access
+   66:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   80:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+   99:33  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  109:7   error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  109:33  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  113:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  123:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  134:38  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  140:13  error  Unsafe assignment of an `any` value                                  @typescript-eslint/no-unsafe-assignment
+  140:43  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  143:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  151:38  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  162:38  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  163:53  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  169:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  170:51  error  Unsafe member access .id on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  178:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  197:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+  204:22  error  Unsafe argument of type `any` assigned to a parameter of type `App`  @typescript-eslint/no-unsafe-argument
+
+✖ 740 problems (740 errors, 0 warnings)
 

@@ -13,18 +13,18 @@ import { FormsModule } from '@angular/forms';
 export class OnboardingVenueComponent {
   venueName = signal<string>('Casa Tulum');
   capacity = signal<number | null>(null);
-  selectedType = signal<string>('Nightclub');
+  selectedType = signal<string>('Club Nocturno');
   location = signal<string>('');
   
   // Tech & Vibe
-  selectedAmenities = signal<string[]>(['Funktion-One', 'VIP Tables']);
+  selectedAmenities = signal<string[]>(['Funktion-One', 'Mesas VIP']);
   amenities = [
     { id: 'funktion-one', label: 'Funktion-One', icon: 'speaker_group' },
-    { id: 'dj-booth', label: 'DJ Booth', icon: 'podium' },
-    { id: 'pro-lighting', label: 'Pro Lighting', icon: 'light_mode' },
-    { id: 'vip-tables', label: 'VIP Tables', icon: 'table_bar' },
-    { id: 'stage', label: 'Stage', icon: 'curtains' },
-    { id: 'projector', label: 'Projector', icon: 'videocam' }
+    { id: 'dj-booth', label: 'Cabina de DJ', icon: 'podium' },
+    { id: 'pro-lighting', label: 'Iluminación Pro', icon: 'light_mode' },
+    { id: 'vip-tables', label: 'Mesas VIP', icon: 'table_bar' },
+    { id: 'stage', label: 'Escenario', icon: 'curtains' },
+    { id: 'projector', label: 'Proyector', icon: 'videocam' }
   ];
 
   // House Rules

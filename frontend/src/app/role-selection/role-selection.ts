@@ -9,9 +9,13 @@ import { Router } from '@angular/router';
   styleUrl: './role-selection.css',
 })
 export class RoleSelection {
-  selectedRole = signal<string | null>('FAN'); // Fan seleccionado por defecto
+  selectedRole = signal<string | null>(this.getInitialRole());
 
   constructor(private router: Router) {}
+
+  private getInitialRole(): string | null {
+    return localStorage.getItem('selectedRole') || 'FAN';
+  }
 
   selectRole(role: string): void {
     this.selectedRole.set(role);

@@ -4,9 +4,8 @@ import { EventRepository } from '../domain/event.repository';
 import { ListEventsDto } from './list-events.dto';
 // Helper function to safely access entity props
 // This function is needed because Entity.props is protected
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 function getEventProps(event: any) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return event.props;
 }
 

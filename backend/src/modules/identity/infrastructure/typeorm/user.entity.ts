@@ -76,4 +76,10 @@ export class UserEntity {
 
   @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt: Date;
+
+  @Column({ nullable: true })
+  currentChallenge: string | null;
+
+  @Column('simple-json', { nullable: true }) // Using simple-json for broader compatibility if not PG
+  authenticators: any[] | null;
 }

@@ -97,6 +97,14 @@ else
     echo -e "${GREEN}✅ backend/.env ya existe${NC}"
 fi
 
+# Exportar variables de entorno explicítamente
+if [ -f "backend/.env" ]; then
+  # Usar set -a para exportar automáticamente
+  set -a
+  source backend/.env
+  set +a
+fi
+
 # Verificar dependencias del backend
 if [ ! -d "backend/node_modules" ]; then
     echo -e "${YELLOW}📦 Instalando dependencias del backend...${NC}"

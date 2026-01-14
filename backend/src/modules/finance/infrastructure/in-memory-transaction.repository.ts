@@ -20,7 +20,7 @@ export class InMemoryTransactionRepository implements TransactionRepository {
       // But wait, Transaction entity `props` is protected.
       // In a real app we would use TypeORM or getters.
       // For InMemory, we can just cast to any to access props for filtering.
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       return (t as any).props.walletId === walletId;
     });
   }

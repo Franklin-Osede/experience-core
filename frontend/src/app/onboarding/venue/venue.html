@@ -2,7 +2,8 @@
   <!-- Sticky Header -->
   <header class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-border-dark/30">
     <!-- Increased padding to px-6 to match DJ screen -->
-    <div class="flex items-center justify-start gap-4 px-6 py-4 pb-2">
+    <!-- Increased padding to px-6 to match DJ screen -->
+    <div class="flex items-center justify-center gap-4 px-6 py-4 pb-2">
       <button 
         (click)="goBack()"
         class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-slate-900 dark:text-white">
@@ -53,10 +54,10 @@
                 [ngModel]="selectedType()"
                 (ngModelChange)="selectedType.set($event)"
                 class="w-full rounded-xl text-slate-900 dark:text-white appearance-none focus:outline-none focus:ring-1 focus:ring-primary border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark h-14 px-4 text-base font-normal transition-all pr-10">
-                <option>Nightclub</option>
+                <option>Club Nocturno</option>
                 <option>Lounge</option>
-                <option>Beach Club</option>
-                <option>Rooftop</option>
+                <option>Club de Playa</option>
+                <option>Terraza</option>
               </select>
               <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none">expand_more</span>
             </div>

@@ -1,0 +1,59 @@
+
+> backend@0.0.1 lint
+> eslint "{src,apps,libs,test}/**/*.ts" --fix
+
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/application/list-events.use-case.ts
+  8:10  warning  'getEventProps' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/event.controller.ts
+  39:10  warning  'PaginatedResponseDto' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/event/infrastructure/typeorm/event.repository.ts
+  13:10  warning  'EventGenre' is defined but never used            @typescript-eslint/no-unused-vars
+  16:3   warning  'ProductionRiderProps' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/finance/infrastructure/in-memory-transaction.repository.ts
+   7:3  error  Async method 'save' has no 'await' expression            @typescript-eslint/require-await
+  16:3  error  Async method 'findByWalletId' has no 'await' expression  @typescript-eslint/require-await
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/finance/infrastructure/typeorm/transaction.repository.ts
+  26:25  error  A method that is not declared with `this: void` may cause unintentional scoping of `this` when separated from its object.
+Consider using an arrow function or explicitly `.bind()`ing the method to avoid calling the method with an unintended `this` value. 
+If a function does not access `this`, it can be annotated with `this: void`  @typescript-eslint/unbound-method
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/identity/application/update-user-profile.use-case.ts
+  5:3  warning  'UnauthorizedException' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/identity/infrastructure/typeorm/user.repository.ts
+   7:10  warning  'UserRole' is defined but never used  @typescript-eslint/no-unused-vars
+  10:13  warning  'bcrypt' is defined but never used    @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/infrastructure/in-memory-service-listing.repository.ts
+   4:10  warning  'ServiceCategory' is defined but never used                       @typescript-eslint/no-unused-vars
+  31:45  error    The two values in this comparison do not have a shared enum type  @typescript-eslint/no-unsafe-enum-comparison
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/modules/provider/infrastructure/provider.controller.ts
+  316:3   error    Async method 'listBookings' has no 'await' expression  @typescript-eslint/require-await
+  317:16  warning  'req' is defined but never used                        @typescript-eslint/no-unused-vars
+  318:23  warning  'eventId' is defined but never used                    @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/src/scripts/seed.ts
+  1:10  warning  'DataSource' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/events.e2e-spec.ts
+   9:7  warning  'organizerId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  94:9  warning  'eventId' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/finance.e2e-spec.ts
+  10:7  warning  'walletId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/ownership.e2e-spec.ts
+   9:7  warning  'organizerId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  11:7  warning  'otherDjId' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+/Users/domoblock/Documents/Proycts-dev/experience-core/backend/test/provider.e2e-spec.ts
+  11:7  warning  'organizerId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+✖ 22 problems (5 errors, 17 warnings)
+

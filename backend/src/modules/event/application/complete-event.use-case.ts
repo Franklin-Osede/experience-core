@@ -9,7 +9,7 @@ import { EventRepository } from '../domain/event.repository';
 import { EventStatus } from '../domain/event-status.enum';
 import { UserRole } from '../../identity/domain/user-role.enum';
 // Helper function to safely access entity props
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 function getEventProps(event: any): any {
   return event.props;
 }
@@ -53,11 +53,11 @@ export class CompleteEventUseCase {
     }
 
     // Use reflection to set status directly (since there's no complete() method yet)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     const mutableProps = getEventProps(event);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
     mutableProps.status = EventStatus.COMPLETED;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
     mutableProps.updatedAt = new Date();
 
     await this.eventRepository.save(event);

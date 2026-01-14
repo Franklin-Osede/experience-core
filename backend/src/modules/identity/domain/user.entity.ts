@@ -21,6 +21,9 @@ export interface UserProps {
   preferredGenres?: EventGenre[]; // User's preferred music genres
   createdAt: Date;
   updatedAt: Date;
+  // WebAuthn
+  currentChallenge?: string;
+  authenticators?: any[]; // Simplified for now, will strict type later
 }
 
 export class User extends Entity<UserProps> {
@@ -101,6 +104,8 @@ export class User extends Entity<UserProps> {
       preferredGenres: props.preferredGenres,
       createdAt: props.createdAt,
       updatedAt: props.updatedAt,
+      currentChallenge: props.currentChallenge,
+      authenticators: props.authenticators,
     });
   }
 
@@ -244,5 +249,27 @@ export class User extends Entity<UserProps> {
 
   get preferredGenres(): EventGenre[] | undefined {
     return this.props.preferredGenres;
+  }
+
+  // WebAuthn Methods
+  public setChallenge(challenge: string | undefined): void {
+    this.props.currentChallenge = challenge;
+    this.props.updatedAt = new Date();
+  }
+
+  public get currentChallenge(): string | undefined {
+    return this.props.currentChallenge;
+  }
+
+  public addAuthenticator(authenticator: any): void {
+    if (!this.props.authenticators) {
+      this.props.authenticators = [];
+    }
+    this.props.authenticators.push(authenticator);
+    this.props.updatedAt = new Date();
+  }
+
+  public get authenticators(): any[] {
+    return this.props.authenticators || [];
   }
 }

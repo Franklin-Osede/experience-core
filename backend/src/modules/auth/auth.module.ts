@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { AuthWebAuthnController } from './auth.webauthn.controller';
+
 import { IdentityModule } from '../identity/identity.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
@@ -36,7 +38,8 @@ import * as jwt from 'jsonwebtoken';
     }),
   ],
   providers: [AuthService, JwtStrategy, CreateUserUseCase],
-  controllers: [AuthController],
+  controllers: [AuthController, AuthWebAuthnController],
+
   exports: [AuthService],
 })
 export class AuthModule {}

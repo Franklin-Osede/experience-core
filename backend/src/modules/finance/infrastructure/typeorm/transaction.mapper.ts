@@ -7,7 +7,7 @@ import { Money } from '../../../../shared/domain/money.vo';
 export class TransactionMapper {
   static toPersistence(domain: Transaction): TransactionEntity {
     const entity = new TransactionEntity();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const props: any = (domain as any).props;
 
     entity.id = domain.id;
