@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class Login {
 
   constructor(
     private apiService: ApiService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -117,5 +119,39 @@ export class Login {
   onGoogleLogin(): void {
     // TODO: Implementar login con Google
     console.log('Google login clicked');
+  }
+
+  async onBiometricLogin() {
+    if (!this.email()) {
+      alert('Please enter your email to login with Passkey');
+      return;
+    }
+    
+    try {
+      this.isLoading.set(true);
+      // Dynamic import to avoid SSR issues if any, though not strict here
+      const { startAuthentication } = await import('@simplewebauthn/browser');
+      
+      const options = await this.authService.getLoginOptions(this.email()).toPromise();
+      const authResp = await startAuthentication(options);
+      
+      const verificationResp = await this.authService.verifyLogin(authResp).toPromise();
+      
+      if (verificationResp && (verificationResp.verified || verificationResp.access_token)) {
+        console.log('Biometric login success');
+         // If token is handled in service map, good. Otherwise set here if needed.
+         if(verificationResp.access_token) {
+             localStorage.setItem('access_token', verificationResp.access_token);
+         }
+        this.router.navigate(['/role-selection']);
+      } else {
+        alert('Biometric login failed');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Authentication failed or cancelled');
+    } finally {
+      this.isLoading.set(false);
+    }
   }
 }

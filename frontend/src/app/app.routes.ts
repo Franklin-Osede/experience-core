@@ -37,4 +37,12 @@ export const routes: Routes = [
     path: 'onboarding/provider',
     loadComponent: () => import('./onboarding/provider/provider').then(m => m.OnboardingProviderComponent), 
   },
+  {
+    path: 'settings/security',
+    loadComponent: () => import('./settings/security/security.component').then(m => m.SecuritySettingsComponent),
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./profile/profile.component').then(m => m.UserProfileComponent),
+  },
 ];

@@ -1,0 +1,95 @@
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden max-w-[430px] mx-auto shadow-2xl">
+  <!-- TopAppBar -->
+  <div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-50 backdrop-blur-md bg-opacity-80">
+    <div class="text-primary flex size-12 shrink-0 items-center cursor-pointer" routerLink="/profile"> <!-- Added routerLink -->
+      <span class="material-symbols-outlined text-[28px]">arrow_back_ios_new</span>
+    </div>
+    <h2 class="text-black dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12 font-display">Security</h2>
+  </div>
+
+  <!-- Feedback Notification (Toast) -->
+  <div class="px-4 pt-4" *ngIf="message">
+    <div [ngClass]="{'success-toast': isSuccess, 'bg-red-500/10 border-l-4 border-red-500': !isSuccess}" class="p-4 rounded-lg flex items-center gap-3 animate-pulse">
+      <span class="material-symbols-outlined" [ngClass]="{'text-primary': isSuccess, 'text-red-500': !isSuccess}">
+        {{ isSuccess ? 'check_circle' : 'error' }}
+      </span>
+      <p class="text-sm font-medium text-black dark:text-white">{{ message }}</p>
+    </div>
+  </div>
+
+  <!-- SectionHeader: Authentication -->
+  <div class="flex flex-col">
+    <h2 class="text-black dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-8 font-display">Authentication</h2>
+    <p class="px-4 text-[#cbad90] text-sm mb-4 font-display">Secure your access to exclusive nightlife experiences.</p>
+  </div>
+
+  <!-- ListItem: Biometric Login Toggle -->
+  <div class="flex items-center gap-4 bg-background-light dark:bg-background-dark px-4 min-h-[88px] py-3 justify-between border-b border-primary/10">
+    <div class="flex items-center gap-4">
+      <div class="text-primary flex items-center justify-center rounded-xl bg-primary/10 shrink-0 size-14 shadow-inner">
+        <span class="material-symbols-outlined text-[32px]">fingerprint</span>
+      </div>
+      <div class="flex flex-col justify-center">
+        <p class="text-black dark:text-white text-base font-semibold leading-normal font-display">Biometric Login</p>
+        <p class="text-[#cbad90] text-xs font-normal leading-normal line-clamp-2 font-display">Use FaceID or TouchID for instant, secure access</p>
+      </div>
+    </div>
+    <div class="shrink-0">
+      <label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-[#493622] p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-300">
+        <div class="h-full w-[27px] rounded-full bg-white shadow-lg"></div>
+        <input type="checkbox" class="invisible absolute" (change)="toggleBiometric($event)" />
+      </label>
+    </div>
+  </div>
+
+  <!-- Additional Action for Setup -->
+  <div class="px-4 py-4">
+    <button (click)="registerPasskey()" class="w-full bg-primary text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-transform font-display text-base">
+      <span class="material-symbols-outlined">add_moderator</span>
+      Register New Passkey
+    </button>
+  </div>
+
+  <!-- SectionHeader: Registered Devices -->
+  <div class="flex flex-col mt-4">
+    <h2 class="text-black dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 font-display">Registered Devices</h2>
+  </div>
+
+  <!-- ListItem: iPhone 15 Pro (MOCK) -->
+  <div class="flex items-center gap-4 bg-background-light dark:bg-background-dark px-4 min-h-[72px] py-2 justify-between group">
+    <div class="flex items-center gap-4">
+      <div class="text-white flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+        <span class="material-symbols-outlined text-primary">smartphone</span>
+      </div>
+      <div class="flex flex-col justify-center">
+        <div class="flex items-center gap-2">
+          <p class="text-black dark:text-white text-base font-medium leading-normal line-clamp-1 font-display">This Device</p>
+          <span class="px-2 py-0.5 bg-primary/20 text-primary text-[10px] uppercase font-bold rounded font-display">Current</span>
+        </div>
+        <p class="text-[#cbad90] text-sm font-normal leading-normal line-clamp-2 font-display">Biometric enabled</p>
+      </div>
+    </div>
+    <div class="shrink-0 flex items-center gap-3">
+       <!-- Mock Delete -->
+    </div>
+  </div>
+
+  <div class="h-[1px] mx-4 bg-primary/10"></div>
+
+
+  <!-- Empty Placeholder Visual (Subtle) -->
+  <div class="px-4 mt-8 flex flex-col items-center justify-center py-10 opacity-30 border-2 border-dashed border-primary/20 rounded-xl mx-4 mb-8">
+    <span class="material-symbols-outlined text-5xl mb-2 text-primary">verified_user</span>
+    <p class="text-center text-sm font-display text-white">Hardware-level encryption enabled for all sessions.</p>
+  </div>
+
+  <!-- Security Footer Info -->
+  <div class="px-8 pb-10 text-center">
+    <p class="text-[#cbad90] text-[11px] leading-relaxed font-display">
+      Your biometric data never leaves your device. We use industry-standard WebAuthn protocols to ensure your private experiences remain truly private.
+    </p>
+  </div>
+
+  <!-- Bottom Safe Area Spacer for iOS -->
+  <div class="h-10 bg-background-light dark:bg-background-dark"></div>
+</div>

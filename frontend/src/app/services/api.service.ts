@@ -40,6 +40,12 @@ export class ApiService {
     });
   }
 
+  getInvites(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users/me/invites`, {
+      headers: this.getHeaders(),
+    });
+  }
+
   updateProfile(data: {
     phoneNumber?: string;
     preferredGenres?: string[];

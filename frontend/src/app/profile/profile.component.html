@@ -1,0 +1,144 @@
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden bg-[#221910] text-white font-display">
+  <!-- Loading State -->
+  <div *ngIf="isLoading()" class="absolute inset-0 z-[100] flex items-center justify-center bg-[#221910]">
+    <p class="text-primary animate-pulse">Cargando Perfil...</p>
+  </div>
+
+  <!-- Top App Bar -->
+  <div class="sticky top-0 z-50 flex items-center bg-[#221910]/80 backdrop-blur-md px-4 py-4 justify-between border-b border-white/5">
+    <!-- Left Spacer for centering -->
+    <div class="w-10"></div>
+    
+    <!-- Centered Group: Back Arrow + Title -->
+    <div class="flex items-center gap-3 cursor-pointer" routerLink="/home">
+       <span class="material-symbols-outlined text-white/80">arrow_back_ios_new</span>
+       <h2 class="text-white text-lg font-bold leading-tight tracking-tight">Mi Perfil</h2>
+    </div>
+
+    <!-- Right Icon (Settings/More) -->
+    <div class="flex size-10 items-center justify-end">
+      <button class="flex cursor-pointer items-center justify-center rounded-full h-10 w-10 hover:bg-white/5 text-white">
+        <span class="material-symbols-outlined">more_horiz</span>
+      </button>
+    </div>
+  </div>
+
+  <main class="max-w-md mx-auto pb-12 w-full">
+    <!-- Profile Header -->
+    <div class="flex p-6 flex-col items-center">
+      <div class="relative">
+        <!-- Avatar -->
+        <div class="flex items-center justify-center rounded-full w-32 h-32 border-2 border-primary bg-surface-dark text-primary text-4xl font-bold uppercase shadow-lg shadow-black/40">
+           {{ user()?.email?.substring(0,2) || 'AN' }}
+        </div>
+        <!-- Badge -->
+        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-primary px-3 py-1 rounded-full shadow-lg">
+          <p class="text-black text-[10px] font-black tracking-widest leading-tight uppercase">{{ user()?.role === 'FAN' ? 'MIEMBRO' : user()?.role || 'MIEMBRO' }}</p>
+        </div>
+      </div>
+      <div class="mt-6 flex flex-col items-center text-center">
+        <h1 class="text-white text-3xl font-bold tracking-tight">
+           {{ user()?.firstName || 'Usuario' }}
+        </h1>
+        <p class="text-white/40 text-sm font-medium mt-1">{{ user()?.email }}</p>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="flex flex-wrap gap-3 px-6 py-4">
+      <div class="flex min-w-[100px] flex-1 flex-col gap-1 rounded-xl border border-white/5 bg-surface-dark p-4 items-center text-center shadow-lg">
+        <p class="text-white text-2xl font-bold leading-tight">{{ user()?.eventsAttended || 0 }}</p>
+        <p class="text-white/40 text-xs font-semibold uppercase tracking-wider">Eventos</p>
+      </div>
+      
+      <!-- Highlighted Stat: inviteCredits > 0 -->
+      <div 
+        class="flex min-w-[100px] flex-1 flex-col gap-1 rounded-xl p-4 items-center text-center shadow-lg transition-colors duration-300"
+        [ngClass]="{'border border-primary/30 bg-primary/10': invites().inviteCredits > 0, 'border border-white/5 bg-surface-dark': invites().inviteCredits <= 0}"
+      >
+        <p class="text-2xl font-bold leading-tight" [ngClass]="{'text-primary': invites().inviteCredits > 0, 'text-white': invites().inviteCredits <= 0}">
+          {{ invites().inviteCredits === -1 ? '∞' : invites().inviteCredits }}
+        </p>
+        <p class="text-xs font-semibold uppercase tracking-wider" [ngClass]="{'text-primary/70': invites().inviteCredits > 0, 'text-white/40': invites().inviteCredits <= 0}">
+          Invites
+        </p>
+      </div>
+
+      <div class="flex min-w-[100px] flex-1 flex-col gap-1 rounded-xl border border-white/5 bg-surface-dark p-4 items-center text-center shadow-lg">
+        <p class="text-white text-2xl font-bold leading-tight">Oro</p>
+        <p class="text-white/40 text-xs font-semibold uppercase tracking-wider">Nivel</p>
+      </div>
+    </div>
+
+    <!-- Section Header -->
+    <h3 class="text-white/40 text-xs font-bold uppercase tracking-[0.15em] px-6 pb-2 pt-8">Gestión de Cuenta</h3>
+
+    <!-- Action Menu -->
+    <div class="px-6 space-y-3 mt-2">
+      <!-- My Tickets -->
+      <div class="flex items-center gap-4 bg-surface-dark border border-white/5 p-4 rounded-xl cursor-pointer active:scale-[0.98] transition-all hover:bg-white/5" routerLink="/tickets">
+        <div class="text-primary flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+          <span class="material-symbols-outlined">confirmation_number</span>
+        </div>
+        <div class="flex-1">
+          <p class="text-white text-base font-semibold">Mis Entradas</p>
+          <p class="text-white/40 text-xs">Ver pases para próximos eventos</p>
+        </div>
+        <div class="text-white/20 shrink-0">
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+      </div>
+
+      <!-- Wallet -->
+      <div class="flex items-center gap-4 bg-surface-dark border border-white/5 p-4 rounded-xl cursor-pointer active:scale-[0.98] transition-all hover:bg-white/5" routerLink="/finance/wallet">
+        <div class="text-primary flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+          <span class="material-symbols-outlined">account_balance_wallet</span>
+        </div>
+        <div class="flex-1">
+          <p class="text-white text-base font-semibold">Billetera</p>
+          <p class="text-white/40 text-xs">Pagos y créditos de membresía</p>
+        </div>
+        <div class="text-white/20 shrink-0">
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+      </div>
+
+      <!-- Invite Friends -->
+      <div class="flex items-center gap-4 bg-surface-dark border border-white/5 p-4 rounded-xl cursor-pointer active:scale-[0.98] transition-all hover:bg-white/5" routerLink="/profile/invite">
+        <div class="text-primary flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+          <span class="material-symbols-outlined">person_add</span>
+        </div>
+        <div class="flex-1">
+          <p class="text-white text-base font-semibold">Invitar Amigos</p>
+          <p class="text-white/40 text-xs">Comparte tu acceso exclusivo</p>
+        </div>
+        <div class="text-white/20 shrink-0">
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+      </div>
+
+      <!-- Security Settings -->
+      <div class="flex items-center gap-4 bg-surface-dark border border-white/5 p-4 rounded-xl cursor-pointer active:scale-[0.98] transition-all hover:bg-white/5" routerLink="/settings/security">
+        <div class="text-primary flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+          <span class="material-symbols-outlined">shield</span>
+        </div>
+        <div class="flex-1">
+          <p class="text-white text-base font-semibold">Seguridad</p>
+          <p class="text-white/40 text-xs">Privacidad, Biometría y Acceso</p>
+        </div>
+        <div class="text-white/20 shrink-0">
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="mt-12 px-6 flex flex-col items-center gap-6">
+      <button (click)="logout()" class="flex items-center justify-center gap-2 text-red-500 hover:text-red-400 font-medium text-sm py-3 px-8 rounded-full border border-red-500/20 w-full transition-colors hover:bg-red-500/10 active:scale-[0.98]">
+        <span class="material-symbols-outlined text-lg">logout</span>
+        Cerrar Sesión
+      </button>
+      <p class="text-white/20 text-[10px] uppercase tracking-widest font-medium">Noir v2.4.0 — Acceso Privado</p>
+    </div>
+  </main>
+</div>

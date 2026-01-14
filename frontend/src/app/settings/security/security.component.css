@@ -1,0 +1,6 @@
+/* Merged styles from user provided HTML */
+.success-toast {
+  border-left: 4px solid #f48c25;
+  background: rgba(244, 140, 37, 0.1);
+}
+/* Tailwind is available globally, but we can add specific overrides here if needed */
