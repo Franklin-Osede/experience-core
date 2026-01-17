@@ -66,7 +66,7 @@ export class OnboardingDjComponent {
       equipment: this.selectedEquipment(),
       vibe: this.selectedVibe()
     });
-    // Todo: Navigate to next step or dashboard
-    // this.router.navigate(['/dashboard']); 
+    // Navegar a Home después de completar onboarding
+    this.router.navigate(['/home']); 
   }
 }

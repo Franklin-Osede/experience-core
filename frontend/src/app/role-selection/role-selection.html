@@ -1,197 +1,152 @@
 <!-- Main Container -->
-<div class="relative flex flex-col flex-grow w-full max-w-md mx-auto px-4 pb-6 min-h-screen">
-  <!-- Top Navigation -->
-  <header class="flex items-center justify-between py-6">
-    <button
-      (click)="goBack()"
-      class="flex items-center justify-center size-10 rounded-full hover:bg-white/5 transition-colors text-white/80 hover:text-white"
-    >
-      <span class="material-symbols-outlined" style="font-size: 24px">arrow_back_ios_new</span>
-    </button>
-    <h2 class="text-lg font-bold tracking-tight text-white/90">Role Selection</h2>
-    <div class="size-10"></div>
-    <!-- Spacer for centering -->
-  </header>
+<div class="fixed inset-0 bg-[#0a0a0a] -z-50 pointer-events-none"></div>
+<div class="fixed inset-0 bg-cover bg-center opacity-5 pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBlAd_CeIe91e3On2Vf7QlcspM4x7-eAVsLGivA7M0lTVDaC78TU-cxs6W8XL4lG9lDHPyvitYw1Pk8NDQMvpcSwxt-OSBCyjVoZyyN9lfAcHPK94P2WFfDpRsku_xRRpWQFadUODq8IvZkakgtKk4m-Mj7OmCyJL3JavjFpKH7SjUwNgAd6bY-7lZ1k3sSr7Nf033Vw9r4ZxBi1JBooBONGCY9OxSO4VUlbJcChYF5ryGmhzUSY_4-ex8EeLjyLGJKHol1Ox-4bIT2');"></div>
 
-  <!-- Progress Indicators -->
-  <div class="flex w-full flex-row items-center justify-center gap-3 pb-8">
-    <div class="h-1.5 w-8 rounded-full bg-primary shadow-[0_0_10px_rgba(244,140,37,0.5)]"></div>
-    <div class="h-1.5 w-2 rounded-full bg-surface-border"></div>
-    <div class="h-1.5 w-2 rounded-full bg-surface-border"></div>
-    <div class="h-1.5 w-2 rounded-full bg-surface-border"></div>
+<main class="flex min-h-screen w-full font-sans text-slate-100">
+  
+  <!-- Left Side: Role Selection Form -->
+  <div class="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 lg:p-16 z-10 overflow-y-auto">
+    <div class="max-w-md w-full">
+      
+      <!-- Logo Header -->
+      <div class="flex items-center gap-3 mb-12">
+        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+          <span class="material-icons-round text-white">grid_view</span>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-white">EXPERIENCE CORE</span>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="flex gap-2 mb-8">
+        <div class="h-1.5 w-8 bg-primary rounded-full"></div>
+        <div class="h-1.5 w-1.5 bg-zinc-800 rounded-full"></div>
+        <div class="h-1.5 w-1.5 bg-zinc-800 rounded-full"></div>
+      </div>
+
+      <h1 class="text-4xl font-bold mb-3 text-white">Select Your Role</h1>
+      <p class="text-zinc-400 mb-10">How do you want to experience the night?</p>
+
+      <!-- Roles List -->
+      <div class="space-y-4 mb-10">
+        
+        <!-- FAN -->
+        <label class="block cursor-pointer group" (click)="selectRole('FAN')">
+          <input type="radio" name="role" class="hidden peer" [checked]="selectedRole() === 'FAN'">
+          <div class="flex items-center justify-between p-5 rounded-xl border border-card-border bg-card-dark transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary/5 group-hover:border-primary/50">
+            <div class="flex items-center gap-4">
+              <div class="text-zinc-500 transition-colors peer-checked:text-primary group-hover:text-primary">
+                <span class="material-icons-round text-3xl">person</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg leading-tight uppercase tracking-wide text-white">Fan</h3>
+                <p class="text-sm text-zinc-400">Book tables, find events, and follow artists.</p>
+              </div>
+            </div>
+            <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgm0BrNf9VhqgaQYzDT9Ru3li3oXvlt8HlIO6NFFuLnvkUgFF7QkE14eoWNpvKcC2d1SalWUn-z0PMzr96FCg7U6Bzr8xSNy42peTu42UgvTFC5RrbwfHvS13S1whWW8M6ysIjWDAsW2AWGV1R5mtpBB02fh_pLmA8kXfpXFmf9HisxXyGoR1MC0ifQPI0xY-lUTzq-N5nkolp9JLOiAcZ-6Huy010eD3vz8H0lCR0XrKEahyml2AVzEcaHQoQRrjfqJSKcUWG-mpX" alt="Club crowd" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </label>
+
+        <!-- DJ -->
+        <label class="block cursor-pointer group" (click)="selectRole('DJ')">
+          <input type="radio" name="role" class="hidden peer" [checked]="selectedRole() === 'DJ'">
+          <div class="flex items-center justify-between p-5 rounded-xl border border-card-border bg-card-dark transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary/5 group-hover:border-primary/50">
+            <div class="flex items-center gap-4">
+              <div class="text-zinc-500 transition-colors peer-checked:text-primary group-hover:text-primary">
+                <span class="material-icons-round text-3xl">adjust</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg leading-tight uppercase tracking-wide text-white">DJ</h3>
+                <p class="text-sm text-zinc-400">Manage bookings and showcase your sets.</p>
+              </div>
+            </div>
+            <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnNqSTkzUv4p9r7dDrdiADzv-pH3Vzp6nT7sx_Jb1QHvWquSsTCqA6HtY9Qom_lwGsQ-I4vRmQ0q6aTDltQGKyNJziAzgcPlMCJ0vN_3tsCWkoQFRnp6o74zPeRd2gdpjrRFqvydjomongS4DozuK8m1pgQSc3w-TB-GjT7bR9mlVRjhZFF-UgtvVq49INHya-JR6OfqSl8oVqnW-A6WQuI-Zzs_lMxyEggBHN1IcCCvzLH_RD9ntdjPAzPBje9LHFPeA8nfJde-uf" alt="DJ Decks" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </label>
+
+        <!-- VENUE -->
+        <label class="block cursor-pointer group" (click)="selectRole('VENUE')">
+          <input type="radio" name="role" class="hidden peer" [checked]="selectedRole() === 'VENUE'">
+          <div class="flex items-center justify-between p-5 rounded-xl border border-card-border bg-card-dark transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary/5 group-hover:border-primary/50">
+            <div class="flex items-center gap-4">
+              <div class="text-zinc-500 transition-colors peer-checked:text-primary group-hover:text-primary">
+                <span class="material-icons-round text-3xl">nightlife</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg leading-tight uppercase tracking-wide text-white">Venue</h3>
+                <p class="text-sm text-zinc-400">Manage guestlists and streamline operations.</p>
+              </div>
+            </div>
+            <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhiTvRBqlAOR_UBGAHd3OUaaqSWJG1QBR3MEqTtB1_i5dQiEHttiBY9UQBzp8WwY6hm7aYXOB8Yv3DS8EopFFEyuSXRQ_x0jJ2UA_Zid6I1H_u5HZcNyZJtDqzx8KNQmwOpWAh7Va2qVW1XsuxoQYmdMVtgCZv2C0oAskB0pV6qWJnvSzhS771-aICD2MQlYAlJAV-OnThsNHoaY78B3fE-HkfmJwnLsXo0oH-wG7UF2_Ejb09NsoFv_J46ibBABINeFYGXbMlsSOm" alt="Luxe Venue" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </label>
+
+        <!-- PROVIDER -->
+        <label class="block cursor-pointer group" (click)="selectRole('PROVIDER')">
+          <input type="radio" name="role" class="hidden peer" [checked]="selectedRole() === 'PROVIDER'">
+          <div class="flex items-center justify-between p-5 rounded-xl border border-card-border bg-card-dark transition-all duration-300 peer-checked:border-primary peer-checked:bg-primary/5 group-hover:border-primary/50">
+            <div class="flex items-center gap-4">
+              <div class="text-zinc-500 transition-colors peer-checked:text-primary group-hover:text-primary">
+                <span class="material-icons-round text-3xl">payments</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg leading-tight uppercase tracking-wide text-white">Provider</h3>
+                <p class="text-sm text-zinc-400">Offer premium services like security or catering.</p>
+              </div>
+            </div>
+            <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrIFW0KU2kTzjqEkpcIfD59mbuXo4nz3ufdQzdOjJAhajenTJjPsACp0bBS51Ddj2J-NgcIEeahVcA72HIjG6cXcyOCzD1DlvlLGDEx7zt10nXbqKe8fj_lGhen3is271g4jVZcKAZ79E5xOKB7vl_c_2mtdwD_imbnluYw8M1kgULzQY4CyJ6B3ML-UY7BrCZJDZFCuxZtaROFF67UIJTsI0OIwDqoaP6qT_PaRBWwVa4oZijFbgHW2zopE8anU3tZi3Jrmj-IfbP" alt="Professional Provider" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </label>
+
+      </div>
+
+      <button (click)="onContinue()" class="w-full bg-primary hover:bg-orange-500 text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(244,140,37,0.3)] hover:shadow-[0_0_30px_rgba(244,140,37,0.5)] transition-all duration-300 mb-6">
+          Continue
+      </button>
+
+      <p class="text-center text-zinc-400 text-sm">
+          Already have an account? <a class="text-primary hover:underline font-semibold cursor-pointer" (click)="goBack()">Login</a>
+      </p>
+    </div>
   </div>
 
-  <!-- Headline Section -->
-  <div class="pb-6">
-    <h1 class="text-3xl font-extrabold leading-tight tracking-tight text-white mb-3">
-      Define Your <br /><span class="text-primary">Experience</span>
-    </h1>
-    <p class="text-text-secondary text-base font-medium leading-relaxed">
-      Select your role to unlock the right features and exclusive access.
-    </p>
+  <!-- Right Side: Image Overlay (Desktop Only) -->
+  <div class="hidden lg:block lg:w-1/2 relative overflow-hidden">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuADTR0bJujJWP54-9x8TwEj6sxDoLfcaymR3NVJyEZ3jLWP42jEs5SeNf12l3Tg7KuL9cSUbNSWno4rGHXKjSMOoatrZKbsx45lL2fB5AFOwTMyLC5t_somwcv114h-Tvwfj2_DfMpgYBmuTSXn9I17EKFK6ZQI6U5puDI5Wph4_OznnpTmxgEG3f2NVDriMr0N6G1WzeaSjXjhIWwnlOgSQP7FOBeFWHdfiuFQ4YqdLnXelMMqc7Cl-MuVqkN3TkfYQ3r1ea9gtMYS" alt="High-end nightclub atmosphere" class="absolute inset-0 w-full h-full object-cover">
+    
+    <div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/90 via-transparent to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0a0a]/50"></div>
+    
+    <!-- Light Leak Effect -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] opacity-30"></div>
+    
+    <!-- Floating Card -->
+    <div class="absolute bottom-16 left-16 right-16 bg-[#161412]/85 backdrop-blur-md p-8 rounded-2xl border border-white/10">
+      <div class="flex items-center gap-2 text-primary mb-2">
+        <span class="material-icons-round text-sm">verified</span>
+        <span class="text-xs font-bold uppercase tracking-widest">Premium Invitation Only</span>
+      </div>
+      <h2 class="text-3xl font-bold text-white mb-2 leading-tight">Access the World's Most Exclusive Events.</h2>
+      <p class="text-zinc-300 text-sm leading-relaxed max-w-lg">
+          Experience Core bridges the gap between high-end venues, top-tier talent, and the elite clientele who appreciate the finer details of nightlife.
+      </p>
+      
+      <div class="mt-6 flex gap-4">
+        <div class="flex -space-x-3">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlzM7KqDazVT6EgZZSF3hAWKWQ64KLgka_XkUFFeBm0iWDt9nbmde2hYPRefKheQCH4-YYlIEP0fVF60-ZkzFCwcbaBkYSC_f-HcE1g2aiAk8WytNB3nW8A5WTbR3krjn3LC0gxOKts2wUoGd9GZXGpwwXp8wAOO0Rgnf8KjCRhRJphNERYTrEIMUcyLlPN-YneI5RRnfsGSuvtfdIa0c1um7XkqzLAS5-JEO86aqNj209qK-GhBJDUeAWVMSldW3MpThUvbSjrRiG" alt="User" class="w-8 h-8 rounded-full border-2 border-black">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOfPbwHZUPb5gVZybcToKgZKbDiT_oytJ4jB6NKzxfT7uDgOmO3VedUhkwvMfczWevI4uO2Xl2iurGgdVQj5ArCSzy7kzvxP2ZitJRX8TwthmvRmjPee9sj78Ti8ftDUG1TyEpLn1LCsLJeHphUTAInXNVEUjZkkteJi5lZIQXKvB6ZJacQwE9XDWR1NXsIGAEHt8S2cTp1GV3zAm2LWdNkxlZ7mtGvCphzmB1ls_T_4TjHRupguV5y7SRoAhxamhwHMnuexZsz_Id" alt="User" class="w-8 h-8 rounded-full border-2 border-black">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTkdLsiuBuPqXAsILFtIghjZLyBn-Nwxwaz_Ca8OOApEINV8hblDHgfGLkZEP3NR-b_a1jMB_jUjW3QaXU9kmji3uPS4oir0z5WkOdNbIEH6pyb7MUc3Pfn1ynskyTiEhPPw4x6EgR76w1qt0ppOxi8XAR7U8hdPSQLORYewMhBxW3mMn-MbcQC0rPUo6PkiZVuk6CKha91yhDhs3uvYjfeJads6JFpkI8sEbMoocXXlAB3AUQPIYNCsQq6vpIaqzLkeZluyVnDxdc" alt="User" class="w-8 h-8 rounded-full border-2 border-black">
+        </div>
+        <span class="text-xs text-zinc-400 flex items-center">Join 5,000+ elite members</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Role Selection Cards -->
-  <form class="flex flex-col gap-4 flex-grow">
-    <!-- DJ Card -->
-    <label class="group cursor-pointer relative">
-      <input
-        [checked]="selectedRole() === 'DJ'"
-        (change)="selectRole('DJ')"
-        class="peer sr-only"
-        name="role"
-        type="radio"
-        value="DJ"
-      />
-      <div
-        class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80 peer-checked:[&_.role-main-icon]:bg-primary/20 peer-checked:[&_.role-main-icon]:text-primary peer-checked:[&_.role-circle]:bg-primary peer-checked:[&_.role-circle]:border-primary peer-checked:[&_.role-circle]:scale-110 peer-checked:[&_.role-check-icon]:opacity-100"
-      >
-        <!-- Icon -->
-        <div
-          class="role-main-icon size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300"
-        >
-          <span class="material-symbols-outlined">graphic_eq</span>
-        </div>
-        <!-- Text -->
-        <div class="flex flex-col grow">
-          <span class="text-base font-bold text-white mb-0.5">DJ</span>
-          <span class="text-sm font-medium text-text-secondary">Share music & get booked.</span>
-        </div>
-        <!-- Radio Indicator -->
-        <div
-          class="role-circle size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300"
-        >
-          <span
-            class="role-check-icon material-symbols-outlined text-white text-[14px] opacity-0 transition-opacity duration-200"
-            style="font-variation-settings: 'wght' 700"
-            >check</span
-          >
-        </div>
-      </div>
-    </label>
-
-    <!-- Venue Card -->
-    <label class="group cursor-pointer relative">
-      <input
-        [checked]="selectedRole() === 'VENUE'"
-        (change)="selectRole('VENUE')"
-        class="peer sr-only"
-        name="role"
-        type="radio"
-        value="VENUE"
-      />
-      <div
-        class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80 peer-checked:[&_.role-main-icon]:bg-primary/20 peer-checked:[&_.role-main-icon]:text-primary peer-checked:[&_.role-circle]:bg-primary peer-checked:[&_.role-circle]:border-primary peer-checked:[&_.role-circle]:scale-110 peer-checked:[&_.role-check-icon]:opacity-100"
-      >
-        <div
-          class="role-main-icon size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300"
-        >
-          <span class="material-symbols-outlined">nightlife</span>
-        </div>
-        <div class="flex flex-col grow">
-          <span class="text-base font-bold text-white mb-0.5">Venue</span>
-          <span class="text-sm font-medium text-text-secondary"
-            >Host events & manage guestlists.</span
-          >
-        </div>
-        <div
-          class="role-circle size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300"
-        >
-          <span
-            class="role-check-icon material-symbols-outlined text-white text-[14px] opacity-0 transition-opacity duration-200"
-            style="font-variation-settings: 'wght' 700"
-            >check</span
-          >
-        </div>
-      </div>
-    </label>
-
-    <!-- Provider Card -->
-    <label class="group cursor-pointer relative">
-      <input
-        [checked]="selectedRole() === 'PROVIDER'"
-        (change)="selectRole('PROVIDER')"
-        class="peer sr-only"
-        name="role"
-        type="radio"
-        value="PROVIDER"
-      />
-      <div
-        class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80 peer-checked:[&_.role-main-icon]:bg-primary/20 peer-checked:[&_.role-main-icon]:text-primary peer-checked:[&_.role-circle]:bg-primary peer-checked:[&_.role-circle]:border-primary peer-checked:[&_.role-circle]:scale-110 peer-checked:[&_.role-check-icon]:opacity-100"
-      >
-        <div
-          class="role-main-icon size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300"
-        >
-          <span class="material-symbols-outlined">speaker_group</span>
-        </div>
-        <div class="flex flex-col grow">
-          <span class="text-base font-bold text-white mb-0.5">Provider</span>
-          <span class="text-sm font-medium text-text-secondary"
-            >Sound, light & production services.</span
-          >
-        </div>
-        <div
-          class="role-circle size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300"
-        >
-          <span
-            class="role-check-icon material-symbols-outlined text-white text-[14px] opacity-0 transition-opacity duration-200"
-            style="font-variation-settings: 'wght' 700"
-            >check</span
-          >
-        </div>
-      </div>
-    </label>
-
-    <!-- Fan Card -->
-    <label class="group cursor-pointer relative">
-      <input
-        [checked]="selectedRole() === 'FAN'"
-        (change)="selectRole('FAN')"
-        class="peer sr-only"
-        name="role"
-        type="radio"
-        value="FAN"
-      />
-      <div
-        class="relative flex items-center gap-4 p-4 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-sm transition-all duration-300 peer-checked:border-primary peer-checked:bg-surface-dark peer-checked:shadow-[0_4px_20px_-4px_rgba(244,140,37,0.15)] group-hover:border-surface-border/80 peer-checked:[&_.role-main-icon]:bg-primary/20 peer-checked:[&_.role-main-icon]:text-primary peer-checked:[&_.role-circle]:bg-primary peer-checked:[&_.role-circle]:border-primary peer-checked:[&_.role-circle]:scale-110 peer-checked:[&_.role-check-icon]:opacity-100"
-      >
-        <div
-          class="role-main-icon size-12 shrink-0 rounded-xl bg-[#3a2d22] flex items-center justify-center text-white/80 transition-colors duration-300"
-        >
-          <span class="material-symbols-outlined">celebration</span>
-        </div>
-        <div class="flex flex-col grow">
-          <span class="text-base font-bold text-white mb-0.5">Fan</span>
-          <span class="text-sm font-medium text-text-secondary"
-            >Discover parties & premium access.</span
-          >
-        </div>
-        <div
-          class="role-circle size-6 rounded-full border-2 border-surface-border flex items-center justify-center transition-all duration-300"
-        >
-          <span
-            class="role-check-icon material-symbols-outlined text-white text-[14px] opacity-0 transition-opacity duration-200"
-            style="font-variation-settings: 'wght' 700"
-            >check</span
-          >
-        </div>
-      </div>
-    </label>
-  </form>
-
-  <!-- Footer / Continue Button -->
-  <div
-    class="pt-8 mt-auto sticky bottom-0 bg-gradient-to-t from-background-dark via-background-dark/95 to-transparent pb-4"
-  >
-    <button
-      (click)="onContinue()"
-      [disabled]="!selectedRole()"
-      class="w-full bg-primary hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold h-14 rounded-xl shadow-[0_4px_14px_0_rgba(244,140,37,0.39)] hover:shadow-[0_6px_20px_0_rgba(244,140,37,0.5)] transition-all transform active:scale-[0.98] disabled:transform-none flex items-center justify-center gap-2"
-    >
-      <span>Continue</span>
-      <span class="material-symbols-outlined text-sm font-bold" style="font-size: 18px"
-        >arrow_forward</span
-      >
-    </button>
-  </div>
-</div>
+</main>

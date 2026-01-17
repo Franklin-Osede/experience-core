@@ -1,147 +1,140 @@
-<!-- Background Image - Full Width, Fixed -->
-<div class="fixed inset-0 w-full h-full -z-10">
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#221910]/60 to-[#221910] z-10"></div>
-  <div class="w-full h-full bg-center bg-cover bg-no-repeat" 
-       style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBP5xEuc7oKrmZe7oBvFcY4qhI3pmgUbupuC6Ggwy9ed4epVorWKldjxhLPWn5JZZnzAAdAEVmPU1nyOw2xXXeUMEEYBtAAj3NjZxg54Mel1Vj0qhKXG8nvarXksUvwazUvqheTlFwYJJUzxUgLXSVimbVGHKDOlrDkQ0WKPxmnLinj2qqdE0J8XRnsFEvyrgM5O3fGZd5Xhaji3hBetOjDG4SbuOZzIYHeLnMUJLshO2X5xFtrJFWpYbnAMBSWJf_ci8oPflEukfMf");'>
-  </div>
-</div>
-
-<!-- Content Container - Centered with max width for mobile, full width background -->
-<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden">
-  <!-- Content Wrapper - Max width 480px centered -->
-  <div class="w-full max-w-[480px] mx-auto flex flex-col min-h-screen">
-  <!-- Header Image Section -->
-  <div class="relative w-full h-64 shrink-0">
+<div class="flex min-h-screen w-full bg-[#221910] overflow-hidden">
+  
+  <!-- Left Side: Hero Image (Desktop Only) -->
+  <div class="hidden lg:relative lg:flex lg:w-1/2 bg-black">
+    <div class="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-transparent to-black/80"></div>
+    <div class="absolute inset-0 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBP5xEuc7oKrmZe7oBvFcY4qhI3pmgUbupuC6Ggwy9ed4epVorWKldjxhLPWn5JZZnzAAdAEVmPU1nyOw2xXXeUMEEYBtAAj3NjZxg54Mel1Vj0qhKXG8nvarXksUvwazUvqheTlFwYJJUzxUgLXSVimbVGHKDOlrDkQ0WKPxmnLinj2qqdE0J8XRnsFEvyrgM5O3fGZd5Xhaji3hBetOjDG4SbuOZzIYHeLnMUJLshO2X5xFtrJFWpYbnAMBSWJf_ci8oPflEukfMf");'></div>
+    
     <!-- Branding Overlay -->
-    <div class="absolute bottom-0 left-0 w-full z-20 pb-6 pt-12 bg-gradient-to-t from-[#221910] to-transparent flex flex-col items-center">
-      <h1 class="text-white tracking-widest text-[32px] font-bold leading-tight px-4 text-center uppercase drop-shadow-lg">NOIR</h1>
-      <p class="text-white/80 text-sm font-light leading-normal pt-2 px-4 text-center tracking-wide">Curated House & Afro House Experiences.</p>
+    <div class="relative z-20 flex flex-col justify-between p-12 w-full h-full">
+      <div class="flex items-center gap-3">
+        <span class="text-primary text-2xl">▲</span>
+        <h1 class="text-white font-bold text-xl tracking-widest uppercase">Modern Noir</h1>
+      </div>
+      
+      <div class="max-w-md">
+        <h2 class="text-white text-5xl font-bold leading-tight mb-4">Elevate your nightlife.</h2>
+        <p class="text-white/70 text-lg font-light">Access the most exclusive rooftop events, curated for the modern enthusiast.</p>
+      </div>
     </div>
   </div>
 
-  <!-- Main Content Area -->
-  <div class="flex-1 flex flex-col px-6 pt-2 pb-8">
-    <!-- Segmented Control (Toggle) -->
-    <div class="flex py-6">
-      <div class="flex h-12 flex-1 items-center justify-center rounded-lg bg-surface-dark p-1 border border-white/5">
-        <label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-[4px] px-2 has-[:checked]:bg-[#4a3b2a] has-[:checked]:text-primary text-white/60 text-sm font-medium leading-normal transition-all duration-200 group">
-          <span class="truncate">Member Login</span>
-          <input 
-            [checked]="authMode() === 'login'"
-            (change)="setAuthMode('login')"
-            class="invisible w-0" 
-            name="auth_mode" 
-            type="radio" 
-            value="Login"/>
-        </label>
-        <label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-[4px] px-2 has-[:checked]:bg-[#4a3b2a] has-[:checked]:text-primary text-white/60 text-sm font-medium leading-normal transition-all duration-200 group">
-          <span class="truncate">Apply</span>
-          <input 
-            [checked]="authMode() === 'apply'"
-            (change)="setAuthMode('apply')"
-            class="invisible w-0" 
-            name="auth_mode" 
-            type="radio" 
-            value="Apply"/>
-        </label>
-      </div>
+  <!-- Right Side: Login Form -->
+  <div class="relative w-full lg:w-1/2 flex flex-col items-center justify-center p-6 lg:p-12">
+    
+    <!-- Mobile Background (Only visible on mobile) -->
+    <div class="absolute inset-0 lg:hidden -z-10">
+       <div class="absolute inset-0 bg-[#221910]/80 z-10"></div>
+       <div class="absolute inset-0 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBP5xEuc7oKrmZe7oBvFcY4qhI3pmgUbupuC6Ggwy9ed4epVorWKldjxhLPWn5JZZnzAAdAEVmPU1nyOw2xXXeUMEEYBtAAj3NjZxg54Mel1Vj0qhKXG8nvarXksUvwazUvqheTlFwYJJUzxUgLXSVimbVGHKDOlrDkQ0WKPxmnLinj2qqdE0J8XRnsFEvyrgM5O3fGZd5Xhaji3hBetOjDG4SbuOZzIYHeLnMUJLshO2X5xFtrJFWpYbnAMBSWJf_ci8oPflEukfMf");'></div>
     </div>
 
-    <!-- Login Form -->
-    <div class="flex flex-col gap-5 w-full">
-      <!-- Email Input -->
-      <div class="flex flex-col gap-2">
-        <label class="text-white text-sm font-medium leading-normal">Email Address</label>
-        <div class="relative">
+    <div class="w-full max-w-md space-y-8">
+      
+      <!-- Mobile Header branding -->
+      <div class="lg:hidden text-center mb-8">
+        <h1 class="text-white font-bold text-3xl tracking-widest uppercase mb-2">NOIR</h1>
+        <p class="text-white/60 text-sm">Curated Experiences</p>
+      </div>
+
+      <div class="text-center lg:text-left">
+        <h2 class="text-white text-3xl font-bold mb-2">Join the Night.</h2>
+        <p class="text-white/50 text-sm">Enter your credentials to access exclusive events.</p>
+      </div>
+
+      <!-- Segmented Control (Toggle) -->
+      <div class="flex p-1 bg-surface-dark rounded-lg border border-white/5">
+         <button 
+           class="flex-1 py-2 text-sm font-medium rounded transition-all duration-200"
+           [class.bg-surface-border]="authMode() === 'login'"
+           [class.text-primary]="authMode() === 'login'"
+           [class.text-white]="authMode() !== 'login'"
+           (click)="setAuthMode('login')">
+           Member Login
+         </button>
+         <button 
+           class="flex-1 py-2 text-sm font-medium rounded transition-all duration-200"
+           [class.bg-surface-border]="authMode() === 'apply'"
+           [class.text-primary]="authMode() === 'apply'"
+           [class.text-white]="authMode() !== 'apply'"
+           (click)="setAuthMode('apply')">
+           Apply
+         </button>
+      </div>
+
+      <!-- Form -->
+      <div class="space-y-5">
+        
+        <div class="space-y-2">
+          <label class="text-xs font-bold text-white/60 uppercase tracking-wider">Email Address</label>
           <input 
-            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-white/10 bg-surface-dark focus:border-primary h-12 placeholder:text-white/30 px-4 text-base font-normal leading-normal transition-colors" 
-            placeholder="Enter your email" 
             type="email" 
+            placeholder="name@example.com"
             [value]="email()"
-            (input)="onEmailChange($event)"/>
-          <span class="material-symbols-outlined absolute right-3 top-3 text-white/30 text-[20px]">mail</span>
+            (input)="onEmailChange($event)"
+            class="w-full h-12 bg-surface-dark border border-white/10 rounded-lg px-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors">
         </div>
-      </div>
 
-      <!-- Password Input -->
-      <div class="flex flex-col gap-2">
-        <div class="flex justify-between items-center">
-          <label class="text-white text-sm font-medium leading-normal">Password</label>
-          <a class="text-primary text-xs font-medium hover:text-primary/80 transition-colors" href="#">Forgot Password?</a>
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <label class="text-xs font-bold text-white/60 uppercase tracking-wider">Password</label>
+            <a href="#" class="text-xs text-primary hover:text-primary-dark transition-colors">Forgot Password?</a>
+          </div>
+          <div class="relative">
+            <input 
+              [type]="showPassword() ? 'text' : 'password'"
+              placeholder="Enter your password"
+              [value]="password()"
+              (input)="onPasswordChange($event)"
+              class="w-full h-12 bg-surface-dark border border-white/10 rounded-lg px-4 text-white placeholder:text-white/20 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors">
+            <button 
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors">
+              <span class="material-symbols-outlined text-[20px]">{{ showPassword() ? 'visibility' : 'visibility_off' }}</span>
+            </button>
+          </div>
         </div>
-        <div class="relative">
-          <input 
-            [type]="showPassword() ? 'text' : 'password'"
-            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-white/10 bg-surface-dark focus:border-primary h-12 placeholder:text-white/30 px-4 text-base font-normal leading-normal transition-colors" 
-            placeholder="Enter your password" 
-            [value]="password()"
-            (input)="onPasswordChange($event)"/>
-          <!-- FaceID / Eye Icon -->
-          <button 
-            type="button"
-            (click)="togglePasswordVisibility()"
-            class="absolute right-3 top-3 text-white/30 hover:text-primary transition-colors flex items-center justify-center">
-            <span class="material-symbols-outlined text-[20px]">{{ showPassword() ? 'visibility' : 'face' }}</span>
-          </button>
+
+        <div class="flex items-center gap-2">
+           <div class="w-5 h-5 rounded border border-white/20 bg-surface-dark flex items-center justify-center cursor-pointer hover:border-primary transition-colors">
+             <!-- Checkbox placeholder -->
+           </div>
+           <span class="text-sm text-white/60">Remember for 30 days</span>
         </div>
-      </div>
 
-      <!-- Primary Action Button -->
-      <button 
-        (click)="onSubmit()"
-        [disabled]="isLoading() || !canSubmit()"
-        class="w-full h-12 mt-2 bg-primary hover:bg-[#ff9500] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-[0_0_15px_rgba(244,140,37,0.3)] hover:shadow-[0_0_20px_rgba(255,149,0,0.5)] flex items-center justify-center gap-2 transition-all transform active:scale-[0.98] disabled:transform-none">
-        <span>Enter Club</span>
-        <span class="material-symbols-outlined text-sm">arrow_forward</span>
-      </button>
-
-      <!-- Biometric Login Button -->
-      <button 
-        (click)="onBiometricLogin()"
-        class="w-full h-12 bg-[#2a2a2a] hover:bg-[#333] border border-white/10 text-white font-medium rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
-        <span class="material-symbols-outlined text-primary text-[20px]">fingerprint</span>
-        <span>Sign in with FaceID / TouchID</span>
-      </button>
-
-      <!-- Divider -->
-      <div class="flex items-center gap-4 py-2">
-        <div class="h-px flex-1 bg-white/10"></div>
-        <span class="text-white/40 text-xs font-medium">OR</span>
-        <div class="h-px flex-1 bg-white/10"></div>
-      </div>
-
-      <!-- Social Auth -->
-      <div class="flex flex-col gap-3">
         <button 
-          (click)="onAppleLogin()"
-          class="w-full h-12 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-lg flex items-center justify-center gap-3 transition-colors">
-          <svg class="h-5 w-5 fill-current text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z"></path>
-          </svg>
-          <span class="text-sm">Continue with Apple</span>
+          (click)="onSubmit()"
+          class="w-full h-12 bg-primary hover:bg-primary-dark text-black font-bold rounded-full shadow-[0_0_20px_rgba(244,140,37,0.3)] hover:shadow-[0_0_30px_rgba(244,140,37,0.5)] transition-all active:scale-[0.98]">
+          Login
         </button>
+
+        <div class="flex items-center gap-4">
+           <div class="h-px flex-1 bg-white/10"></div>
+           <span class="text-xs font-bold text-white/30 uppercase tracking-widest">or continue with</span>
+           <div class="h-px flex-1 bg-white/10"></div>
+        </div>
+
         <button 
-          (click)="onGoogleLogin()"
-          class="w-full h-12 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-lg flex items-center justify-center gap-3 transition-colors">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
-          </svg>
-          <span class="text-sm">Continue with Google</span>
+          (click)="onBiometricLogin()"
+          class="w-full h-12 bg-surface-dark hover:bg-[#36291d] border border-white/10 text-white font-medium rounded-full flex items-center justify-center gap-2 transition-colors">
+          <span class="material-symbols-outlined text-[20px]">fingerprint</span>
+          Biometric Login
         </button>
       </div>
-    </div>
 
-    <!-- Footer Trust Signal -->
-    <div class="mt-auto pt-8 flex flex-col items-center justify-center gap-2 text-center opacity-60">
-      <div class="flex items-center gap-1">
-        <span class="material-symbols-outlined text-[16px] text-primary">lock</span>
-        <p class="text-[10px] uppercase tracking-widest text-white/80">Encrypted & Private</p>
+      <div class="text-center">
+        <span class="text-white/50 text-sm">Don't have an account? </span>
+        <a href="#" class="text-primary font-bold hover:text-primary-dark transition-colors">Sign Up</a>
       </div>
-      <p class="text-[10px] text-white/40">Private Membership. Invite Only.</p>
+
+      <!-- Footer Links -->
+      <div class="flex justify-center gap-6 pt-8">
+        <a href="#" class="text-[10px] font-bold text-white/30 uppercase tracking-widest hover:text-white transition-colors">English</a>
+        <a href="#" class="text-[10px] font-bold text-white/30 uppercase tracking-widest hover:text-white transition-colors">Privacy</a>
+        <a href="#" class="text-[10px] font-bold text-white/30 uppercase tracking-widest hover:text-white transition-colors">Terms</a>
+        <a href="#" class="text-[10px] font-bold text-white/30 uppercase tracking-widest hover:text-white transition-colors">Support</a>
+      </div>
+
     </div>
-  </div>
   </div>
 </div>

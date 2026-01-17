@@ -45,4 +45,28 @@ export const routes: Routes = [
     path: 'profile',
     loadComponent: () => import('./profile/profile.component').then(m => m.UserProfileComponent),
   },
+  {
+    path: 'home',
+    loadComponent: () => import('./home/home').then(m => m.HomeComponent),
+  },
+  {
+    path: 'events',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'explore',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'saved',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'tickets',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
 ];

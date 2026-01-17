@@ -1,0 +1,248 @@
+<div class="min-h-screen bg-[#1a140e] text-white font-sans selection:bg-primary selection:text-black">
+
+  <!-- Desktop Grid Layout -->
+  <div class="lg:grid lg:grid-cols-[240px_1fr_320px] lg:gap-8 lg:max-w-[1600px] lg:mx-auto lg:h-screen lg:overflow-hidden">
+
+    <!-- LEFT SIDEBAR (Desktop Only) -->
+    <aside class="hidden lg:flex flex-col py-8 px-6 border-r border-white/5 bg-[#1a140e]">
+      <!-- Logo -->
+      <div class="flex items-center gap-3 mb-10">
+        <span class="text-primary text-2xl">▲</span>
+        <h1 class="text-xl font-bold tracking-[0.2em] uppercase">NoirPulse</h1>
+      </div>
+
+      <!-- Nav Links -->
+      <nav class="flex flex-col gap-2 space-y-1">
+        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl bg-white/5 text-primary font-medium transition-all group">
+          <span class="material-symbols-outlined">home</span>
+          <span>Home</span>
+        </a>
+        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all group">
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform">explore</span>
+          <span>Explore</span>
+        </a>
+        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all group">
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform">confirmation_number</span>
+          <span>Tickets</span>
+        </a>
+        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all group">
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform">bookmark_border</span>
+          <span>Saved</span>
+        </a>
+        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-all group">
+           <div class="relative">
+             <span class="material-symbols-outlined group-hover:scale-110 transition-transform">notifications</span>
+             <span class="absolute top-0 right-0 size-2 bg-red-500 rounded-full border border-[#1a140e]"></span>
+           </div>
+          <span>Notifications</span>
+        </a>
+      </nav>
+
+      <!-- User Profile (Bottom) -->
+      <div class="mt-auto pt-6 border-t border-white/5">
+        <button class="flex items-center gap-3 w-full p-2 hover:bg-white/5 rounded-xl transition-colors text-left">
+          <div class="size-10 rounded-full bg-gradient-to-tr from-primary to-[#ffcea0] p-[2px]">
+            <img src="https://i.pravatar.cc/150?u=domoblock" alt="User" class="w-full h-full rounded-full object-cover border border-[#1a140e]">
+          </div>
+          <div class="flex-1 overflow-hidden">
+            <h4 class="text-sm font-bold truncate">Domo Block</h4>
+            <p class="text-xs text-white/40 truncate">Fan Member</p>
+          </div>
+          <span class="material-symbols-outlined text-white/40">more_vert</span>
+        </button>
+      </div>
+    </aside>
+
+
+    <!-- CENTER FEED (Scrollable) -->
+    <main class="flex flex-col h-full overflow-y-auto no-scrollbar relative lg:pt-8 lg:pb-20">
+      
+      <!-- Mobile Header (Hidden on Desktop) -->
+      <header class="lg:hidden sticky top-0 z-50 bg-[#1a140e]/80 backdrop-blur-md border-b border-white/5 px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">grain</span>
+          <h1 class="font-bold tracking-widest uppercase text-sm">Core</h1>
+        </div>
+        <div class="flex items-center gap-4">
+          <button (click)="onSearch()"><span class="material-symbols-outlined">search</span></button>
+          <button (click)="onNotifications()"><span class="material-symbols-outlined">notifications_none</span></button>
+        </div>
+      </header>
+
+      <!-- Feed Content -->
+      <div class="px-4 lg:px-0 space-y-8 pb-24 lg:pb-0">
+
+        <!-- Featured Carousel (Desktop Enhanced) -->
+        @if (featuredEvent()) {
+          <section class="relative w-full aspect-[4/5] lg:aspect-[21/9] rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-primary/5" (click)="onEventClick(featuredEvent()!.id)">
+            <!-- Image -->
+            <img 
+              [src]="featuredEvent()!.imageUrl" 
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            >
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90"></div>
+            
+            <!-- Content -->
+            <div class="absolute bottom-0 left-0 w-full p-6 lg:p-10 flex flex-col items-start gap-4">
+              <span class="bg-primary text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Selling Fast</span>
+              
+              <div class="max-w-2xl">
+                <h2 class="text-3xl lg:text-5xl font-extrabold leading-tight mb-2 text-white">{{ featuredEvent()!.title }}</h2>
+                <div class="flex items-center gap-4 text-white/80 text-sm lg:text-base">
+                  <span class="flex items-center gap-1"><span class="material-symbols-outlined text-primary text-[18px]">calendar_today</span> {{ formatTime(featuredEvent()!.startTime) }}</span>
+                  <span class="flex items-center gap-1"><span class="material-symbols-outlined text-primary text-[18px]">location_on</span> {{ featuredEvent()!.venue }}</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 mt-2 w-full lg:w-auto">
+                <button 
+                  class="flex-1 lg:flex-none bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition-colors"
+                  (click)="onBookAccess(featuredEvent()!.id); $event.stopPropagation()">
+                  Book Access
+                </button>
+                <button class="size-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-sm">
+                   <span class="material-symbols-outlined">bookmark_border</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        }
+
+        <!-- Tribes Section (Horizontal Scroll) -->
+        <section>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold">Your Tribes</h3>
+            <button class="text-primary text-sm font-medium hover:underline" (click)="onSeeAllTribes()">See All</button>
+          </div>
+          <div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+            @for (tribe of tribes(); track tribe.id) {
+              <div class="flex flex-col items-center gap-2 cursor-pointer group min-w-[70px]" (click)="onTribeClick(tribe.id)">
+                <div class="size-[70px] rounded-full p-[2px] transition-all duration-300" [class.bg-gradient-to-tr]="tribe.isActive" [class.from-primary]="tribe.isActive" [class.to-purple-500]="tribe.isActive" [class.grayscale]="!tribe.isActive" [class.group-hover:grayscale-0]="!tribe.isActive">
+                  <img [src]="tribe.imageUrl" class="w-full h-full rounded-full object-cover border-2 border-[#1a140e]">
+                </div>
+                <span class="text-xs font-medium text-white/60 group-hover:text-white transition-colors truncate w-full text-center">{{ tribe.name }}</span>
+              </div>
+            }
+             <!-- Discover Tribe Button -->
+             <div class="flex flex-col items-center gap-2 cursor-pointer group min-w-[70px]">
+                <div class="size-[70px] rounded-full border border-dashed border-white/30 flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors">
+                  <span class="material-symbols-outlined">add</span>
+                </div>
+                <span class="text-xs font-medium text-white/40">Discover</span>
+             </div>
+          </div>
+        </section>
+
+        <!-- Events Grid (Weekend) -->
+        <section>
+          <h3 class="text-lg font-bold mb-4">Happening This Weekend</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+             @for (event of weekendEvents(); track event.id) {
+               <div class="bg-white/[0.03] hover:bg-white/[0.06] border border-white/5 rounded-2xl p-3 flex gap-4 transition-all cursor-pointer group" (click)="onEventClick(event.id)">
+                 <!-- Image Date -->
+                 <div class="relative w-24 h-24 shrink-0 rounded-xl overflow-hidden">
+                   <img [src]="event.imageUrl" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500">
+                   <div class="absolute inset-0 bg-black/20"></div>
+                   <div class="absolute top-1 left-1 bg-black/60 backdrop-blur-sm rounded-lg px-2 py-1 flex flex-col items-center">
+                     <span class="text-[10px] font-bold uppercase text-white/60">{{ formatDate(event.startTime).month }}</span>
+                     <span class="text-sm font-bold text-white">{{ formatDate(event.startTime).day }}</span>
+                   </div>
+                 </div>
+
+                 <!-- Info -->
+                 <div class="flex flex-col justify-between py-1 flex-1">
+                   <div>
+                     <h4 class="font-bold text-white leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">{{ event.title }}</h4>
+                     <p class="text-xs text-white/50 flex items-center gap-1">
+                       <span class="material-symbols-outlined text-[14px]">location_on</span>
+                       {{ event.venue }}
+                     </p>
+                   </div>
+                   <div class="flex items-center justify-between mt-2">
+                      <span class="text-sm font-bold text-white">{{ formatPrice(event.price, event.currency) }}</span>
+                      <div class="flex -space-x-2">
+                        <div class="size-5 rounded-full bg-gray-700 border border-[#1a140e]"></div>
+                        <div class="size-5 rounded-full bg-gray-600 border border-[#1a140e]"></div>
+                        <div class="size-5 rounded-full bg-gray-500 border border-[#1a140e] flex items-center justify-center text-[8px]">+8</div>
+                      </div>
+                   </div>
+                 </div>
+               </div>
+             }
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+
+    <!-- RIGHT SIDEBAR (Desktop Only - Filters & Calendar) -->
+    <aside class="hidden lg:flex flex-col py-8 px-6 border-l border-white/5 bg-[#1a140e] gap-8">
+      
+      <!-- Search -->
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-3 top-2.5 text-white/30">search</span>
+        <input type="text" placeholder="Search events, DJs..." class="w-full bg-white/5 border border-white/10 rounded-full py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+      </div>
+
+      <!-- Filters Widget -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-sm uppercase tracking-wider text-white/50">Filters</h3>
+          <button class="text-primary text-xs hover:underline">Reset</button>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button class="px-3 py-1.5 rounded-lg bg-primary text-black text-xs font-bold">All</button>
+          <button class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 text-xs font-medium transition-colors">Techno</button>
+          <button class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 text-xs font-medium transition-colors">House</button>
+          <button class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 text-xs font-medium transition-colors">Rave</button>
+          <button class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 text-xs font-medium transition-colors">Rooftop</button>
+        </div>
+      </div>
+
+      <!-- Mini Calendar / Upcoming -->
+      <div>
+        <h3 class="font-bold text-sm uppercase tracking-wider text-white/50 mb-4">Upcoming Highlights</h3>
+        <div class="space-y-4">
+           @for (highlight of upcomingHighlights(); track highlight.id) {
+             <div class="p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
+               <span class="text-xs text-primary font-bold uppercase mb-1 block">Coming Soon</span>
+               <h4 class="font-bold text-lg mb-2">{{ highlight.title }}</h4>
+               <p class="text-xs text-white/60 mb-3 line-clamp-2">{{ highlight.description }}</p>
+               <button class="w-full py-2 bg-white/10 hover:bg-white/20 rounded-lg text-xs font-bold transition-colors">Get Notified</button>
+             </div>
+           }
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- Mobile Bottom Nav (Already matches existing mobile screenshot) -->
+  <nav class="lg:hidden fixed bottom-0 left-0 w-full bg-[#1a140e]/95 backdrop-blur-xl border-t border-white/10 px-6 py-3 flex justify-between items-center z-50">
+     <button class="flex flex-col items-center gap-1 text-primary">
+       <span class="material-symbols-outlined">home</span>
+       <span class="text-[10px] font-medium">Home</span>
+     </button>
+     <button class="flex flex-col items-center gap-1 text-white/40 hover:text-white transition-colors">
+       <span class="material-symbols-outlined">explore</span>
+       <span class="text-[10px] font-medium">Explore</span>
+     </button>
+     <div class="relative -top-6">
+       <button class="size-14 rounded-full bg-primary text-black flex items-center justify-center shadow-[0_0_20px_rgba(244,140,37,0.4)]">
+         <span class="material-symbols-outlined">confirmation_number</span>
+       </button>
+     </div>
+     <button class="flex flex-col items-center gap-1 text-white/40 hover:text-white transition-colors">
+       <span class="material-symbols-outlined">bookmark_border</span>
+       <span class="text-[10px] font-medium">Saved</span>
+     </button>
+     <button class="flex flex-col items-center gap-1 text-white/40 hover:text-white transition-colors">
+       <span class="material-symbols-outlined">person</span>
+       <span class="text-[10px] font-medium">Profile</span>
+     </button>
+  </nav>
+
+</div>

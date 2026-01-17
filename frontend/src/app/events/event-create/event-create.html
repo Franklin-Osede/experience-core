@@ -1,0 +1,84 @@
+<div class="event-create-container">
+  <header class="create-header">
+    <button class="back-button" (click)="onCancel()">
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <h1 class="page-title">Crear Evento</h1>
+  </header>
+
+  <main class="create-main">
+    <form (ngSubmit)="onSubmit()" class="event-form">
+      <div class="form-group">
+        <label>Título *</label>
+        <input type="text" [value]="title()" (input)="title.set($any($event.target).value)" required />
+      </div>
+
+      <div class="form-group">
+        <label>Descripción *</label>
+        <textarea [value]="description()" (input)="description.set($any($event.target).value)" rows="4" required></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tipo *</label>
+          <select [value]="type()" (change)="type.set($any($event.target).value)">
+            @for (t of eventTypes; track t) {
+              <option [value]="t">{{ t }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Género *</label>
+          <select [value]="genre()" (change)="genre.set($any($event.target).value)">
+            @for (g of eventGenres; track g) {
+              <option [value]="g">{{ g }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Fecha y Hora Inicio *</label>
+          <input type="datetime-local" [value]="startTime()" (input)="startTime.set($any($event.target).value)" required />
+        </div>
+
+        <div class="form-group">
+          <label>Fecha y Hora Fin *</label>
+          <input type="datetime-local" [value]="endTime()" (input)="endTime.set($any($event.target).value)" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Ubicación *</label>
+        <input type="text" [value]="location()" (input)="location.set($any($event.target).value)" required />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Venue ID (opcional)</label>
+          <input type="text" [value]="venueId()" (input)="venueId.set($any($event.target).value)" />
+        </div>
+
+        <div class="form-group">
+          <label>Capacidad Máxima (opcional)</label>
+          <input type="number" [value]="maxCapacity()" (input)="maxCapacity.set(+$any($event.target).value || null)" />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="onCancel()" [disabled]="isLoading()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="isLoading()">
+          @if (isLoading()) {
+            Creando...
+          } @else {
+            Crear Evento
+          }
+        </button>
+      </div>
+    </form>
+  </main>
+</div>

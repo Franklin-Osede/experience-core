@@ -72,7 +72,7 @@ export class OnboardingVenueComponent {
         membersOnly: this.membersOnly()
       }
     });
-    // Todo: Navigate to next step (Upload Photos)
-    // this.router.navigate(['/onboarding/venue/photos']); 
+    // Navegar a Home después de completar onboarding
+    this.router.navigate(['/home']); 
   }
 }

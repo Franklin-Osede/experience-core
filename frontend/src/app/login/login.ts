@@ -63,6 +63,8 @@ export class Login {
     });
     
     // Navegación temporal para probar el flujo
+    // Si ya tiene rol seleccionado, ir directo a home, sino a role-selection
+    // Navigation logic updated for dev testing: Always go to role-selection
     this.router.navigate(['/role-selection']);
 
     /* Código comentado - se implementará después de crear todas las pantallas
@@ -79,7 +81,13 @@ export class Login {
             localStorage.setItem('access_token', response.access_token);
           }
           this.isLoading.set(false);
-          this.router.navigate(['/role-selection']);
+          // Si ya tiene rol seleccionado, ir directo a home, sino a role-selection
+          const selectedRole = localStorage.getItem('selectedRole');
+          if (selectedRole) {
+            this.router.navigate(['/home']);
+          } else {
+            this.router.navigate(['/role-selection']);
+          }
         },
         error: (error) => {
           console.error('Error en login:', error);
@@ -99,7 +107,13 @@ export class Login {
             localStorage.setItem('access_token', response.access_token);
           }
           this.isLoading.set(false);
-          this.router.navigate(['/role-selection']);
+          // Si ya tiene rol seleccionado, ir directo a home, sino a role-selection
+          const selectedRole = localStorage.getItem('selectedRole');
+          if (selectedRole) {
+            this.router.navigate(['/home']);
+          } else {
+            this.router.navigate(['/role-selection']);
+          }
         },
         error: (error) => {
           console.error('Error en registro:', error);
@@ -140,10 +154,16 @@ export class Login {
       if (verificationResp && (verificationResp.verified || verificationResp.access_token)) {
         console.log('Biometric login success');
          // If token is handled in service map, good. Otherwise set here if needed.
-         if(verificationResp.access_token) {
-             localStorage.setItem('access_token', verificationResp.access_token);
-         }
-        this.router.navigate(['/role-selection']);
+        if(verificationResp.access_token) {
+            localStorage.setItem('access_token', verificationResp.access_token);
+        }
+        // Si ya tiene rol seleccionado, ir directo a home, sino a role-selection
+        const selectedRole = localStorage.getItem('selectedRole');
+        if (selectedRole) {
+          this.router.navigate(['/home']);
+        } else {
+          this.router.navigate(['/role-selection']);
+        }
       } else {
         alert('Biometric login failed');
       }

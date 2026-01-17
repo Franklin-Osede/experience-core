@@ -1,0 +1,94 @@
+<div class="events-list-container">
+  <header class="events-header">
+    <div class="header-content">
+      <button class="back-button" (click)="router.navigate(['/home'])">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h1 class="page-title">Eventos</h1>
+      <button class="create-button" (click)="onCreateEvent()">
+        <span class="material-icons">add</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="events-main">
+    <!-- Search and Filters -->
+    <div class="filters-section">
+      <div class="search-box">
+        <span class="material-icons">search</span>
+        <input 
+          type="text" 
+          placeholder="Buscar eventos..."
+          [value]="searchQuery()"
+          (input)="searchQuery.set($any($event.target).value)"
+          (keyup.enter)="onSearch()"
+        />
+      </div>
+      
+      <div class="filter-row">
+        <select [value]="selectedType()" (change)="selectedType.set($any($event.target).value); onFilterChange()">
+          <option value="ALL">Todos los tipos</option>
+          <option value="HOUSE_DAY">House Day</option>
+          <option value="CLUB_NIGHT">Club Night</option>
+          <option value="AFRO_SESSION">Afro Session</option>
+          <option value="PRIVATE_LAB">Private Lab</option>
+        </select>
+        
+        <select [value]="selectedGenre()" (change)="selectedGenre.set($any($event.target).value); onFilterChange()">
+          <option value="ALL">Todos los géneros</option>
+          <option value="HOUSE">House</option>
+          <option value="AFRO_HOUSE">Afro House</option>
+          <option value="DEEP_HOUSE">Deep House</option>
+          <option value="TECH_HOUSE">Tech House</option>
+        </select>
+        
+        <select [value]="selectedStatus()" (change)="selectedStatus.set($any($event.target).value); onFilterChange()">
+          <option value="ALL">Todos los estados</option>
+          <option value="PUBLISHED">Publicados</option>
+          <option value="CONFIRMED">Confirmados</option>
+          <option value="COMPLETED">Completados</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Events List -->
+    @if (isLoading()) {
+      <div class="loading-state">
+        <p>Cargando eventos...</p>
+      </div>
+    } @else if (events().length === 0) {
+      <div class="empty-state">
+        <span class="material-icons">event_busy</span>
+        <p>No se encontraron eventos</p>
+      </div>
+    } @else {
+      <div class="events-grid">
+        @for (event of events(); track event.id) {
+          <div class="event-card" (click)="onEventClick(event.id)">
+            <div class="event-image">
+              <span class="status-badge" [ngClass]="getStatusColor(event.status)">
+                {{ event.status }}
+              </span>
+            </div>
+            <div class="event-info">
+              <h3 class="event-title">{{ event.title }}</h3>
+              <p class="event-description">{{ event.description?.substring(0, 100) }}...</p>
+              <div class="event-meta">
+                <span class="material-icons">calendar_today</span>
+                <span>{{ formatDate(event.startTime) }}</span>
+              </div>
+              <div class="event-meta">
+                <span class="material-icons">schedule</span>
+                <span>{{ formatTime(event.startTime) }}</span>
+              </div>
+              <div class="event-meta">
+                <span class="material-icons">location_on</span>
+                <span>{{ event.location }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </main>
+</div>

@@ -101,7 +101,7 @@ export class OnboardingProviderComponent {
         minBookingNotice: this.minBookingNotice()
       }
     });
-    // Todo: Navigate to next step (Provider Profile Details)
-    // this.router.navigate(['/onboarding/provider/profile']); 
+    // Navegar a Home después de completar onboarding
+    this.router.navigate(['/home']); 
   }
 }

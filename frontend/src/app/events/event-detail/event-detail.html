@@ -1,0 +1,110 @@
+<div class="event-detail-container">
+  @if (isLoading()) {
+    <div class="loading-state">
+      <p>Cargando evento...</p>
+    </div>
+  } @else if (event()) {
+    <header class="event-header">
+      <button class="back-button" (click)="router.navigate(['/events'])">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h1 class="event-title-main">{{ event()!.title }}</h1>
+    </header>
+
+    <main class="event-main">
+      <div class="event-hero">
+        <div class="event-image-placeholder">
+          <span class="material-icons">event</span>
+        </div>
+        <div class="event-status-badge" [ngClass]="'status-' + event()!.status.toLowerCase()">
+          {{ event()!.status }}
+        </div>
+      </div>
+
+      <div class="event-content">
+        <div class="event-info-section">
+          <h2 class="section-title">Información</h2>
+          <div class="info-item">
+            <span class="material-icons">description</span>
+            <p>{{ event()!.description }}</p>
+          </div>
+          <div class="info-item">
+            <span class="material-icons">calendar_today</span>
+            <div>
+              <p class="info-label">Fecha</p>
+              <p>{{ formatDate(event()!.startTime) }}</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="material-icons">schedule</span>
+            <div>
+              <p class="info-label">Hora</p>
+              <p>{{ formatTime(event()!.startTime) }} - {{ formatTime(event()!.endTime) }}</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="material-icons">location_on</span>
+            <div>
+              <p class="info-label">Ubicación</p>
+              <p>{{ event()!.location }}</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="material-icons">category</span>
+            <div>
+              <p class="info-label">Tipo</p>
+              <p>{{ event()!.type }} - {{ event()!.genre }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="event-actions">
+          @if (canManageEvent() && isOrganizer()) {
+            <div class="organizer-actions">
+              @if (event()!.status === 'DRAFT') {
+                <button class="btn-primary" (click)="onPublish()">
+                  Publicar Evento
+                </button>
+              }
+              @if (event()!.status === 'PUBLISHED' && !event()!.isEscrowFunded) {
+                <button class="btn-primary" (click)="onFund()">
+                  Financiar Evento
+                </button>
+              }
+              @if (event()!.status === 'CONFIRMED') {
+                <button class="btn-primary" (click)="onComplete()">
+                  Completar Evento
+                </button>
+              }
+              <button class="btn-secondary" (click)="onViewRsvps()">
+                Ver RSVPs
+              </button>
+              <button class="btn-danger" (click)="onCancel()">
+                Cancelar Evento
+              </button>
+            </div>
+          } @else {
+            <div class="fan-actions">
+              @if (!hasRsvp()) {
+                <button class="btn-primary" (click)="onRsvp()">
+                  Confirmar RSVP
+                </button>
+              } @else {
+                <button class="btn-secondary" (click)="onCancelRsvp()">
+                  Cancelar RSVP
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </main>
+  } @else {
+    <div class="error-state">
+      <p>Evento no encontrado</p>
+      <button class="btn-primary" (click)="router.navigate(['/events'])">
+        Volver a Eventos
+      </button>
+    </div>
+  }
+</div>
